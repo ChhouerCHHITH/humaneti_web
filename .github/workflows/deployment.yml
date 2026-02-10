@@ -37,58 +37,46 @@ jobs:
       - name: Build assets
         run: npm run build
 
-      - name: Prepare SSH (debug)
+      # Refactored: non-debug, strict, key-safe, and uses ONLY your deploy key
+      - name: Prepare SSH
         run: |
-          set -e
+          set -euo pipefail
+
+          # Fail-fast if required secrets missing
+          test -n "${{ secrets.SSH_HOST }}" || (echo "Missing secret: SSH_HOST" && exit 1)
+          test -n "${{ secrets.SSH_USER }}" || (echo "Missing secret: SSH_USER" && exit 1)
+          test -n "${{ secrets.SSH_PORT }}" || (echo "Missing secret: SSH_PORT" && exit 1)
+          test -n "${{ secrets.DEPLOY_PATH }}" || (echo "Missing secret: DEPLOY_PATH" && exit 1)
+          test -n "${{ secrets.SSH_PRIVATE_KEY }}" || (echo "Missing secret: SSH_PRIVATE_KEY" && exit 1)
 
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
 
-          # Write private key safely (echo can break formatting)
-          printf "%s" "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
+          # Write private key (avoid echo, keep formatting)
+          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
 
-          echo "Testing DNS + port reachability..."
-          # Check DNS resolution (won’t print host)
-          getent hosts "${{ secrets.SSH_HOST }}" >/dev/null || { echo "ERROR: SSH_HOST cannot be resolved (DNS)"; exit 1; }
-
-          # Check TCP port reachability (won’t print host)
-          timeout 10 bash -lc "cat < /dev/null > /dev/tcp/${{ secrets.SSH_HOST }}/${{ secrets.SSH_PORT }}" \
-            && echo "Port reachable" \
-            || { echo "ERROR: Cannot reach SSH port (blocked, wrong host, wrong port, or SSH not enabled)"; exit 1; }
-
-          echo "Adding host key..."
+          # Known hosts (prefer pinned secret)
           if [ -n "${{ secrets.SSH_KNOWN_HOSTS }}" ]; then
             printf "%s\n" "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
           else
-            ssh-keyscan -T 10 -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" 2>keyscan.err >> ~/.ssh/known_hosts || true
-            if [ ! -s ~/.ssh/known_hosts ]; then
-              echo "ERROR: ssh-keyscan failed:"
-              cat keyscan.err
-              exit 1
-            fi
+            ssh-keyscan -T 10 -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
           fi
+          chmod 600 ~/.ssh/known_hosts
 
-          echo "Testing SSH authentication..."
-          ssh -vvv -p "${{ secrets.SSH_PORT }}" \
+          # Test auth (IdentitiesOnly prevents trying other keys)
+          ssh -i ~/.ssh/id_ed25519 -p "${{ secrets.SSH_PORT }}" \
+            -o IdentitiesOnly=yes \
             -o BatchMode=yes \
             -o StrictHostKeyChecking=yes \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "echo SSH_OK" 2>ssh.err || true
-
-          if grep -q "SSH_OK" ssh.err; then
-            echo "SSH OK"
-            exit 0
-          fi
-
-          echo "ERROR: SSH failed. Details:"
-          tail -n 80 ssh.err
-          exit 1
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "echo SSH_OK" | grep -q "SSH_OK"
 
       - name: Deploy via rsync
         run: |
           rsync -az --delete \
+            --exclude=".env" \
             --exclude=".git/" \
             --exclude=".github/" \
             --exclude="node_modules/" \
-            -e "ssh -p ${{ secrets.SSH_PORT }}" \
-            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
+            -e "ssh -i ~/.ssh/id_ed25519 -p ${{ secrets.SSH_PORT }} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+            ./ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/"
