@@ -39,15 +39,28 @@ jobs:
 
       - name: Prepare SSH
         run: |
+          set -e
+          test -n "${{ secrets.SSH_HOST }}" || (echo "Missing secret: SSH_HOST" && exit 1)
+          test -n "${{ secrets.SSH_USER }}" || (echo "Missing secret: SSH_USER" && exit 1)
+          test -n "${{ secrets.SSH_PORT }}" || (echo "Missing secret: SSH_PORT" && exit 1)
+          test -n "${{ secrets.DEPLOY_PATH }}" || (echo "Missing secret: DEPLOY_PATH" && exit 1)
+          test -n "${{ secrets.SSH_PRIVATE_KEY }}" || (echo "Missing secret: SSH_PRIVATE_KEY" && exit 1)
+
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+
+          # known_hosts
           if [ -n "${{ secrets.SSH_KNOWN_HOSTS }}" ]; then
             echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
           else
             ssh-keyscan -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
           fi
+
+          # test connection (no deploy yet)
+          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "echo 'SSH OK'"
 
       - name: Deploy via rsync
         run: |
