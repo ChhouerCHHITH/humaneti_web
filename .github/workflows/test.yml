@@ -20,11 +20,23 @@ jobs:
           tools: composer:v2
           extensions: mbstring, pdo_sqlite, sqlite3
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-      - name: Install Dependencies
+      - name: Install PHP dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build frontend assets (Vite)
+        run: npm run build
 
       - name: Generate key
         run: php artisan key:generate
