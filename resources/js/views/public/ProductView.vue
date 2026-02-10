@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import UiCard from '@/components/UiCard.vue'
 import UiSection from '@/components/UiSection.vue'
 import UiBadge from '@/components/UiBadge.vue'
@@ -355,49 +355,57 @@ const setActiveModule = (index) => {
 
       <!-- Tab Content -->
       <div class="mt-8">
-        <div 
-          v-for="(module, idx) in modules"
-          :key="idx"
-          v-show="activeModule === idx"
-          class="grid gap-8 lg:grid-cols-2 lg:gap-12"
+        <Transition
+          mode="out-in"
+          enter-active-class="transition duration-300 ease-out"
+          enter-from-class="opacity-0 translate-y-4"
+          enter-to-class="opacity-100 translate-y-0"
+          leave-active-class="transition duration-200 ease-in"
+          leave-from-class="opacity-100 translate-y-0"
+          leave-to-class="opacity-0 -translate-y-4"
         >
-          <div>
-            <div class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
-              <span v-html="`<svg viewBox='0 0 24 24' class='h-4 w-4'>${module.icon}</svg>`"></span>
-              {{ module.name }} Module
-            </div>
-            
-            <h3 class="mt-4 text-3xl font-bold text-slate-900">{{ module.tagline }}</h3>
-            <p class="mt-4 text-lg leading-relaxed text-slate-600">{{ module.description }}</p>
+          <div 
+            :key="activeModule"
+            class="grid gap-8 lg:grid-cols-2 lg:gap-12"
+          >
+            <div>
+              <div class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+                <span v-html="`<svg viewBox='0 0 24 24' class='h-4 w-4'>${modules[activeModule].icon}</svg>`"></span>
+                {{ modules[activeModule].name }} Module
+              </div>
+              
+              <h3 class="mt-4 text-3xl font-bold text-slate-900">{{ modules[activeModule].tagline }}</h3>
+              <p class="mt-4 text-lg leading-relaxed text-slate-600">{{ modules[activeModule].description }}</p>
 
-            <div class="mt-8">
-              <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-500">Key Benefits</h4>
-              <ul class="mt-4 space-y-3">
-                <li 
-                  v-for="benefit in module.benefits" 
-                  :key="benefit"
-                  class="flex items-start gap-3"
-                >
-                  <svg class="h-5 w-5 flex-shrink-0 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                  </svg>
-                  <span class="text-slate-700">{{ benefit }}</span>
-                </li>
-              </ul>
+              <div class="mt-8">
+                <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-500">Key Benefits</h4>
+                <ul class="mt-4 space-y-3">
+                  <li 
+                    v-for="benefit in modules[activeModule].benefits" 
+                    :key="benefit"
+                    class="flex items-start gap-3"
+                  >
+                    <svg class="h-5 w-5 flex-shrink-0 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-slate-700">{{ benefit }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div 
+                v-for="feature in modules[activeModule].features" 
+                :key="feature.title"
+                class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:shadow-md"
+              >
+                <h4 class="font-semibold text-slate-900">{{ feature.title }}</h4>
+                <p class="mt-1 text-sm text-slate-600">{{ feature.description }}</p>
+              </div>
             </div>
           </div>
-
-          <div class="space-y-4">
-            <div 
-              v-for="feature in module.features" 
-              :key="feature.title"
-              class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:shadow-md"
-            >
-              <h4 class="font-semibold text-slate-900">{{ feature.title }}</h4>
-              <p class="mt-1 text-sm text-slate-600">{{ feature.description }}</p>
-            </div>
-          </div>
-        </div>
+        </Transition>
       </div>
     </section>
 
