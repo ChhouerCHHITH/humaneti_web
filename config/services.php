@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'humaneti_sass' => [
+        'base_url' => env('HUMANETI_SASS_API_URL'),
+        'subscription_public_token' => env('HUMANETI_SASS_SUBSCRIPTION_PUBLIC_TOKEN'),
+        'http_timeout' => env('HUMANETI_SASS_HTTP_TIMEOUT', 15),
+    ],
+
 ];

@@ -1,510 +1,356 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import UiSection from '@/components/UiSection.vue'
 import UiCard from '@/components/UiCard.vue'
 import UiBadge from '@/components/UiBadge.vue'
 import UiButton from '@/components/UiButton.vue'
 import { useToast } from '@/components/useToast'
+import { usePublicI18n } from '@/composables/usePublicI18n'
 
 const { push } = useToast()
+const { t, locale } = usePublicI18n()
 
-const loading = ref(false)
+const submitting = ref(false)
+const loadingPlans = ref(false)
+const formErrors = ref({})
+const plans = ref([])
 const form = ref({
-  name: '',
-  email: '',
-  company: '',
-  phone: '',
-  employees: '',
-  modules: [],
+  company_name: '',
+  contact_name: '',
+  contact_email: '',
+  contact_phone: '',
+  tenant_type: '',
+  requested_plan_code: '',
+  preferred_users: null,
+  billing_cycle: 'monthly',
   message: '',
+  website: '',
 })
 
-const moduleOptions = [
-  { id: 'hrm', label: 'HRM (Human Resource Management)' },
-  { id: 'payroll', label: 'Payroll Processing' },
-  { id: 'asset', label: 'Asset Management' },
-  { id: 'pr', label: 'Purchase Requests' }
-]
+const firstError = (key) => formErrors.value?.[key]?.[0] || ''
 
-const employeeSizes = [
-  '1-25 employees',
-  '26-50 employees',
-  '51-100 employees',
-  '101-250 employees',
-  '250+ employees'
-]
+const clearFieldError = (key) => {
+  if (!formErrors.value[key]) return
+  const next = { ...formErrors.value }
+  delete next[key]
+  formErrors.value = next
+}
 
-const contactMethods = [
-  {
-    icon: '📧',
-    title: 'Email Us',
-    description: 'Get a response within 24 hours',
-    detail: 'sales@humaneti.com',
-    link: 'mailto:sales@humaneti.com',
-    action: 'Send Email'
-  },
-  {
-    icon: '📞',
-    title: 'Call Us',
-    description: 'Speak with our team directly',
-    detail: '(+855) 000 000 000',
-    link: 'tel:+855000000000',
-    action: 'Call Now'
-  },
-  {
-    icon: '📍',
-    title: 'Visit Us',
-    description: 'Meet us at our office',
-    detail: 'Phnom Penh, Cambodia',
-    link: '#',
-    action: 'Get Directions'
-  },
-  {
-    icon: '💬',
-    title: 'Live Chat',
-    description: 'Chat during business hours',
-    detail: 'Mon-Fri, 9AM-5PM ICT',
-    link: '#',
-    action: 'Start Chat'
-  }
-]
+const requestablePlans = computed(() =>
+  (Array.isArray(plans.value) ? plans.value : []).map((plan) => ({
+    code: plan.code,
+    name: locale.value === 'kh' ? (plan.name_kh || plan.name) : plan.name,
+    tenant_type: plan.tenant_type || 'all',
+  })),
+)
 
-const reasons = [
-  {
-    icon: '🎯',
-    title: 'Request a Demo',
-    description: 'See Humaneti in action with a personalized walkthrough'
-  },
-  {
-    icon: '💼',
-    title: 'Discuss Implementation',
-    description: 'Plan your rollout with our implementation specialists'
-  },
-  {
-    icon: '💰',
-    title: 'Get Pricing Quote',
-    description: 'Receive a custom quote based on your needs'
-  },
-  {
-    icon: '🤝',
-    title: 'Partnership Inquiry',
-    description: 'Explore partnership and integration opportunities'
-  }
-]
+const selectedPlan = computed(() => requestablePlans.value.find((plan) => plan.code === form.value.requested_plan_code) || null)
 
-const quickFaqs = [
-  {
-    q: 'How quickly can we start?',
-    a: 'Most implementations take 4-6 weeks from kickoff to go-live.'
-  },
-  {
-    q: 'Do you offer training?',
-    a: 'Yes, comprehensive training is included with all plans.'
-  },
-  {
-    q: 'Can we schedule a demo?',
-    a: 'Absolutely! Submit the form and we\'ll schedule a personalized demo.'
-  }
-]
-
-async function submit() {
-  loading.value = true
+const fetchPlans = async () => {
+  loadingPlans.value = true
   try {
-    const res = await fetch('/api/v1/public/contact', {
+    const tenantType = form.value.tenant_type
+    const query = tenantType ? `?tenant_type=${encodeURIComponent(tenantType)}` : ''
+    const res = await fetch(`/api/v1/public/subscription-plans${query}`, {
+      method: 'GET',
+      headers: { Accept: 'application/json' },
+    })
+    const data = await res.json().catch(() => null)
+    if (!res.ok || !Array.isArray(data?.data)) {
+      plans.value = []
+      return
+    }
+    plans.value = data.data
+  } finally {
+    loadingPlans.value = false
+  }
+}
+
+const chooseDefaultPlan = () => {
+  if (requestablePlans.value.length === 0) {
+    form.value.requested_plan_code = ''
+    return
+  }
+
+  const type = form.value.tenant_type
+  const match = requestablePlans.value.find((plan) => (type ? (plan.tenant_type === type || plan.tenant_type === 'all') : true))
+  form.value.requested_plan_code = match?.code || requestablePlans.value[0].code
+}
+
+const onTenantTypeChange = async () => {
+  await fetchPlans()
+  chooseDefaultPlan()
+}
+
+const submit = async () => {
+  if (submitting.value) return
+
+  formErrors.value = {}
+  if (form.value.website) {
+    push(t({ en: 'Failed to submit subscription request. Please try again.', kh: 'បរាជ័យក្នុងការដាក់ស្នើសំណើជាវ។ សូមព្យាយាមម្តងទៀត។' }), 'danger')
+    return
+  }
+
+  submitting.value = true
+  try {
+    const payload = {
+      company_name: form.value.company_name.trim(),
+      contact_name: form.value.contact_name.trim(),
+      contact_email: form.value.contact_email.trim(),
+      contact_phone: form.value.contact_phone.trim() || null,
+      tenant_type: form.value.tenant_type || null,
+      requested_plan_code: form.value.requested_plan_code || null,
+      preferred_users: form.value.preferred_users ? Number(form.value.preferred_users) : null,
+      billing_cycle: form.value.billing_cycle || 'monthly',
+      requested_modules: [],
+      message: form.value.message.trim() || null,
+      metadata: {
+        locale: locale.value,
+        page: 'contact',
+      },
+    }
+
+    const res = await fetch('/api/v1/public/subscription-requests', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(form.value),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'X-Locale': locale.value,
+      },
+      body: JSON.stringify(payload),
     })
 
+    const data = await res.json().catch(() => null)
     if (!res.ok) {
-      const data = await res.json().catch(() => null)
-      const msg = data?.message || 'Failed to submit. Please try again.'
+      if (res.status === 422 && data?.errors) {
+        formErrors.value = data.errors
+      }
+      const msg =
+        res.status === 429
+          ? t({ en: 'Too many attempts. Please wait a minute and try again.', kh: 'បានព្យាយាមច្រើនដងពេក។ សូមរង់ចាំបន្តិច ហើយព្យាយាមម្តងទៀត។' })
+          : data?.message || t({ en: 'Failed to submit subscription request. Please try again.', kh: 'បរាជ័យក្នុងការដាក់ស្នើសំណើជាវ។ សូមព្យាយាមម្តងទៀត។' })
       push(msg, 'danger')
       return
     }
 
-    const data = await res.json().catch(() => null)
-    push(data?.message || 'Thank you! We\'ll get back to you within 24 hours.', 'success')
-
-    // Reset form
+    push(data?.message || t({ en: 'Subscription request submitted successfully.', kh: 'បានដាក់ស្នើសំណើជាវដោយជោគជ័យ។' }), 'success')
     form.value = {
-      name: '',
-      email: '',
-      company: '',
-      phone: '',
-      employees: '',
-      modules: [],
+      company_name: '',
+      contact_name: '',
+      contact_email: '',
+      contact_phone: '',
+      tenant_type: form.value.tenant_type,
+      requested_plan_code: form.value.requested_plan_code,
+      preferred_users: null,
+      billing_cycle: 'monthly',
       message: '',
+      website: '',
     }
-  } catch (error) {
-    push('An error occurred. Please try again or contact us directly.', 'danger')
   } finally {
-    loading.value = false
+    submitting.value = false
   }
 }
+
+onMounted(async () => {
+  await fetchPlans()
+  chooseDefaultPlan()
+})
 </script>
 
 <template>
-  <div class="space-y-20">
-    <!-- Hero Section -->
-    <section>
-      <UiBadge tone="neutral" class="mb-6">GET IN TOUCH</UiBadge>
-      
-      <UiSection
-        kicker="LET'S TALK"
-        title="Ready to transform your operations?"
-        subtitle="Schedule a demo, discuss implementation, or get answers to your questions. Our team is here to help."
-      />
-    </section>
+  <UiBadge tone="neutral">{{ t({ en: 'CONTACT', kh: 'ទំនាក់ទំនង' }) }}</UiBadge>
 
-    <!-- Why Contact Us -->
-    <section>
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <div 
-          v-for="reason in reasons" 
-          :key="reason.title"
-          class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition-all hover:shadow-md"
+  <div class="mt-4">
+    <UiSection
+      :kicker="t({ en: 'SUBSCRIPTION REQUEST', kh: 'សំណើជាវ' })"
+      :title="t({ en: 'Request subscription onboarding', kh: 'ស្នើសុំការចាប់ផ្តើមការជាវ' })"
+      :subtitle="t({ en: 'Use one form to request your subscription plan. We will confirm by email and contact you for onboarding.', kh: 'ប្រើបែបបទតែមួយដើម្បីស្នើសុំគម្រោងជាវរបស់អ្នក។ យើងនឹងបញ្ជាក់តាមអ៊ីមែល និងទាក់ទងអ្នកសម្រាប់ការចាប់ផ្តើមប្រើប្រាស់។' })"
+    />
+  </div>
+
+  <div class="mt-8 grid gap-6 lg:grid-cols-3">
+    <UiCard class="lg:col-span-2">
+      <div class="font-semibold text-lg">{{ t({ en: 'Subscription Request Form', kh: 'បែបបទសំណើជាវ' }) }}</div>
+      <p class="mt-2 text-sm text-slate-600">
+        {{ t({ en: 'After submission, confirmation is sent to your email and our sales team is notified.', kh: 'បន្ទាប់ពីដាក់ស្នើ ការបញ្ជាក់នឹងផ្ញើទៅអ៊ីមែលរបស់អ្នក ហើយក្រុមលក់នឹងទទួលការជូនដំណឹង។' }) }}
+      </p>
+
+      <form class="mt-6 grid gap-4" novalidate @submit.prevent="submit">
+        <input
+          v-model="form.website"
+          type="text"
+          tabindex="-1"
+          autocomplete="off"
+          class="hidden"
+          aria-hidden="true"
         >
-          <div class="text-4xl mb-3">{{ reason.icon }}</div>
-          <h3 class="font-semibold text-slate-900">{{ reason.title }}</h3>
-          <p class="mt-2 text-sm text-slate-600">{{ reason.description }}</p>
-        </div>
-      </div>
-    </section>
 
-    <!-- Main Contact Section -->
-    <section>
-      <div class="grid gap-8 lg:grid-cols-3">
-        <!-- Contact Form -->
-        <div class="lg:col-span-2">
-          <div class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
-            <div class="mb-8">
-              <h2 class="text-2xl font-bold text-slate-900">Send us a message</h2>
-              <p class="mt-2 text-slate-600">Fill out the form below and we'll respond within 24 hours.</p>
-            </div>
-
-            <form @submit.prevent="submit" class="space-y-6">
-              <!-- Name and Email -->
-              <div class="grid gap-6 md:grid-cols-2">
-                <div>
-                  <label class="block text-sm font-medium text-slate-700">
-                    Full Name <span class="text-red-500">*</span>
-                  </label>
-                  <input 
-                    v-model="form.name" 
-                    type="text"
-                    required
-                    placeholder="John Doe"
-                    class="mt-2 block w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 transition-colors focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
-                  />
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-slate-700">
-                    Email Address <span class="text-red-500">*</span>
-                  </label>
-                  <input 
-                    v-model="form.email" 
-                    type="email"
-                    required
-                    placeholder="john@company.com"
-                    class="mt-2 block w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 transition-colors focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
-                  />
-                </div>
-              </div>
-
-              <!-- Company and Phone -->
-              <div class="grid gap-6 md:grid-cols-2">
-                <div>
-                  <label class="block text-sm font-medium text-slate-700">
-                    Company Name
-                  </label>
-                  <input 
-                    v-model="form.company" 
-                    type="text"
-                    placeholder="Your Company"
-                    class="mt-2 block w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 transition-colors focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
-                  />
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-slate-700">
-                    Phone Number
-                  </label>
-                  <input 
-                    v-model="form.phone" 
-                    type="tel"
-                    placeholder="+855 12 345 678"
-                    class="mt-2 block w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 transition-colors focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
-                  />
-                </div>
-              </div>
-
-              <!-- Company Size -->
-              <div>
-                <label class="block text-sm font-medium text-slate-700">
-                  Company Size
-                </label>
-                <select 
-                  v-model="form.employees"
-                  class="mt-2 block w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 transition-colors focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
-                >
-                  <option value="">Select company size</option>
-                  <option v-for="size in employeeSizes" :key="size" :value="size">
-                    {{ size }}
-                  </option>
-                </select>
-              </div>
-
-              <!-- Modules Interest -->
-              <div>
-                <label class="block text-sm font-medium text-slate-700">
-                  Which modules are you interested in?
-                </label>
-                <div class="mt-3 grid gap-3 sm:grid-cols-2">
-                  <label 
-                    v-for="module in moduleOptions" 
-                    :key="module.id"
-                    class="flex items-center gap-3 rounded-lg border border-slate-200 px-4 py-3 cursor-pointer transition-all hover:border-indigo-500 hover:bg-indigo-50"
-                    :class="form.modules.includes(module.id) ? 'border-indigo-600 bg-indigo-50' : ''"
-                  >
-                    <input 
-                      type="checkbox" 
-                      :value="module.id"
-                      v-model="form.modules"
-                      class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500"
-                    />
-                    <span class="text-sm font-medium text-slate-700">{{ module.label }}</span>
-                  </label>
-                </div>
-              </div>
-
-              <!-- Message -->
-              <div>
-                <label class="block text-sm font-medium text-slate-700">
-                  Message
-                </label>
-                <textarea 
-                  v-model="form.message" 
-                  rows="5"
-                  placeholder="Tell us about your needs, timeline, or any specific questions you have..."
-                  class="mt-2 block w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 transition-colors focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
-                ></textarea>
-              </div>
-
-              <!-- Submit Button -->
-              <div class="flex items-center gap-4">
-                <UiButton 
-                  type="submit"
-                  :disabled="loading" 
-                  variant="primary" 
-                  size="lg"
-                  class="flex-1"
-                >
-                  <svg v-if="loading" class="animate-spin -ml-1 mr-3 h-5 w-5" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  {{ loading ? 'Sending...' : 'Send Message' }}
-                </UiButton>
-              </div>
-
-              <!-- Privacy Notice -->
-              <p class="text-xs text-slate-500">
-                By submitting this form, you agree to our 
-                <RouterLink to="/legal/privacy" class="text-indigo-600 hover:text-indigo-700">Privacy Policy</RouterLink>. 
-                We'll use your information to contact you about Humaneti and may send you relevant product updates.
-              </p>
-            </form>
-          </div>
-        </div>
-
-        <!-- Sidebar -->
-        <div class="space-y-6">
-          <!-- Contact Methods -->
-          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h3 class="text-lg font-semibold text-slate-900">Other ways to reach us</h3>
-            <div class="mt-4 space-y-4">
-              <div class="flex items-start gap-3">
-                <div class="text-2xl">📧</div>
-                <div>
-                  <div class="text-sm font-medium text-slate-900">Email</div>
-                  <a href="mailto:sales@humaneti.com" class="text-sm text-indigo-600 hover:text-indigo-700">
-                    sales@humaneti.com
-                  </a>
-                </div>
-              </div>
-              <div class="flex items-start gap-3">
-                <div class="text-2xl">📞</div>
-                <div>
-                  <div class="text-sm font-medium text-slate-900">Phone</div>
-                  <a href="tel:+855000000000" class="text-sm text-indigo-600 hover:text-indigo-700">
-                    (+855) 000 000 000
-                  </a>
-                </div>
-              </div>
-              <div class="flex items-start gap-3">
-                <div class="text-2xl">📍</div>
-                <div>
-                  <div class="text-sm font-medium text-slate-900">Location</div>
-                  <div class="text-sm text-slate-600">Phnom Penh, Cambodia</div>
-                </div>
-              </div>
-              <div class="flex items-start gap-3">
-                <div class="text-2xl">🕐</div>
-                <div>
-                  <div class="text-sm font-medium text-slate-900">Business Hours</div>
-                  <div class="text-sm text-slate-600">Mon-Fri: 9AM - 5PM ICT</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- What to Include -->
-          <div class="rounded-2xl border border-indigo-200 bg-indigo-50 p-6">
-            <h3 class="text-lg font-semibold text-indigo-900">What to include in your message</h3>
-            <ul class="mt-4 space-y-2 text-sm text-indigo-700">
-              <li class="flex items-start gap-2">
-                <svg class="h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Number of employees and departments</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Which modules you need first</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Desired timeline and go-live date</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Compliance or audit requirements</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Quick FAQs -->
-          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h3 class="text-lg font-semibold text-slate-900">Quick answers</h3>
-            <div class="mt-4 space-y-4">
-              <div v-for="faq in quickFaqs" :key="faq.q">
-                <div class="text-sm font-medium text-slate-900">{{ faq.q }}</div>
-                <div class="mt-1 text-sm text-slate-600">{{ faq.a }}</div>
-              </div>
-            </div>
-            <RouterLink 
-              to="/resources" 
-              class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-indigo-600 hover:text-indigo-700"
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label class="text-sm font-medium">{{ t({ en: 'Company Name', kh: 'ឈ្មោះអង្គការ/ក្រុមហ៊ុន' }) }}</label>
+            <input
+              v-model="form.company_name"
+              type="text"
+              maxlength="191"
+              required
+              :class="[
+                'mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2',
+                firstError('company_name') ? 'border-rose-300 focus:ring-rose-200' : 'border-slate-200 focus:ring-slate-300',
+              ]"
+              @input="clearFieldError('company_name')"
             >
-              View all FAQs
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </RouterLink>
+            <p v-if="firstError('company_name')" class="mt-1 text-xs text-rose-600">{{ firstError('company_name') }}</p>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium">{{ t({ en: 'Contact Name', kh: 'ឈ្មោះអ្នកទំនាក់ទំនង' }) }}</label>
+            <input
+              v-model="form.contact_name"
+              type="text"
+              maxlength="191"
+              required
+              :class="[
+                'mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2',
+                firstError('contact_name') ? 'border-rose-300 focus:ring-rose-200' : 'border-slate-200 focus:ring-slate-300',
+              ]"
+              @input="clearFieldError('contact_name')"
+            >
+            <p v-if="firstError('contact_name')" class="mt-1 text-xs text-rose-600">{{ firstError('contact_name') }}</p>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Contact Methods Grid -->
-    <section>
-      <UiSection
-        kicker="MULTIPLE CHANNELS"
-        title="Choose your preferred way to connect"
-        subtitle="We're available through various channels to accommodate your preferences."
-      />
-
-      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <a
-          v-for="method in contactMethods" 
-          :key="method.title"
-          :href="method.link"
-          class="group rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition-all hover:shadow-lg hover:border-indigo-200"
-        >
-          <div class="text-4xl mb-3">{{ method.icon }}</div>
-          <h3 class="font-semibold text-slate-900 group-hover:text-indigo-600">{{ method.title }}</h3>
-          <p class="mt-1 text-sm text-slate-600">{{ method.description }}</p>
-          <div class="mt-3 text-sm font-medium text-slate-700">{{ method.detail }}</div>
-          <div class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-indigo-600">
-            {{ method.action }}
-            <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Trust Section -->
-    <section class="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 lg:p-12">
-      <div class="mx-auto max-w-3xl text-center">
-        <h2 class="text-2xl font-bold text-slate-900 sm:text-3xl">
-          What happens after you contact us?
-        </h2>
-        <div class="mt-8 grid gap-6 md:grid-cols-3">
+        <div class="grid gap-4 md:grid-cols-2">
           <div>
-            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold">
-              1
-            </div>
-            <h3 class="mt-4 font-semibold text-slate-900">We Review Your Needs</h3>
-            <p class="mt-2 text-sm text-slate-600">
-              Our team reviews your requirements and prepares a customized response
-            </p>
+            <label class="text-sm font-medium">{{ t({ en: 'Contact Email', kh: 'អ៊ីមែលទំនាក់ទំនង' }) }}</label>
+            <input
+              v-model="form.contact_email"
+              type="email"
+              maxlength="191"
+              required
+              :class="[
+                'mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2',
+                firstError('contact_email') ? 'border-rose-300 focus:ring-rose-200' : 'border-slate-200 focus:ring-slate-300',
+              ]"
+              @input="clearFieldError('contact_email')"
+            >
+            <p v-if="firstError('contact_email')" class="mt-1 text-xs text-rose-600">{{ firstError('contact_email') }}</p>
           </div>
           <div>
-            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold">
-              2
-            </div>
-            <h3 class="mt-4 font-semibold text-slate-900">We Schedule a Call</h3>
-            <p class="mt-2 text-sm text-slate-600">
-              We reach out within 24 hours to schedule a demo or discovery call
-            </p>
-          </div>
-          <div>
-            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold">
-              3
-            </div>
-            <h3 class="mt-4 font-semibold text-slate-900">We Create Your Plan</h3>
-            <p class="mt-2 text-sm text-slate-600">
-              You receive a tailored implementation plan with timeline and pricing
-            </p>
+            <label class="text-sm font-medium">{{ t({ en: 'Contact Phone', kh: 'លេខទូរស័ព្ទទំនាក់ទំនង' }) }}</label>
+            <input
+              v-model="form.contact_phone"
+              type="text"
+              maxlength="50"
+              class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+            >
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section>
-      <div class="relative overflow-hidden rounded-[2rem] border border-slate-900 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-12 text-white shadow-2xl">
-        <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-indigo-500/20 blur-3xl"></div>
-        <div class="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-emerald-500/20 blur-3xl"></div>
-        
-        <div class="relative mx-auto max-w-3xl text-center">
-          <h2 class="text-3xl font-bold sm:text-4xl">
-            Prefer to explore on your own?
-          </h2>
-          <p class="mt-4 text-lg text-slate-300">
-            Check out our product pages, pricing, and resources to learn more about Humaneti at your own pace.
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label class="text-sm font-medium">{{ t({ en: 'Tenant Type', kh: 'ប្រភេទតេណង់' }) }}</label>
+            <select
+              v-model="form.tenant_type"
+              class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+              @change="onTenantTypeChange"
+            >
+              <option value="">{{ t({ en: 'All', kh: 'ទាំងអស់' }) }}</option>
+              <option value="sme">{{ t({ en: 'SME', kh: 'សហគ្រាសធុនតូច និងមធ្យម' }) }}</option>
+              <option value="ngo">{{ t({ en: 'NGO', kh: 'អង្គការមិនមែនរដ្ឋាភិបាល' }) }}</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-sm font-medium">{{ t({ en: 'Plan', kh: 'គម្រោង' }) }}</label>
+            <select
+              v-model="form.requested_plan_code"
+              :disabled="loadingPlans"
+              class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 disabled:cursor-not-allowed disabled:bg-slate-100"
+              @change="clearFieldError('requested_plan_code')"
+            >
+              <option value="" disabled>{{ t({ en: 'Select plan', kh: 'ជ្រើសរើសគម្រោង' }) }}</option>
+              <option v-for="plan in requestablePlans" :key="plan.code" :value="plan.code">
+                {{ plan.name }}
+              </option>
+            </select>
+            <p v-if="firstError('requested_plan_code')" class="mt-1 text-xs text-rose-600">{{ firstError('requested_plan_code') }}</p>
+          </div>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label class="text-sm font-medium">{{ t({ en: 'Preferred Users', kh: 'ចំនួនអ្នកប្រើដែលចង់បាន' }) }}</label>
+            <input
+              v-model.number="form.preferred_users"
+              type="number"
+              min="1"
+              max="200000"
+              class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+              @input="clearFieldError('preferred_users')"
+            >
+            <p v-if="firstError('preferred_users')" class="mt-1 text-xs text-rose-600">{{ firstError('preferred_users') }}</p>
+          </div>
+          <div>
+            <label class="text-sm font-medium">{{ t({ en: 'Billing Cycle', kh: 'រយៈពេលវិក្កយបត្រ' }) }}</label>
+            <select
+              v-model="form.billing_cycle"
+              class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+              @change="clearFieldError('billing_cycle')"
+            >
+              <option value="monthly">{{ t({ en: 'Monthly', kh: 'ប្រចាំខែ' }) }}</option>
+              <option value="yearly">{{ t({ en: 'Yearly', kh: 'ប្រចាំឆ្នាំ' }) }}</option>
+              <option value="custom">{{ t({ en: 'Custom', kh: 'តាមតម្រូវការ' }) }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium">{{ t({ en: 'Request Notes', kh: 'កំណត់ចំណាំសំណើ' }) }}</label>
+          <textarea
+            v-model="form.message"
+            rows="4"
+            maxlength="5000"
+            class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+            :placeholder="t({ en: 'Modules, timeline, onboarding notes...', kh: 'ម៉ូឌុល កាលវិភាគ កំណត់ចំណាំការចាប់ផ្តើមប្រើប្រាស់...' })"
+          ></textarea>
+          <p class="mt-1 text-xs text-slate-500">
+            {{ t({ en: 'Selected plan', kh: 'គម្រោងដែលបានជ្រើស' }) }}:
+            <span class="font-medium text-slate-700">{{ selectedPlan ? selectedPlan.name : '-' }}</span>
           </p>
-          
-          <div class="mt-8 flex flex-wrap justify-center gap-4">
-            <UiButton as="router-link" to="/product" variant="secondary" size="lg">
-              Explore Platform
-            </UiButton>
-            <UiButton as="router-link" to="/pricing" variant="ghost" size="lg" class="!text-white hover:!bg-white/10 border border-white/20">
-              View Pricing
-            </UiButton>
-          </div>
         </div>
-      </div>
-    </section>
+
+        <UiButton :disabled="submitting" variant="primary" class="w-full">
+          {{ submitting ? t({ en: 'Submitting...', kh: 'កំពុងដាក់ស្នើ...' }) : t({ en: 'Submit Subscription Request', kh: 'ដាក់ស្នើសំណើជាវ' }) }}
+        </UiButton>
+
+        <p class="text-xs text-slate-500">
+          {{ t({ en: 'By submitting, you agree to our', kh: 'ដោយដាក់ស្នើ អ្នកយល់ព្រមនឹង' }) }}
+          <RouterLink to="/legal/privacy" class="font-medium text-slate-700 hover:text-slate-900 hover:underline">
+            {{ t({ en: 'Privacy Policy', kh: 'គោលការណ៍ភាពឯកជន' }) }}
+          </RouterLink>.
+        </p>
+      </form>
+    </UiCard>
+
+    <div class="space-y-4">
+      <UiCard>
+        <div class="font-semibold">{{ t({ en: 'Business contact', kh: 'ទំនាក់ទំនងអាជីវកម្ម' }) }}</div>
+        <div class="mt-2 text-sm text-slate-600">
+          {{ t({ en: 'Email:', kh: 'អ៊ីមែល៖' }) }} <span class="text-slate-900">sales@humaneti.com</span><br>
+          {{ t({ en: 'Phone:', kh: 'ទូរស័ព្ទ៖' }) }} <span class="text-slate-900">(+855) 096 59 62 864</span><br>
+          {{ t({ en: 'Location:', kh: 'ទីតាំង៖' }) }} <span class="text-slate-900">{{ t({ en: 'Phnom Penh, Cambodia', kh: 'ភ្នំពេញ ប្រទេសកម្ពុជា' }) }}</span>
+        </div>
+      </UiCard>
+
+      <UiCard>
+        <div class="font-semibold">{{ t({ en: 'What to include', kh: 'ព័ត៌មានដែលគួរដាក់បញ្ចូល' }) }}</div>
+        <ul class="mt-2 space-y-2 text-sm text-slate-600 list-disc pl-5">
+          <li>{{ t({ en: 'Number of employees and departments', kh: 'ចំនួនបុគ្គលិក និងផ្នែក' }) }}</li>
+          <li>{{ t({ en: 'Priority modules (e.g., Payroll, Expense Claim, Projects)', kh: 'ម៉ូឌុលអាទិភាព (ឧ. បៀវត្សរ៍ ចំណាយ គម្រោង)' }) }}</li>
+          <li>{{ t({ en: 'Expected go-live timeline', kh: 'កាលវិភាគចង់ដាក់ឱ្យប្រើ' }) }}</li>
+          <li>{{ t({ en: 'Any compliance or reporting requirements', kh: 'តម្រូវការអនុលោម ឬរបាយការណ៍ពាក់ព័ន្ធ' }) }}</li>
+        </ul>
+      </UiCard>
+    </div>
   </div>
 </template>
+
