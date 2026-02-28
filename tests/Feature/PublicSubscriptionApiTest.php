@@ -2,11 +2,24 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Routing\Middleware\ThrottleRequestsWithRedis;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class PublicSubscriptionApiTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Prevent CI flakiness from route-level throttle middleware.
+        $this->withoutMiddleware([
+            ThrottleRequests::class,
+            ThrottleRequestsWithRedis::class,
+        ]);
+    }
+
     public function test_it_proxies_public_subscription_plans(): void
     {
         config()->set('services.humaneti_sass.base_url', 'http://sass.test');
@@ -93,4 +106,3 @@ class PublicSubscriptionApiTest extends TestCase
         });
     }
 }
-
