@@ -5,7 +5,28 @@ const LOCALE_CHANGED_EVENT = 'public-locale-changed'
 
 const normalizeLocale = (value) => (value === 'kh' ? 'kh' : 'en')
 
+const readLocaleFromUrl = () => {
+  if (typeof window === 'undefined') return null
+  try {
+    const value = new URLSearchParams(window.location.search).get('lang')
+    if (!value) return null
+    return normalizeLocale(value)
+  } catch (_) {
+    return null
+  }
+}
+
 const readStoredLocale = () => {
+  if (typeof window === 'undefined') return 'en'
+  const fromUrl = readLocaleFromUrl()
+  if (fromUrl) {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, fromUrl)
+    } catch (_) {
+      // ignore storage errors
+    }
+    return fromUrl
+  }
   try {
     return normalizeLocale(window.localStorage.getItem(STORAGE_KEY))
   } catch (_) {
@@ -13,7 +34,13 @@ const readStoredLocale = () => {
   }
 }
 
+const applyDocumentLang = (value) => {
+  if (typeof document === 'undefined') return
+  document.documentElement.setAttribute('lang', value === 'kh' ? 'km' : 'en')
+}
+
 const locale = ref(readStoredLocale())
+applyDocumentLang(locale.value)
 
 const writeStoredLocale = (value) => {
   try {
@@ -49,7 +76,7 @@ const pickPublicText = (value, activeLocale = locale.value) => {
 }
 
 export function getPublicLocale() {
-  return readStoredLocale()
+  return locale.value
 }
 
 export function usePublicI18n() {
@@ -58,6 +85,7 @@ export function usePublicI18n() {
     if (next === locale.value) return
     locale.value = next
     writeStoredLocale(next)
+    applyDocumentLang(next)
     emitLocaleChange(next)
   }
 

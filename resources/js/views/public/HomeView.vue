@@ -245,6 +245,16 @@ const faqs = [
   },
   {
     question: {
+      en: 'Where is our data stored after subscription, and what security controls are applied?',
+      kh: 'បន្ទាប់ពីជាវរួច ទិន្នន័យរបស់យើងត្រូវរក្សាទុកនៅឯណា ហើយមានវិធានការសុវត្ថិភាពអ្វីខ្លះ?',
+    },
+    answer: {
+      en: 'During onboarding, Humaneti confirms your data hosting scope, ownership, and access policy. Tenant company scope isolation, role-based permissions, and audit history are enforced in the system. We also align backup, retention/deletion, and export/handover terms in the service agreement so your team knows exactly how data is protected and managed.',
+      kh: 'នៅដំណាក់កាល Onboarding ក្រុមហ៊ុន ហ៊ូម៉ាណេទី នឹងបញ្ជាក់អំពីវិសាលភាពទីតាំងរក្សាទុកទិន្នន័យ កម្មសិទ្ធិទិន្នន័យ និងគោលនយោបាយការចូលប្រើ។ ក្នុងប្រព័ន្ធ មានការបំបែកវិសាលភាពតាមក្រុមហ៊ុន សិទ្ធិតាមតួនាទី និងប្រវត្តិត្រួតពិនិត្យ។ ក៏មានការកំណត់អំពីការបម្រុងទុក ការរក្សាទុក/លុបទិន្នន័យ និងការនាំចេញ/ប្រគល់ទិន្នន័យ ក្នុងកិច្ចព្រមព្រៀងសេវាកម្ម ដើម្បីឱ្យក្រុមរបស់អ្នកយល់ច្បាស់ពីការការពារ និងការគ្រប់គ្រងទិន្នន័យ។',
+    },
+  },
+  {
+    question: {
       en: 'Do you offer training and support?',
       kh: 'តើមានការបណ្តុះបណ្តាល និងគាំទ្រឬទេ?',
     },

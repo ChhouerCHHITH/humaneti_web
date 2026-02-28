@@ -46,6 +46,17 @@ const requestablePlans = computed(() =>
 
 const selectedPlan = computed(() => requestablePlans.value.find((plan) => plan.code === form.value.requested_plan_code) || null)
 
+const normalizePlansPayload = (payload) => {
+  // Accept common response shapes:
+  // 1) { data: [...] }
+  // 2) { data: { data: [...] } }  (Laravel paginator/resource style)
+  // 3) [...]
+  if (Array.isArray(payload)) return payload
+  if (Array.isArray(payload?.data)) return payload.data
+  if (Array.isArray(payload?.data?.data)) return payload.data.data
+  return []
+}
+
 const fetchPlans = async () => {
   loadingPlans.value = true
   try {
@@ -56,11 +67,25 @@ const fetchPlans = async () => {
       headers: { Accept: 'application/json' },
     })
     const data = await res.json().catch(() => null)
-    if (!res.ok || !Array.isArray(data?.data)) {
+    if (!res.ok) {
       plans.value = []
+      push(
+        data?.message || t({ en: 'Failed to load subscription plans.', kh: 'បរាជ័យក្នុងការទាញយកគម្រោងជាវ។' }),
+        'danger',
+      )
       return
     }
-    plans.value = data.data
+
+    plans.value = normalizePlansPayload(data)
+    if (plans.value.length === 0) {
+      push(
+        t({
+          en: 'No public subscription plans are available right now. Please contact sales.',
+          kh: 'បច្ចុប្បន្នមិនមានគម្រោងជាវសាធារណៈទេ។ សូមទាក់ទងក្រុមលក់។',
+        }),
+        'warning',
+      )
+    }
   } finally {
     loadingPlans.value = false
   }
@@ -263,11 +288,14 @@ onMounted(async () => {
             <label class="text-sm font-medium">{{ t({ en: 'Plan', kh: 'គម្រោង' }) }}</label>
             <select
               v-model="form.requested_plan_code"
-              :disabled="loadingPlans"
+              :disabled="loadingPlans || requestablePlans.length === 0"
               class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 disabled:cursor-not-allowed disabled:bg-slate-100"
               @change="clearFieldError('requested_plan_code')"
             >
               <option value="" disabled>{{ t({ en: 'Select plan', kh: 'ជ្រើសរើសគម្រោង' }) }}</option>
+              <option v-if="!loadingPlans && requestablePlans.length === 0" value="" disabled>
+                {{ t({ en: 'No plans available', kh: 'មិនមានគម្រោងទេ' }) }}
+              </option>
               <option v-for="plan in requestablePlans" :key="plan.code" :value="plan.code">
                 {{ plan.name }}
               </option>
@@ -353,4 +381,3 @@ onMounted(async () => {
     </div>
   </div>
 </template>
-
