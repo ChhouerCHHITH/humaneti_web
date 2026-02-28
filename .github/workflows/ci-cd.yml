@@ -10,6 +10,10 @@ concurrency:
   group: ci-cd-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  PHP_VERSION: "8.4"
+  NODE_VERSION: "20"
+
 jobs:
   test:
     name: Test
@@ -22,14 +26,14 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2.30"
+          php-version: ${{ env.PHP_VERSION }}
           tools: composer:v2
           extensions: mbstring, pdo_sqlite, sqlite3
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
       - name: Copy .env
@@ -43,6 +47,9 @@ jobs:
 
       - name: Install PHP dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Verify PHP platform requirements
+        run: composer check-platform-reqs
 
       - name: Install Node dependencies
         run: npm ci
@@ -83,17 +90,17 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2.30"
+          php-version: ${{ env.PHP_VERSION }}
           tools: composer:v2
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
       - name: Install PHP deps
-        run: composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader
+        run: composer install --no-dev --no-interaction --no-progress --prefer-dist --optimize-autoloader --classmap-authoritative
 
       - name: Install Node deps
         run: npm ci
@@ -129,6 +136,26 @@ jobs:
             -o BatchMode=yes \
             -o StrictHostKeyChecking=yes \
             "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "echo SSH_OK" | grep -q "SSH_OK"
+
+      - name: Verify remote PHP runtime
+        run: |
+          set -euo pipefail
+
+          REQUIRED="${{ env.PHP_VERSION }}"
+          REMOTE_PHP=$(ssh -i ~/.ssh/id_ed25519 -p "${{ secrets.SSH_PORT }}" \
+            -o IdentitiesOnly=yes \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+            "php -r 'echo PHP_MAJOR_VERSION.\".\".PHP_MINOR_VERSION;'")
+
+          echo "Remote PHP version: ${REMOTE_PHP}"
+          echo "Required PHP version: ${REQUIRED}"
+
+          if [ "$(printf '%s\n' "${REQUIRED}" "${REMOTE_PHP}" | sort -V | head -n1)" != "${REQUIRED}" ]; then
+            echo "Remote PHP ${REMOTE_PHP} is lower than required ${REQUIRED}. Aborting deploy."
+            exit 1
+          fi
 
       - name: Deploy via rsync
         run: |
