@@ -11,8 +11,8 @@ const { t } = usePublicI18n()
 
 const stats = [
   {
-    label: { en: 'Core Modules', kh: 'ម៉ូឌុលស្នូល' },
-    value: '8+',
+    label: { en: 'Module Families', kh: 'គ្រួសារម៉ូឌុល' },
+    value: '9',
     icon: icons.people,
   },
   {
@@ -283,7 +283,7 @@ const toggleFaq = (index) => {
               <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
               </svg>
-              {{ t({ en: 'HRM • PAYROLL • ASSETS • PURCHASE REQUESTS • EXPENSE CLAIM • PROJECTS', kh: 'HRM • បៀវត្សរ៍ • ទ្រព្យសម្បត្តិ • សំណើទិញ • ទាមទារចំណាយ • គម្រោង' }) }}
+              {{ t({ en: 'PEOPLE • ATTENDANCE • LEAVE • PAYROLL • PROCUREMENT • EXPENSES • ASSETS • PROJECTS • ANNOUNCEMENTS', kh: 'បុគ្គលិក • វត្តមាន • ការឈប់សម្រាក • បៀវត្សរ៍ • លទ្ធកម្ម • ចំណាយ • ទ្រព្យសម្បត្តិ • គម្រោង • សេចក្តីប្រកាស' }) }}
             </span>
           </UiBadge>
 
@@ -298,8 +298,8 @@ const toggleFaq = (index) => {
 
         <p class="text-lg leading-relaxed text-slate-600 sm:text-xl">
           {{ t({
-            en: 'Humaneti streamlines people, payroll, assets, procurement, expense claims, and projects with clear approvals and complete traceability. Start with your current priority and expand without changing platforms.',
-            kh: 'ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ធ្វើឱ្យការងារបុគ្គលិក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម ការទាមទារចំណាយ និងគម្រោង មានភាពរលូនជាមួយការអនុម័តច្បាស់ និងការតាមដានពេញលេញ។ ចាប់ផ្តើមពីអាទិភាពរបស់អ្នក ហើយពង្រីកដោយមិនចាំបាច់ប្តូរវេទិកា។',
+            en: 'Humaneti streamlines people, attendance, leave, payroll, procurement, expense claims, assets, projects, and announcements with clear approvals and complete traceability. Start with your current priority and expand without changing platforms.',
+            kh: 'ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ធ្វើឱ្យការងារបុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ លទ្ធកម្ម ការទាមទារចំណាយ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស មានភាពរលូនជាមួយការអនុម័តច្បាស់ និងការតាមដានពេញលេញ។ ចាប់ផ្តើមពីអាទិភាពរបស់អ្នក ហើយពង្រីកដោយមិនចាំបាច់ប្តូរវេទិកា។',
           }) }}
         </p>
 
@@ -411,7 +411,7 @@ const toggleFaq = (index) => {
       <UiSection
         :kicker="t({ en: 'COMPLETE SOLUTION', kh: 'ដំណោះស្រាយពេញលេញ' })"
         :title="t({ en: 'Everything you need to manage your operations', kh: 'អ្វីៗគ្រប់យ៉ាងដែលអ្នកត្រូវការសម្រាប់គ្រប់គ្រងប្រតិបត្តិការ' })"
-        :subtitle="t({ en: 'Integrated modules for HR, payroll, assets, procurement, expense claims, and projects with consistent approvals across your organization.', kh: 'ម៉ូឌុលរួមបញ្ចូលសម្រាប់ HR បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម ការទាមទារចំណាយ និងគម្រោង ជាមួយការអនុម័តស្របគ្នាទូទាំងអង្គការ។' })"
+        :subtitle="t({ en: 'Integrated modules for people, attendance, leave, payroll, procurement, expense claims, assets, projects, and announcements with consistent approvals across your organization.', kh: 'ម៉ូឌុលរួមបញ្ចូលសម្រាប់បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ លទ្ធកម្ម ការទាមទារចំណាយ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស ជាមួយការអនុម័តស្របគ្នាទូទាំងអង្គការ។' })"
       />
 
       <div class="mt-12 grid gap-8 lg:grid-cols-2">

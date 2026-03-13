@@ -165,169 +165,239 @@ const tx = (value) => {
 
 const modules = [
   {
-    id: 'hrm',
-    name: 'HRM',
-    fullName: 'Human Resource Management',
+    id: 'people',
+    name: { en: 'People', kh: 'បុគ្គលិក' },
+    fullName: { en: 'People & Organization', kh: 'បុគ្គលិក និងរចនាសម្ព័ន្ធអង្គការ' },
     icon: icons.people,
-    color: 'indigo',
-    tagline: 'Structured workforce operations',
-    description: 'Run people operations with employee records, departments, designations, reporting lines, contracts, and onboarding/offboarding controls.',
+    tagline: { en: 'Foundational workforce records', kh: 'កំណត់ត្រាបុគ្គលិកជាគ្រឹះ' },
+    description: {
+      en: 'Centralize employee records, departments, designations, recruitment, contracts, and onboarding or offboarding workflows in one operational system.',
+      kh: 'កណ្ដាលកំណត់ត្រាបុគ្គលិក នាយកដ្ឋាន តួនាទី ការជ្រើសរើស កិច្ចសន្យា និងលំហូរ onboarding ឬ offboarding ក្នុងប្រព័ន្ធតែមួយ។',
+    },
+    availableIn: { en: 'Starter and above', kh: 'Starter និងខ្ពស់ជាង' },
     features: [
-      {
-        title: 'Employee Profiles',
-        description: 'Centralized employee database with complete information, documents, and history.'
-      },
-      {
-        title: 'Organizational Structure',
-        description: 'Department hierarchies, reporting lines, and role definitions in one place.'
-      },
-      {
-        title: 'Attendance Tracking',
-        description: 'Clock in/out, leave requests, overtime calculation, and attendance reports.'
-      },
-      {
-        title: 'Leave Management',
-        description: 'Leave requests, approval routing, balances, and policy-based leave type controls.'
-      },
-      {
-        title: 'Recruitment & On/Offboarding',
-        description: 'Manage jobs, candidates, interviews, and checklist-driven onboarding/offboarding.'
-      },
-      {
-        title: 'Document Storage',
-        description: 'Secure storage for contracts, certifications, and employee documents.'
-      }
+      { title: { en: 'Employee Profiles', kh: 'ប្រវត្តិបុគ្គលិក' }, description: { en: 'One source of truth for employee data, documents, and lifecycle history.', kh: 'ប្រភពទិន្នន័យតែមួយសម្រាប់ព័ត៌មាន ឯកសារ និងប្រវត្តិបុគ្គលិក។' } },
+      { title: { en: 'Departments & Designations', kh: 'នាយកដ្ឋាន និងតួនាទី' }, description: { en: 'Maintain department structure and position mapping for approvals and reporting.', kh: 'គ្រប់គ្រងរចនាសម្ព័ន្ធនាយកដ្ឋាន និងការភ្ជាប់តួនាទី សម្រាប់អនុម័ត និងរបាយការណ៍។' } },
+      { title: { en: 'Recruitment', kh: 'ការជ្រើសរើសបុគ្គលិក' }, description: { en: 'Track openings, candidates, and recruitment progression in the same HR workspace.', kh: 'តាមដានតំណែងទំនេរ បេក្ខជន និងវឌ្ឍនភាពជ្រើសរើស ក្នុងកន្លែងធ្វើការ HR ដូចគ្នា។' } },
+      { title: { en: 'Contracts & Documents', kh: 'កិច្ចសន្យា និងឯកសារ' }, description: { en: 'Store contracts and supporting files with cleaner employee context.', kh: 'រក្សាទុកកិច្ចសន្យា និងឯកសារគាំទ្រ ជាមួយបរិបទបុគ្គលិកច្បាស់លាស់។' } },
+      { title: { en: 'Onboarding & Offboarding', kh: 'Onboarding និង Offboarding' }, description: { en: 'Use checklist-based controls when employees join or leave the organization.', kh: 'ប្រើការគ្រប់គ្រងតាម checklist នៅពេលបុគ្គលិកចូល ឬចាកចេញពីអង្គការ។' } },
+      { title: { en: 'Company Structure', kh: 'រចនាសម្ព័ន្ធក្រុមហ៊ុន' }, description: { en: 'Keep reporting lines and organization context aligned across modules.', kh: 'រក្សាខ្សែរបាយការណ៍ និងបរិបទរចនាសម្ព័ន្ធអង្គការ ឱ្យស្របគ្នាទូទាំងម៉ូឌុល។' } },
     ],
     benefits: [
-      'Standardize HR records and approvals',
-      'Reduce manual handoffs and follow-ups',
-      'Improve reporting line clarity',
-      'Strengthen compliance traceability'
-    ]
+      { en: 'Reduce duplicate HR records', kh: 'កាត់បន្ថយកំណត់ត្រា HR ស្ទួន' },
+      { en: 'Improve role and reporting clarity', kh: 'បង្កើនភាពច្បាស់នៃតួនាទី និងខ្សែរបាយការណ៍' },
+      { en: 'Keep employee history auditable', kh: 'រក្សាប្រវត្តិបុគ្គលិកឱ្យអាចត្រួតពិនិត្យបាន' },
+      { en: 'Support cleaner onboarding handoffs', kh: 'គាំទ្រការផ្ទេរការងារ onboarding ឱ្យស្អាតជាងមុន' },
+    ],
+  },
+  {
+    id: 'attendance',
+    name: { en: 'Attendance', kh: 'វត្តមាន' },
+    fullName: { en: 'Attendance & Shift Controls', kh: 'វត្តមាន និងការគ្រប់គ្រងវេន' },
+    icon: icons.workflow,
+    tagline: { en: 'Daily time visibility', kh: 'ភាពមើលឃើញលើពេលវេលាប្រចាំថ្ងៃ' },
+    description: {
+      en: 'Manage attendance capture, shifts, holidays, overtime context, and attendance reporting with company-scoped visibility.',
+      kh: 'គ្រប់គ្រងការកត់វត្តមាន វេនធ្វើការ ថ្ងៃឈប់សម្រាក បរិបទ OT និងរបាយការណ៍វត្តមាន ជាមួយភាពមើលឃើញតាមវិសាលភាពក្រុមហ៊ុន។',
+    },
+    availableIn: { en: 'Starter and above', kh: 'Starter និងខ្ពស់ជាង' },
+    features: [
+      { title: { en: 'My Attendance', kh: 'វត្តមានរបស់ខ្ញុំ' }, description: { en: 'Employees can review their own attendance and workday history.', kh: 'បុគ្គលិកអាចពិនិត្យវត្តមាន និងប្រវត្តិថ្ងៃធ្វើការរបស់ខ្លួនបាន។' } },
+      { title: { en: 'Attendance Management', kh: 'ការគ្រប់គ្រងវត្តមាន' }, description: { en: 'Managers and HR teams can review attendance with company controls.', kh: 'អ្នកគ្រប់គ្រង និងក្រុម HR អាចពិនិត្យវត្តមានបាន ជាមួយការគ្រប់គ្រងតាមក្រុមហ៊ុន។' } },
+      { title: { en: 'Shift Setup', kh: 'ការកំណត់វេន' }, description: { en: 'Define shift patterns that align with payroll and workforce operations.', kh: 'កំណត់លំនាំវេនឱ្យស្របតាមបៀវត្សរ៍ និងប្រតិបត្តិការកម្លាំងការងារ។' } },
+      { title: { en: 'Holiday Calendar', kh: 'ប្រតិទិនថ្ងៃឈប់សម្រាក' }, description: { en: 'Maintain holiday rules centrally for more consistent attendance handling.', kh: 'រក្សាគោលការណ៍ថ្ងៃឈប់សម្រាកនៅកណ្ដាល ដើម្បីគ្រប់គ្រងវត្តមានឱ្យស្របគ្នា។' } },
+      { title: { en: 'Attendance Reporting', kh: 'របាយការណ៍វត្តមាន' }, description: { en: 'Use reporting to review punctuality, presence, and operational coverage.', kh: 'ប្រើរបាយការណ៍ដើម្បីពិនិត្យពេលវេលា វត្តមាន និងការគ្របដណ្ដប់ប្រតិបត្តិការ។' } },
+      { title: { en: 'Manager Review', kh: 'ការពិនិត្យរបស់អ្នកគ្រប់គ្រង' }, description: { en: 'Support manager follow-up before records flow into later processes.', kh: 'គាំទ្រការតាមដានរបស់អ្នកគ្រប់គ្រង មុនពេលទិន្នន័យឆ្លងទៅដំណើរការបន្ទាប់។' } },
+    ],
+    benefits: [
+      { en: 'Reduce manual attendance consolidation', kh: 'កាត់បន្ថយការបូកសរុបវត្តមានដោយដៃ' },
+      { en: 'Connect shift context to payroll readiness', kh: 'ភ្ជាប់បរិបទវេនទៅនឹងភាពត្រៀមសម្រាប់បៀវត្សរ៍' },
+      { en: 'Improve daily team visibility', kh: 'បង្កើនភាពមើលឃើញលើក្រុមការងារប្រចាំថ្ងៃ' },
+      { en: 'Support cleaner exception handling', kh: 'គាំទ្រការដោះស្រាយករណីលើកលែងឱ្យស្អាតជាងមុន' },
+    ],
+  },
+  {
+    id: 'leave',
+    name: { en: 'Leave', kh: 'ការឈប់សម្រាក' },
+    fullName: { en: 'Leave Management', kh: 'ការគ្រប់គ្រងការឈប់សម្រាក' },
+    icon: icons.shield,
+    tagline: { en: 'Policy-based leave approvals', kh: 'អនុម័តការឈប់សម្រាកតាមគោលនយោបាយ' },
+    description: {
+      en: 'Manage leave types, balances, employee requests, approval routing, and entitlement visibility with stronger policy control.',
+      kh: 'គ្រប់គ្រងប្រភេទច្បាប់ សមតុល្យ សំណើបុគ្គលិក លំហូរអនុម័ត និងភាពមើលឃើញសិទ្ធិច្បាប់ ជាមួយការគ្រប់គ្រងតាមគោលនយោបាយកាន់តែរឹងមាំ។',
+    },
+    availableIn: { en: 'Starter and above', kh: 'Starter និងខ្ពស់ជាង' },
+    features: [
+      { title: { en: 'Leave Requests', kh: 'សំណើឈប់សម្រាក' }, description: { en: 'Employees can request leave from the same operational workspace.', kh: 'បុគ្គលិកអាចស្នើឈប់សម្រាកពីកន្លែងធ្វើការប្រតិបត្តិការដូចគ្នា។' } },
+      { title: { en: 'Leave Balances', kh: 'សមតុល្យការឈប់សម្រាក' }, description: { en: 'Monitor current leave balances and employee entitlement visibility.', kh: 'តាមដានសមតុល្យច្បាប់បច្ចុប្បន្ន និងភាពមើលឃើញសិទ្ធិបុគ្គលិក។' } },
+      { title: { en: 'Leave Types', kh: 'ប្រភេទការឈប់សម្រាក' }, description: { en: 'Configure policy-aligned leave categories and rules.', kh: 'កំណត់ប្រភេទច្បាប់ និងច្បាប់ស្របតាមគោលនយោបាយ។' } },
+      { title: { en: 'Approvals', kh: 'ការអនុម័ត' }, description: { en: 'Route requests through appropriate managers with visible decision history.', kh: 'បញ្ជូនសំណើទៅអ្នកគ្រប់គ្រងត្រឹមត្រូវ ជាមួយប្រវត្តិសម្រេចចិត្តដែលអាចមើលឃើញបាន។' } },
+      { title: { en: 'Policy Controls', kh: 'ការគ្រប់គ្រងគោលនយោបាយ' }, description: { en: 'Keep leave administration aligned with internal leave rules.', kh: 'រក្សាការគ្រប់គ្រងច្បាប់ឱ្យស្របតាមគោលនយោបាយខាងក្នុង។' } },
+      { title: { en: 'History & Reporting', kh: 'ប្រវត្តិ និងរបាយការណ៍' }, description: { en: 'Review leave history with clearer traceability for teams and managers.', kh: 'ពិនិត្យប្រវត្តិច្បាប់ជាមួយភាពអាចតាមដានបានកាន់តែច្បាស់ សម្រាប់ក្រុម និងអ្នកគ្រប់គ្រង។' } },
+    ],
+    benefits: [
+      { en: 'Standardize leave request handling', kh: 'ធ្វើស្តង់ដារការដោះស្រាយសំណើច្បាប់' },
+      { en: 'Improve entitlement transparency', kh: 'បង្កើនភាពថ្លៃថ្នូរនៃសិទ្ធិច្បាប់' },
+      { en: 'Reduce approval ambiguity', kh: 'កាត់បន្ថយភាពមិនច្បាស់នៃការអនុម័ត' },
+      { en: 'Keep leave history accessible', kh: 'រក្សាប្រវត្តិច្បាប់ឱ្យអាចចូលប្រើបាន' },
+    ],
   },
   {
     id: 'payroll',
-    name: 'Payroll',
-    fullName: 'Payroll Processing',
+    name: { en: 'Payroll', kh: 'បៀវត្សរ៍' },
+    fullName: { en: 'Payroll & Employee Salaries', kh: 'បៀវត្សរ៍ និងប្រាក់ខែបុគ្គលិក' },
     icon: icons.money,
-    color: 'emerald',
-    tagline: 'Controlled payroll execution',
-    description: 'Process payroll with salary structures, adjustments, bonus/incentives, deductions, runs, and full approval tracking.',
+    tagline: { en: 'Controlled payroll execution', kh: 'ដំណើរការបៀវត្សរ៍មានការគ្រប់គ្រង' },
+    description: {
+      en: 'Run payroll with salary grades, salary templates, employee salary structures, tax configuration, exchange rates, payment methods, loans, payroll runs, and payslips.',
+      kh: 'ដំណើរការបៀវត្សរ៍ជាមួយថ្នាក់ប្រាក់ខែ គំរូប្រាក់ខែ រចនាសម្ព័ន្ធប្រាក់ខែបុគ្គលិក ការកំណត់ពន្ធ អត្រាប្តូរប្រាក់ វិធីបង់ប្រាក់ កម្ចី វដ្ដបៀវត្សរ៍ និងសន្លឹកបៀវត្សរ៍។',
+    },
+    availableIn: { en: 'Business and above', kh: 'Business និងខ្ពស់ជាង' },
     features: [
-      {
-        title: 'Salary Structures',
-        description: 'Flexible salary components including allowances, deductions, and bonuses.'
-      },
-      {
-        title: 'Approval Workflows',
-        description: 'Multi-step approval process ensuring proper authorization before payment.'
-      },
-      {
-        title: 'Payslip Generation',
-        description: 'Automated payslip creation with secure delivery to employees.'
-      },
-      {
-        title: 'Tax Management',
-        description: 'Configurable tax settings and exchange-rate aware calculations for payroll processing.'
-      },
-      {
-        title: 'Loan Management',
-        description: 'Track employee loans and automatically deduct installments from salary.'
-      },
-      {
-        title: 'Audit Trail',
-        description: 'Complete history of all payroll changes and approvals for compliance.'
-      }
+      { title: { en: 'Salary Grades & Templates', kh: 'ថ្នាក់ និងគំរូប្រាក់ខែ' }, description: { en: 'Standardize pay structures before they flow to employee salary records.', kh: 'ធ្វើស្តង់ដាររចនាសម្ព័ន្ធប្រាក់ខែ មុនឆ្លងទៅកំណត់ត្រាប្រាក់ខែបុគ្គលិក។' } },
+      { title: { en: 'Employee Salary Structures', kh: 'រចនាសម្ព័ន្ធប្រាក់ខែបុគ្គលិក' }, description: { en: 'Manage effective-dated employee salary setups with approval routing.', kh: 'គ្រប់គ្រងការរៀបចំបៀវត្សរ៍បុគ្គលិកតាមកាលបរិច្ឆេទមានប្រសិទ្ធិភាព ជាមួយលំហូរអនុម័ត។' } },
+      { title: { en: 'Payroll Runs & Payslips', kh: 'វដ្ដបៀវត្សរ៍ និងសន្លឹកបៀវត្សរ៍' }, description: { en: 'Create draft runs, process employees, and generate auditable payslips.', kh: 'បង្កើតវដ្ដ draft ដំណើរការបុគ្គលិក និងបង្កើតសន្លឹកបៀវត្សរ៍ដែលអាចត្រួតពិនិត្យបាន។' } },
+      { title: { en: 'Tax & Exchange Rates', kh: 'ពន្ធ និងអត្រាប្តូរប្រាក់' }, description: { en: 'Use configurable tax rules and rate sources for payroll calculations.', kh: 'ប្រើច្បាប់ពន្ធ និងប្រភពអត្រាប្តូរប្រាក់ដែលអាចកំណត់បាន សម្រាប់ការគណនាបៀវត្សរ៍។' } },
+      { title: { en: 'Loans & Deductions', kh: 'កម្ចី និងការកាត់ប្រាក់' }, description: { en: 'Handle employee loans and payroll deductions with cleaner traceability.', kh: 'គ្រប់គ្រងកម្ចីបុគ្គលិក និងការកាត់ប្រាក់បៀវត្សរ៍ ជាមួយភាពអាចតាមដានបានកាន់តែស្អាត។' } },
+      { title: { en: 'Bank Export & Reports', kh: 'នាំចេញទៅធនាគារ និងរបាយការណ៍' }, description: { en: 'Support payment files and payroll reporting for finance review.', kh: 'គាំទ្រឯកសារបង់ប្រាក់ និងរបាយការណ៍បៀវត្សរ៍ សម្រាប់ការពិនិត្យរបស់ហិរញ្ញវត្ថុ។' } },
     ],
     benefits: [
-      'Standardize payroll change controls',
-      'Improve pay component consistency',
-      'Support finance review checkpoints',
-      'Maintain complete payroll traceability'
-    ]
+      { en: 'Standardize payroll change controls', kh: 'ធ្វើស្តង់ដារការគ្រប់គ្រងការកែប្រែបៀវត្សរ៍' },
+      { en: 'Improve salary component consistency', kh: 'បង្កើនភាពស្របគ្នានៃសមាសភាគប្រាក់ខែ' },
+      { en: 'Support finance approval checkpoints', kh: 'គាំទ្រចំណុចពិនិត្យអនុម័តរបស់ហិរញ្ញវត្ថុ' },
+      { en: 'Maintain full payroll traceability', kh: 'រក្សាភាពអាចតាមដានបៀវត្សរ៍ពេញលេញ' },
+    ],
+  },
+  {
+    id: 'expense-claim',
+    name: { en: 'Expense Claim', kh: 'ការទាមទារចំណាយ' },
+    fullName: { en: 'Expense Claims & Cash Advances', kh: 'ការទាមទារចំណាយ និងបុរេប្រទានសាច់ប្រាក់' },
+    icon: icons.audit,
+    tagline: { en: 'Controlled employee spending workflows', kh: 'លំហូរការងារចំណាយបុគ្គលិកមានការគ្រប់គ្រង' },
+    description: {
+      en: 'Handle cash advances, advance clearances, and reimbursements with workflow approvals, supporting evidence, and settlement visibility.',
+      kh: 'គ្រប់គ្រងបុរេប្រទានសាច់ប្រាក់ ការបិទបញ្ចប់បុរេប្រទាន និងសំណងចំណាយ ជាមួយការអនុម័តតាមលំហូរការងារ ភស្តុតាងគាំទ្រ និងភាពមើលឃើញការទូទាត់។',
+    },
+    availableIn: { en: 'Professional and above', kh: 'Professional និងខ្ពស់ជាង' },
+    features: [
+      { title: { en: 'Cash Advances', kh: 'បុរេប្រទានសាច់ប្រាក់' }, description: { en: 'Submit and track advance requests with approval visibility.', kh: 'ដាក់ស្នើ និងតាមដានសំណើបុរេប្រទាន ជាមួយភាពមើលឃើញការអនុម័ត។' } },
+      { title: { en: 'Advance Clearances', kh: 'ការបិទបញ្ចប់បុរេប្រទាន' }, description: { en: 'Close advances with supporting records and controlled settlement steps.', kh: 'បិទបញ្ចប់បុរេប្រទាន ជាមួយកំណត់ត្រាគាំទ្រ និងជំហានទូទាត់ដែលមានការគ្រប់គ្រង។' } },
+      { title: { en: 'Reimbursements', kh: 'សំណងចំណាយ' }, description: { en: 'Handle reimbursement workflows with clearer evidence and approval history.', kh: 'គ្រប់គ្រងលំហូរសំណងចំណាយ ជាមួយភស្តុតាង និងប្រវត្តិអនុម័តកាន់តែច្បាស់។' } },
+      { title: { en: 'Settlement Tracking', kh: 'ការតាមដានការទូទាត់' }, description: { en: 'Keep visibility over outstanding balances and cleared transactions.', kh: 'រក្សាភាពមើលឃើញលើសមតុល្យដែលនៅសល់ និងប្រតិបត្តិការដែលបានទូទាត់រួច។' } },
+      { title: { en: 'Approval Routing', kh: 'លំហូរអនុម័ត' }, description: { en: 'Route spending decisions through the right reviewers.', kh: 'បញ្ជូនសេចក្តីសម្រេចអំពីចំណាយទៅអ្នកពិនិត្យត្រឹមត្រូវ។' } },
+      { title: { en: 'Supporting Documents', kh: 'ឯកសារគាំទ្រ' }, description: { en: 'Attach bills and supporting evidence to improve review quality.', kh: 'ភ្ជាប់វិក្កយបត្រ និងភស្តុតាងគាំទ្រ ដើម្បីបង្កើនគុណភាពការពិនិត្យ។' } },
+    ],
+    benefits: [
+      { en: 'Reduce uncontrolled employee spending', kh: 'កាត់បន្ថយការចំណាយបុគ្គលិកដែលគ្មានការគ្រប់គ្រង' },
+      { en: 'Improve settlement visibility', kh: 'បង្កើនភាពមើលឃើញលើការទូទាត់' },
+      { en: 'Keep supporting evidence linked', kh: 'រក្សាភស្តុតាងគាំទ្រឱ្យភ្ជាប់ជាប់' },
+      { en: 'Support cleaner finance review', kh: 'គាំទ្រការពិនិត្យរបស់ហិរញ្ញវត្ថុឱ្យស្អាតជាងមុន' },
+    ],
+  },
+  {
+    id: 'purchase-requests',
+    name: { en: 'Purchase Request', kh: 'សំណើទិញ' },
+    fullName: { en: 'Purchase Requests & Procurement', kh: 'សំណើទិញ និងលទ្ធកម្ម' },
+    icon: icons.cart,
+    tagline: { en: 'End-to-end procurement controls', kh: 'ការគ្រប់គ្រងលទ្ធកម្មគ្រប់ដំណាក់កាល' },
+    description: {
+      en: 'Control procurement through dashboards, request queues, budget accounts, budget allocations, quotes, vendors, purchase orders, goods received, workflows, and audit logs.',
+      kh: 'គ្រប់គ្រងលទ្ធកម្មតាម dashboard ជួរសំណើ គណនីថវិកា ការបែងចែកថវិកា សម្រង់ អ្នកផ្គត់ផ្គង់ ពាក្យបញ្ជាទិញ ការទទួលទំនិញ workflow និងកំណត់ហេតុសវនកម្ម។',
+    },
+    availableIn: { en: 'Professional and above', kh: 'Professional និងខ្ពស់ជាង' },
+    features: [
+      { title: { en: 'Dashboard & Request Queues', kh: 'Dashboard និងជួរសំណើ' }, description: { en: 'Monitor my requests, drafts, pending approvals, and all requests in one view.', kh: 'តាមដានសំណើរបស់ខ្ញុំ draft ការអនុម័តកំពុងរង់ចាំ និងសំណើទាំងអស់ ក្នុងទិដ្ឋភាពតែមួយ។' } },
+      { title: { en: 'Budget Accounts & Allocations', kh: 'គណនី និងការបែងចែកថវិកា' }, description: { en: 'Link procurement actions to budget ownership and allocation controls.', kh: 'ភ្ជាប់សកម្មភាពលទ្ធកម្មទៅម្ចាស់ថវិកា និងការគ្រប់គ្រងការបែងចែក។' } },
+      { title: { en: 'Quotes, Tenders & Vendors', kh: 'សម្រង់ ការប្រកួតតម្លៃ និងអ្នកផ្គត់ផ្គង់' }, description: { en: 'Manage vendor evidence and quotation flows around each request.', kh: 'គ្រប់គ្រងភស្តុតាងអ្នកផ្គត់ផ្គង់ និងលំហូរសម្រង់ជុំវិញសំណើនីមួយៗ។' } },
+      { title: { en: 'Purchase Orders', kh: 'ពាក្យបញ្ជាទិញ' }, description: { en: 'Convert approved requests into purchase orders with cleaner control.', kh: 'បម្លែងសំណើដែលបានអនុម័តទៅជាពាក្យបញ្ជាទិញ ជាមួយការគ្រប់គ្រងកាន់តែស្អាត។' } },
+      { title: { en: 'Goods Received', kh: 'ការទទួលទំនិញ' }, description: { en: 'Record received goods and connect them back to procurement history.', kh: 'កត់ត្រាការទទួលទំនិញ និងភ្ជាប់វាត្រឡប់ទៅប្រវត្តិលទ្ធកម្ម។' } },
+      { title: { en: 'Workflow & Audit Logs', kh: 'Workflow និងកំណត់ហេតុសវនកម្ម' }, description: { en: 'Keep approval routing and decision history visible for procurement review.', kh: 'រក្សាលំហូរអនុម័ត និងប្រវត្តិសម្រេចចិត្ត ឱ្យអាចមើលឃើញសម្រាប់ការពិនិត្យលទ្ធកម្ម។' } },
+    ],
+    benefits: [
+      { en: 'Reduce off-process purchasing', kh: 'កាត់បន្ថយការទិញក្រៅដំណើរការ' },
+      { en: 'Improve budget discipline', kh: 'បង្កើនវិន័យថវិកា' },
+      { en: 'Keep vendor evidence attached', kh: 'រក្សាភស្តុតាងអ្នកផ្គត់ផ្គង់ឱ្យភ្ជាប់ជាប់' },
+      { en: 'Maintain procurement auditability', kh: 'រក្សាភាពអាចត្រួតពិនិត្យបាននៃលទ្ធកម្ម' },
+    ],
   },
   {
     id: 'assets',
-    name: 'Asset',
-    fullName: 'Asset Management',
+    name: { en: 'Assets', kh: 'ទ្រព្យសម្បត្តិ' },
+    fullName: { en: 'Assets & Categories', kh: 'ទ្រព្យសម្បត្តិ និងប្រភេទ' },
     icon: icons.box,
-    color: 'violet',
-    tagline: 'Controlled asset lifecycle',
-    description: 'Maintain visibility from registration to assignment, transfer, and retirement with complete custody history.',
+    tagline: { en: 'Controlled asset accountability', kh: 'ការទទួលខុសត្រូវលើទ្រព្យសម្បត្តិមានការគ្រប់គ្រង' },
+    description: {
+      en: 'Register asset categories and assets, track assignment, returns, custody history, and branch-aware lifecycle context.',
+      kh: 'ចុះបញ្ជីប្រភេទទ្រព្យសម្បត្តិ និងទ្រព្យសម្បត្តិ តាមដានការចាត់តាំង ការបង្វិលត្រឡប់ ប្រវត្តិកាន់កាប់ និងបរិបទវដ្ដជីវិតតាមសាខា។',
+    },
+    availableIn: { en: 'Enterprise', kh: 'Enterprise' },
     features: [
-      {
-        title: 'Asset Registry',
-        description: 'Complete inventory of all company assets with detailed specifications.'
-      },
-      {
-        title: 'Assignment Tracking',
-        description: 'Track which employee or department has custody of each asset.'
-      },
-      {
-        title: 'Custody History',
-        description: 'Complete audit trail of all asset transfers and assignments.'
-      },
-      {
-        title: 'Status Management',
-        description: 'Track asset condition, maintenance, and lifecycle status.'
-      },
-      {
-        title: 'Return Workflows',
-        description: 'Structured process for asset returns with condition verification.'
-      },
-      {
-        title: 'Reporting',
-        description: 'Asset status, assignment, and movement reporting with action history.'
-      }
+      { title: { en: 'Asset Register', kh: 'បញ្ជីទ្រព្យសម្បត្តិ' }, description: { en: 'Maintain inventory details in a structured asset register.', kh: 'រក្សាព័ត៌មានសារពើភណ្ឌនៅក្នុងបញ្ជីទ្រព្យសម្បត្តិដែលមានរចនាសម្ព័ន្ធ។' } },
+      { title: { en: 'Category Policies', kh: 'គោលនយោបាយប្រភេទ' }, description: { en: 'Use category rules to standardize asset registration requirements.', kh: 'ប្រើច្បាប់ប្រភេទ ដើម្បីធ្វើស្តង់ដារតម្រូវការចុះបញ្ជីទ្រព្យសម្បត្តិ។' } },
+      { title: { en: 'Assignment & Return', kh: 'ការចាត់តាំង និងការប្រគល់ត្រឡប់' }, description: { en: 'Track who holds each asset and when it is returned.', kh: 'តាមដានថានរណាកាន់កាប់ទ្រព្យសម្បត្តិនីមួយៗ និងពេលណាប្រគល់ត្រឡប់។' } },
+      { title: { en: 'Custody History', kh: 'ប្រវត្តិកាន់កាប់' }, description: { en: 'Keep traceable transfer and custody history per item.', kh: 'រក្សាប្រវត្តិផ្ទេរ និងកាន់កាប់ដែលអាចតាមដានបាន សម្រាប់ទ្រព្យសម្បត្តិនីមួយៗ។' } },
+      { title: { en: 'QR, Photos & Documents', kh: 'QR រូបថត និងឯកសារ' }, description: { en: 'Attach photos, codes, and supporting files to assets.', kh: 'ភ្ជាប់រូបថត កូដ និងឯកសារគាំទ្រ ទៅទ្រព្យសម្បត្តិ។' } },
+      { title: { en: 'Branch-aware Tracking', kh: 'ការតាមដានតាមសាខា' }, description: { en: 'Keep visibility across sites and responsible teams.', kh: 'រក្សាភាពមើលឃើញឆ្លងកាត់ទីតាំង និងក្រុមទទួលខុសត្រូវ។' } },
     ],
     benefits: [
-      'Improve asset accountability',
-      'Reduce assignment disputes',
-      'Support maintenance decisions',
-      'Strengthen audit preparedness'
-    ]
+      { en: 'Improve asset accountability', kh: 'បង្កើនការទទួលខុសត្រូវលើទ្រព្យសម្បត្តិ' },
+      { en: 'Reduce assignment disputes', kh: 'កាត់បន្ថយជម្លោះការចាត់តាំង' },
+      { en: 'Support operational audits', kh: 'គាំទ្រសវនកម្មប្រតិបត្តិការ' },
+      { en: 'Keep lifecycle status visible', kh: 'រក្សាភាពមើលឃើញស្ថានភាពវដ្ដជីវិត' },
+    ],
   },
   {
-    id: 'pr',
-    name: 'Purchase Request',
-    fullName: 'Purchase Request System',
-    icon: icons.cart,
-    color: 'amber',
-    tagline: 'End-to-end procurement controls',
-    description: 'Control purchasing through request workflows, budget checks, vendor/quote handling, purchase orders, and goods received.',
+    id: 'projects',
+    name: { en: 'Projects', kh: 'គម្រោង' },
+    fullName: { en: 'Projects & Grant Operations', kh: 'គម្រោង និងប្រតិបត្តិការមូលនិធិ' },
+    icon: icons.workflow,
+    tagline: { en: 'NGO and donor project structure', kh: 'រចនាសម្ព័ន្ធគម្រោង NGO និងម្ចាស់ជំនួយ' },
+    description: {
+      en: 'Support donor-driven operations with project master data, grants, budgets, workplans, activities, partners, beneficiaries, and compliance views.',
+      kh: 'គាំទ្រប្រតិបត្តិការដែលដឹកនាំដោយម្ចាស់ជំនួយ ជាមួយទិន្នន័យស្នូលគម្រោង មូលនិធិ ថវិកា ផែនការការងារ សកម្មភាព ដៃគូ អ្នកទទួលផល និងទិដ្ឋភាពអនុលោម។',
+    },
+    availableIn: { en: 'Enterprise', kh: 'Enterprise' },
     features: [
-      {
-        title: 'Request Submission',
-        description: 'Simple form-based purchase request creation with item details.'
-      },
-      {
-        title: 'Approval Chains',
-        description: 'Configurable multi-level approval based on amount and category.'
-      },
-      {
-        title: 'Budget Tracking',
-        description: 'Real-time budget monitoring and approval rules based on limits.'
-      },
-      {
-        title: 'Vendor Management',
-        description: 'Maintain vendor database with quotes and performance history.'
-      },
-      {
-        title: 'Document Attachment',
-        description: 'Attach quotes, invoices, and supporting documents to requests.'
-      },
-      {
-        title: 'Status Tracking',
-        description: 'Real-time visibility of request status and decision history.'
-      }
+      { title: { en: 'Project Master Data', kh: 'ទិន្នន័យស្នូលគម្រោង' }, description: { en: 'Keep project identities and structures organized in one place.', kh: 'រក្សាអត្តសញ្ញាណ និងរចនាសម្ព័ន្ធគម្រោងឱ្យមានរបៀបរៀបរយ ក្នុងកន្លែងតែមួយ។' } },
+      { title: { en: 'Donor & Grant Management', kh: 'ម្ចាស់ជំនួយ និងការគ្រប់គ្រងមូលនិធិ' }, description: { en: 'Track funding structures that support NGO reporting.', kh: 'តាមដានរចនាសម្ព័ន្ធមូលនិធិ ដែលគាំទ្ររបាយការណ៍ NGO។' } },
+      { title: { en: 'Budget & Workplans', kh: 'ថវិកា និងផែនការការងារ' }, description: { en: 'Link budgets and workplans to project execution controls.', kh: 'ភ្ជាប់ថវិកា និងផែនការការងារ ទៅការគ្រប់គ្រងការអនុវត្តគម្រោង។' } },
+      { title: { en: 'Activities & M&E', kh: 'សកម្មភាព និង M&E' }, description: { en: 'Manage activity planning and monitoring views for programs.', kh: 'គ្រប់គ្រងការរៀបចំសកម្មភាព និងទិដ្ឋភាពតាមដាន សម្រាប់កម្មវិធី។' } },
+      { title: { en: 'Partners & Beneficiaries', kh: 'ដៃគូ និងអ្នកទទួលផល' }, description: { en: 'Keep relationship and beneficiary context connected to projects.', kh: 'រក្សាបរិបទដៃគូ និងអ្នកទទួលផល ឱ្យភ្ជាប់ជាមួយគម្រោង។' } },
+      { title: { en: 'Audit & Compliance Views', kh: 'ទិដ្ឋភាពសវនកម្ម និងអនុលោម' }, description: { en: 'Support traceability for donor-facing reviews.', kh: 'គាំទ្រភាពអាចតាមដានបាន សម្រាប់ការពិនិត្យដែលប្រឈមមុខម្ចាស់ជំនួយ។' } },
     ],
     benefits: [
-      'Reduce off-process purchases',
-      'Improve budget discipline',
-      'Keep vendor evidence linked',
-      'Maintain procurement audit trail'
-    ]
-  }
+      { en: 'Support structured grant operations', kh: 'គាំទ្រប្រតិបត្តិការមូលនិធិដែលមានរចនាសម្ព័ន្ធ' },
+      { en: 'Connect projects to budgets and teams', kh: 'ភ្ជាប់គម្រោងទៅថវិកា និងក្រុមការងារ' },
+      { en: 'Improve NGO reporting readiness', kh: 'បង្កើនភាពត្រៀមសម្រាប់របាយការណ៍ NGO' },
+      { en: 'Keep donor context visible', kh: 'រក្សាភាពមើលឃើញលើបរិបទម្ចាស់ជំនួយ' },
+    ],
+  },
+  {
+    id: 'announcements',
+    name: { en: 'Announcements', kh: 'សេចក្តីប្រកាស' },
+    fullName: { en: 'Announcements & Internal Notices', kh: 'សេចក្តីប្រកាស និងសារជូនដំណឹងខាងក្នុង' },
+    icon: icons.audit,
+    tagline: { en: 'Company-wide communication with acknowledgment', kh: 'ការទំនាក់ទំនងទូទាំងក្រុមហ៊ុនជាមួយការទទួលស្គាល់' },
+    description: {
+      en: 'Publish internal announcements with scoped visibility, acknowledgment tracking, and cleaner policy communication across teams.',
+      kh: 'ផ្សាយសេចក្តីប្រកាសខាងក្នុង ជាមួយភាពមើលឃើញតាមវិសាលភាព ការតាមដានការទទួលស្គាល់ និងការទំនាក់ទំនងគោលនយោបាយឱ្យស្អាតជាងមុន ទូទាំងក្រុម។',
+    },
+    availableIn: { en: 'Enterprise', kh: 'Enterprise' },
+    features: [
+      { title: { en: 'Internal Broadcasts', kh: 'ការជូនដំណឹងខាងក្នុងទូទាំងអង្គការ' }, description: { en: 'Share notices across targeted groups inside the company.', kh: 'ចែករំលែកសារជូនដំណឹងទៅក្រុមគោលដៅខាងក្នុងក្រុមហ៊ុន។' } },
+      { title: { en: 'Audience Scope', kh: 'វិសាលភាពទស្សនិកជន' }, description: { en: 'Control which users or groups can view each announcement.', kh: 'គ្រប់គ្រងថា អ្នកប្រើ ឬក្រុមណាអាចមើលសេចក្តីប្រកាសនីមួយៗបាន។' } },
+      { title: { en: 'Acknowledgments', kh: 'ការទទួលស្គាល់' }, description: { en: 'Track who has seen or acknowledged key notices.', kh: 'តាមដានថានរណាបានមើល ឬទទួលស្គាល់សារសំខាន់ៗ។' } },
+      { title: { en: 'Notice History', kh: 'ប្រវត្តិសារជូនដំណឹង' }, description: { en: 'Keep a reviewable history of published internal communication.', kh: 'រក្សាប្រវត្តិដែលអាចពិនិត្យឡើងវិញបាន នៃការទំនាក់ទំនងខាងក្នុងដែលបានផ្សាយ។' } },
+      { title: { en: 'Policy Communication', kh: 'ការទំនាក់ទំនងគោលនយោបាយ' }, description: { en: 'Use announcements for policy and company-wide operational messaging.', kh: 'ប្រើសេចក្តីប្រកាស សម្រាប់សារគោលនយោបាយ និងសារប្រតិបត្តិការទូទាំងក្រុមហ៊ុន។' } },
+      { title: { en: 'Audit Visibility', kh: 'ភាពមើលឃើញសម្រាប់សវនកម្ម' }, description: { en: 'Support traceability for critical internal notices.', kh: 'គាំទ្រភាពអាចតាមដានបាន សម្រាប់សារជូនដំណឹងខាងក្នុងសំខាន់ៗ។' } },
+    ],
+    benefits: [
+      { en: 'Improve internal communication control', kh: 'បង្កើនការគ្រប់គ្រងលើការទំនាក់ទំនងខាងក្នុង' },
+      { en: 'Track acknowledgment of important notices', kh: 'តាមដានការទទួលស្គាល់សារសំខាន់ៗ' },
+      { en: 'Keep policy communication traceable', kh: 'រក្សាការទំនាក់ទំនងគោលនយោបាយឱ្យអាចតាមដានបាន' },
+      { en: 'Support organization-wide alignment', kh: 'គាំទ្រការសម្របសម្រួលទូទាំងអង្គការ' },
+    ],
+  },
 ]
 
 const platformFeatures = [
@@ -433,7 +503,7 @@ watch(() => route.hash, (hash) => {
           </h1>
           
           <p class="mt-6 text-lg leading-relaxed text-slate-600">
-            {{ t({ en: 'Humaneti is modular by design. Start with core operations (HRM, Payroll, Assets, Purchase Requests), then extend into Expense Claim, Projects, Announcements, and global operational settings as you scale.', kh: 'ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ត្រូវបានរចនាជាម៉ូឌុល។ ចាប់ផ្តើមពីប្រតិបត្តិការស្នូល (HRM បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ) ហើយពង្រីកទៅ Expense Claim Projects Announcements និងការកំណត់សកលពេលអង្គការរីកចម្រើន។' }) }}
+            {{ t({ en: 'Humaneti is modular by design. The live SaaS catalog currently spans People, Attendance, Leave, Payroll, Expense Claims, Purchase Requests, Assets, Projects, and Announcements, with plan availability expanding from Starter to Enterprise.', kh: 'Humaneti ត្រូវបានរចនាជាម៉ូឌុល។ កាតាឡុក SaaS បច្ចុប្បន្នរួមមាន បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ការទាមទារចំណាយ សំណើទិញ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស ដោយការប្រើប្រាស់ពង្រីកពី Starter ទៅ Enterprise។' }) }}
           </p>
 
           <div class="mt-8 flex flex-wrap gap-4">
@@ -517,8 +587,8 @@ watch(() => route.hash, (hash) => {
     <section>
       <UiSection
         :kicker="t({ en: 'CORE MODULES', kh: 'ម៉ូឌុលស្នូល' })"
-        :title="t({ en: 'Four powerful modules, one unified platform', kh: '4 ម៉ូឌុលសំខាន់ៗលើវេទិកាតែមួយ' })"
-        :subtitle="t({ en: 'Core operations modules share one workflow approach, one permission model, and one audit-ready activity trail.', kh: 'ម៉ូឌុលប្រតិបត្តិការស្នូលប្រើលំនាំលំហូរការងារដូចគ្នា គំរូសិទ្ធិដូចគ្នា និងប្រវត្តិសកម្មភាពត្រៀមសវនកម្ម។' })"
+        :title="t({ en: 'Operational modules available today', kh: 'ម៉ូឌុលប្រតិបត្តិការដែលមាននៅថ្ងៃនេះ' })"
+        :subtitle="t({ en: 'These public product modules now match the Humaneti SaaS subscription catalog. Availability differs by plan, but the workflow model stays consistent across the platform.', kh: 'ម៉ូឌុលផលិតផលសាធារណៈទាំងនេះឥឡូវត្រូវនឹងកាតាឡុក Subscription របស់ Humaneti SaaS។ ការប្រើប្រាស់ខុសគ្នាតាមគម្រោង ប៉ុន្តែគំរូ workflow នៅតែស្របគ្នាទូទាំងវេទិកា។' })"
       />
 
       <!-- Tab Navigation -->
@@ -543,7 +613,7 @@ watch(() => route.hash, (hash) => {
           ]"
         >
           <span v-html="`<svg viewBox='0 0 24 24' class='h-5 w-5'>${module.icon}</svg>`"></span>
-          {{ tx(module.fullName) }}
+          {{ t(module.fullName) }}
         </button>
       </div>
 
@@ -561,24 +631,28 @@ watch(() => route.hash, (hash) => {
           <div>
             <div class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
               <span v-html="`<svg viewBox='0 0 24 24' class='h-4 w-4'>${module.icon}</svg>`"></span>
-              {{ tx(module.name) }} {{ t({ en: 'Module', kh: 'ម៉ូឌុល' }) }}
+              {{ t(module.name) }} {{ t({ en: 'Module', kh: 'ម៉ូឌុល' }) }}
             </div>
             
-            <h3 class="mt-4 text-3xl font-bold text-slate-900">{{ tx(module.tagline) }}</h3>
-            <p class="mt-4 text-lg leading-relaxed text-slate-600">{{ tx(module.description) }}</p>
+            <h3 class="mt-4 text-3xl font-bold text-slate-900">{{ t(module.tagline) }}</h3>
+            <p class="mt-4 text-lg leading-relaxed text-slate-600">{{ t(module.description) }}</p>
+
+            <div class="mt-4 inline-flex items-center rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700">
+              {{ t({ en: 'Available in', kh: 'មានក្នុង' }) }}: {{ t(module.availableIn) }}
+            </div>
 
             <div class="mt-8">
               <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-500">{{ t({ en: 'Key Benefits', kh: 'អត្ថប្រយោជន៍សំខាន់' }) }}</h4>
               <ul class="mt-4 space-y-3">
                 <li 
                   v-for="benefit in module.benefits" 
-                  :key="benefit"
+                  :key="benefit.en"
                   class="flex items-start gap-3"
                 >
                   <svg class="h-5 w-5 flex-shrink-0 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                  <span class="text-slate-700">{{ tx(benefit) }}</span>
+                  <span class="text-slate-700">{{ t(benefit) }}</span>
                 </li>
               </ul>
             </div>
@@ -587,11 +661,11 @@ watch(() => route.hash, (hash) => {
           <div class="space-y-4">
             <div 
               v-for="feature in module.features" 
-              :key="feature.title"
+              :key="feature.title.en"
               class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:shadow-md"
             >
-              <h4 class="font-semibold text-slate-900">{{ tx(feature.title) }}</h4>
-              <p class="mt-1 text-sm text-slate-600">{{ tx(feature.description) }}</p>
+              <h4 class="font-semibold text-slate-900">{{ t(feature.title) }}</h4>
+              <p class="mt-1 text-sm text-slate-600">{{ t(feature.description) }}</p>
             </div>
           </div>
         </div>
@@ -603,7 +677,7 @@ watch(() => route.hash, (hash) => {
       <UiSection
         :kicker="t({ en: 'PLATFORM FEATURES', kh: 'សមត្ថភាពវេទិកា' })"
         :title="t({ en: 'Built-in capabilities that power each module', kh: 'សមត្ថភាពភ្ជាប់មកជាស្រេចសម្រាប់គ្រប់ម៉ូឌុល' })"
-        :subtitle="t({ en: 'Consistent controls across HR, payroll, assets, procurement, expense claims, and projects.', kh: 'ការគ្រប់គ្រងស្របគ្នាទូទាំង HR បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម ចំណាយ និងគម្រោង។' })"
+        :subtitle="t({ en: 'Consistent controls across people, attendance, leave, payroll, procurement, expense claims, assets, projects, and internal announcements.', kh: 'ការគ្រប់គ្រងស្របគ្នាទូទាំងបុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ លទ្ធកម្ម ចំណាយ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាសខាងក្នុង។' })"
       />
 
       <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

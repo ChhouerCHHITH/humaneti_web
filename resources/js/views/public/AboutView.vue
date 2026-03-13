@@ -127,11 +127,118 @@ const timeline = [
   }
 ]
 
+const identityCards = [
+  {
+    title: {
+      en: 'A workflow-first operations platform',
+      kh: 'វេទិកាប្រតិបត្តិការផ្អែកលើលំហូរការងារ',
+    },
+    description: {
+      en: 'Humaneti brings people operations, payroll, procurement, expense claims, assets, projects, and announcements into one operating model instead of disconnected tools.',
+      kh: 'Humaneti រួមបញ្ចូលប្រតិបត្តិការបុគ្គលិក បៀវត្សរ៍ លទ្ធកម្ម ការទាមទារចំណាយ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស ទៅក្នុងគំរូប្រតិបត្តិការតែមួយ ជំនួសឱ្យឧបករណ៍ដែលបែកចេញពីគ្នា។',
+    },
+    accent: 'indigo',
+  },
+  {
+    title: {
+      en: 'A governance layer for approvals and access',
+      kh: 'ស្រទាប់អភិបាលកិច្ចសម្រាប់ការអនុម័ត និងសិទ្ធិចូលប្រើ',
+    },
+    description: {
+      en: 'Requests follow role permissions, company scope, approval rules, and audit history so teams can work with stronger control and accountability.',
+      kh: 'សំណើត្រូវបានដំណើរការតាមសិទ្ធិតួនាទី វិសាលភាពក្រុមហ៊ុន ច្បាប់អនុម័ត និងប្រវត្តិត្រួតពិនិត្យ ដើម្បីឱ្យក្រុមការងារធ្វើការជាមួយការគ្រប់គ្រង និងការទទួលខុសត្រូវកាន់តែរឹងមាំ។',
+    },
+    accent: 'emerald',
+  },
+  {
+    title: {
+      en: 'A modular SaaS that scales in phases',
+      kh: 'សេវា SaaS ជាម៉ូឌុល ដែលអាចពង្រីកជាដំណាក់កាល',
+    },
+    description: {
+      en: 'Organizations can start with a priority area like payroll or purchase requests, then add more modules later without changing platform patterns.',
+      kh: 'អង្គការអាចចាប់ផ្តើមពីផ្នែកអាទិភាពដូចជា បៀវត្សរ៍ ឬ សំណើទិញ ហើយបន្ថែមម៉ូឌុលផ្សេងទៀតពេលក្រោយ ដោយមិនចាំបាច់ប្តូរគំរូវេទិកា។',
+    },
+    accent: 'violet',
+  },
+  {
+    title: {
+      en: 'An implementation partner for real operations',
+      kh: 'ដៃគូអនុវត្តសម្រាប់ប្រតិបត្តិការពិត',
+    },
+    description: {
+      en: 'We do not stop at software delivery. Humaneti also helps shape workflows, roles, onboarding, migration, and rollout practices that teams can sustain.',
+      kh: 'យើងមិនបញ្ឈប់ត្រឹមការផ្តល់កម្មវិធីទេ។ Humaneti ក៏ជួយរៀបចំលំហូរការងារ តួនាទី onboarding ការផ្លាស់ប្តូរទិន្នន័យ និងការដាក់ឱ្យប្រើប្រាស់ ដែលក្រុមការងារអាចរក្សាបានក្នុងរយៈពេលវែង។',
+    },
+    accent: 'amber',
+  },
+]
+
+const fitCards = [
+  {
+    title: {
+      en: 'SMEs building stronger internal control',
+      kh: 'SME ដែលកំពុងបង្កើតការគ្រប់គ្រងផ្ទៃក្នុងឱ្យរឹងមាំ',
+    },
+    description: {
+      en: 'For growing companies that want structured approvals, clearer ownership, and less dependence on manual follow-up.',
+      kh: 'សម្រាប់ក្រុមហ៊ុនកំពុងរីកចម្រើន ដែលចង់បានការអនុម័តមានរចនាសម្ព័ន្ធ ភាពជាម្ចាស់ការងារច្បាស់ និងកាត់បន្ថយការតាមដានដោយដៃ។',
+    },
+    tags: [
+      { en: 'People and payroll control', kh: 'ការគ្រប់គ្រងបុគ្គលិក និងបៀវត្សរ៍' },
+      { en: 'Faster approvals', kh: 'ការអនុម័តលឿនជាងមុន' },
+      { en: 'Cleaner records', kh: 'កំណត់ត្រាស្អាតជាងមុន' },
+    ],
+  },
+  {
+    title: {
+      en: 'NGOs with compliance and donor visibility needs',
+      kh: 'NGO ដែលត្រូវការអនុលោម និងភាពអាចមើលឃើញសម្រាប់ម្ចាស់ជំនួយ',
+    },
+    description: {
+      en: 'For organizations that need traceable approvals, project-linked operations, and stronger audit readiness across teams.',
+      kh: 'សម្រាប់អង្គការដែលត្រូវការការអនុម័តអាចតាមដានបាន ប្រតិបត្តិការភ្ជាប់គម្រោង និងភាពត្រៀមសម្រាប់សវនកម្មកាន់តែរឹងមាំទូទាំងក្រុម។',
+    },
+    tags: [
+      { en: 'Project-linked workflows', kh: 'លំហូរការងារភ្ជាប់គម្រោង' },
+      { en: 'Audit-ready history', kh: 'ប្រវត្តិត្រៀមសវនកម្ម' },
+      { en: 'Governance support', kh: 'ការគាំទ្រអភិបាលកិច្ច' },
+    ],
+  },
+  {
+    title: {
+      en: 'Multi-branch or multi-department teams',
+      kh: 'ក្រុមការងារច្រើនសាខា ឬ ច្រើនផ្នែក',
+    },
+    description: {
+      en: 'For organizations that need one consistent system while preserving delegated authority by company, branch, and role.',
+      kh: 'សម្រាប់អង្គការដែលត្រូវការប្រព័ន្ធតែមួយស្របគ្នា ខណៈរក្សាសិទ្ធិប្រគល់អំណាចតាមក្រុមហ៊ុន សាខា និងតួនាទី។',
+    },
+    tags: [
+      { en: 'Company-scope controls', kh: 'ការគ្រប់គ្រងតាមវិសាលភាពក្រុមហ៊ុន' },
+      { en: 'Role-based access', kh: 'សិទ្ធិតាមតួនាទី' },
+      { en: 'Repeatable processes', kh: 'ដំណើរការដែលអាចធ្វើឡើងវិញបាន' },
+    ],
+  },
+]
+
 const stats = [
-  { label: 'Core Domains', value: 'People + Payroll + Operations' },
-  { label: 'Workflow Model', value: 'Dynamic approvals' },
-  { label: 'Access Model', value: 'Role + Company scope' },
-  { label: 'Implementation Focus', value: 'SME & NGO' }
+  {
+    label: { en: 'Platform Type', kh: 'ប្រភេទវេទិកា' },
+    value: { en: 'Workflow-first SaaS', kh: 'SaaS ផ្អែកលើលំហូរការងារ' },
+  },
+  {
+    label: { en: 'Core Domains', kh: 'ដែនប្រតិបត្តិការស្នូល' },
+    value: { en: 'People + Payroll + Operations', kh: 'បុគ្គលិក + បៀវត្សរ៍ + ប្រតិបត្តិការ' },
+  },
+  {
+    label: { en: 'Control Model', kh: 'គំរូគ្រប់គ្រង' },
+    value: { en: 'Roles + approvals + audit trail', kh: 'តួនាទី + អនុម័ត + ប្រវត្តិត្រួតពិនិត្យ' },
+  },
+  {
+    label: { en: 'Best Fit', kh: 'សមស្របសម្រាប់' },
+    value: { en: 'SMEs, NGOs, multi-branch teams', kh: 'SME, NGO និងក្រុមច្រើនសាខា' },
+  },
 ]
 </script>
 
@@ -149,7 +256,11 @@ const stats = [
           </h1>
           
           <p class="mt-6 text-lg leading-relaxed text-slate-600">
-            {{ t({ en: 'Many teams struggle with unclear approvals, scattered ownership, and lost records. Humaneti brings these critical actions into one workflow-driven platform across People, Payroll, Assets, Purchase Requests, Expense Claims, and Projects.', kh: 'ក្រុមជាច្រើនជួបបញ្ហាការអនុម័តមិនច្បាស់ ភាពទទួលខុសត្រូវបែកបាក់ និងកំណត់ត្រាបាត់បង់។ ក្រុមហ៊ុន ហ៊ូម៉ាណេទី រួមបញ្ចូលសកម្មភាពសំខាន់ទាំងនេះទៅក្នុងវេទិកាមួយដែលដំណើរការតាមលំហូរការងារ។' }) }}
+            {{ t({ en: 'Humaneti is a workflow-first SaaS platform for organizations that need stronger control across people, payroll, procurement, expense, assets, projects, and internal communication. It replaces scattered spreadsheets, chat approvals, and disconnected records with one structured operating model.', kh: 'Humaneti គឺជាវេទិកា SaaS ផ្អែកលើលំហូរការងារ សម្រាប់អង្គការដែលត្រូវការការគ្រប់គ្រងកាន់តែរឹងមាំលើបុគ្គលិក បៀវត្សរ៍ លទ្ធកម្ម ចំណាយ ទ្រព្យសម្បត្តិ គម្រោង និងការទំនាក់ទំនងផ្ទៃក្នុង។ វាជំនួស spreadsheet បែកចេញ ការអនុម័តតាម chat និងកំណត់ត្រាមិនភ្ជាប់គ្នា ដោយគំរូប្រតិបត្តិការមានរចនាសម្ព័ន្ធតែមួយ។' }) }}
+          </p>
+
+          <p class="mt-4 text-base leading-relaxed text-slate-600">
+            {{ t({ en: 'Teams use Humaneti to run People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements with clear ownership, role-based access, and traceable approval history.', kh: 'ក្រុមការងារប្រើ Humaneti ដើម្បីដំណើរការ បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស ជាមួយភាពជាម្ចាស់ការងារច្បាស់ សិទ្ធិតាមតួនាទី និងប្រវត្តិអនុម័តអាចតាមដានបាន។' }) }}
           </p>
 
           <div class="mt-8 flex flex-wrap gap-4">
@@ -168,11 +279,11 @@ const stats = [
             <div class="grid gap-4 sm:grid-cols-2">
               <div 
                 v-for="stat in stats" 
-                :key="stat.label"
+                :key="stat.label.en"
                 class="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center"
               >
-                <div class="text-3xl font-bold text-slate-900">{{ tx(stat.value) }}</div>
-                <div class="mt-1 text-sm text-slate-600">{{ tx(stat.label) }}</div>
+                <div class="text-3xl font-bold text-slate-900">{{ t(stat.value) }}</div>
+                <div class="mt-1 text-sm text-slate-600">{{ t(stat.label) }}</div>
               </div>
             </div>
           </div>
@@ -195,6 +306,66 @@ const stats = [
         <p class="mt-4 text-lg leading-relaxed text-slate-600">
           {{ t({ en: 'We believe strong operations do not require unnecessary complexity. With clear workflows, proper approvals, role-based access, and complete traceability, teams can execute reliably at scale. That is why we built Humaneti—to make professional-grade workflow management accessible to every business.', kh: 'យើងជឿថាប្រតិបត្តិការរឹងមាំ មិនចាំបាច់ស្មុគស្មាញលើសចាំបាច់។ ដោយមានលំហូរការងារច្បាស់ ការអនុម័តត្រឹមត្រូវ សិទ្ធិតាមតួនាទី និងការតាមដានពេញលេញ ក្រុមការងារអាចអនុវត្តបានគួរឱ្យទុកចិត្តក្នុងកម្រិតធំ។ នេះជាមូលហេតុដែលយើងបង្កើត ក្រុមហ៊ុន ហ៊ូម៉ាណេទី។' }) }}
         </p>
+      </div>
+    </section>
+
+    <!-- What Humaneti Is -->
+    <section>
+      <UiSection
+        :kicker="t({ en: 'WHAT HUMANETI IS', kh: 'HUMANETI ជាអ្វី' })"
+        :title="t({ en: 'More than software screens', kh: 'លើសពីអេក្រង់កម្មវិធីធម្មតា' })"
+        :subtitle="t({ en: 'Humaneti is designed as an operating system for structured work, not a collection of isolated forms.', kh: 'Humaneti ត្រូវបានរចនាឡើងជាប្រព័ន្ធប្រតិបត្តិការសម្រាប់ការងារមានរចនាសម្ព័ន្ធ មិនមែនជាការប្រមូលផ្តុំទម្រង់ឯកត្តាឡើយ។' })"
+      />
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <div
+          v-for="card in identityCards"
+          :key="card.title.en"
+          class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+        >
+          <div
+            class="absolute -right-10 -top-10 h-28 w-28 rounded-full blur-3xl transition-transform group-hover:scale-110"
+            :class="{
+              'bg-indigo-500/10': card.accent === 'indigo',
+              'bg-emerald-500/10': card.accent === 'emerald',
+              'bg-violet-500/10': card.accent === 'violet',
+              'bg-amber-500/10': card.accent === 'amber',
+            }"
+          ></div>
+          <div class="relative">
+            <h3 class="text-xl font-bold text-slate-900">{{ t(card.title) }}</h3>
+            <p class="mt-3 leading-relaxed text-slate-600">{{ t(card.description) }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who It Fits -->
+    <section>
+      <UiSection
+        :kicker="t({ en: 'WHO IT FITS', kh: 'សមស្របសម្រាប់អ្នកណា' })"
+        :title="t({ en: 'Built for teams that need structure without heavy complexity', kh: 'បង្កើតសម្រាប់ក្រុមការងារដែលត្រូវការរចនាសម្ព័ន្ធ ដោយមិនមានភាពស្មុគស្មាញលើសចាំបាច់' })"
+        :subtitle="t({ en: 'Humaneti works best where approvals, controls, and repeatable operations matter every day.', kh: 'Humaneti សមស្របបំផុតសម្រាប់កន្លែងដែលការអនុម័ត ការគ្រប់គ្រង និងប្រតិបត្តិការដែលអាចធ្វើឡើងវិញបាន មានសារៈសំខាន់រាល់ថ្ងៃ។' })"
+      />
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        <div
+          v-for="card in fitCards"
+          :key="card.title.en"
+          class="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-7 shadow-sm"
+        >
+          <h3 class="text-xl font-bold text-slate-900">{{ t(card.title) }}</h3>
+          <p class="mt-3 leading-relaxed text-slate-600">{{ t(card.description) }}</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span
+              v-for="tag in card.tags"
+              :key="tag.en"
+              class="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700"
+            >
+              {{ t(tag) }}
+            </span>
+          </div>
+        </div>
       </div>
     </section>
 

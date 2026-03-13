@@ -13,6 +13,7 @@ const { push } = useToast()
 const khText = {
   Starter: 'ចាប់ផ្តើម',
   Business: 'អាជីវកម្ម',
+  Professional: 'វិជ្ជាជីវៈ',
   Enterprise: 'សហគ្រាស',
   Contact: 'ទាក់ទង',
   Custom: 'តាមតម្រូវការ',
@@ -34,6 +35,15 @@ const khText = {
   'Most popular choice': 'ជម្រើសពេញនិយមបំផុត',
   'Complete platform with advanced controls and full support.':
     'វេទិកាពេញលេញជាមួយការគ្រប់គ្រងកម្រិតខ្ពស់ និងការគាំទ្រពេញលេញ។',
+  'For NGO compliance operations': 'សម្រាប់ប្រតិបត្តិការអនុលោម NGO',
+  'Business plan with stronger compliance, expense, and procurement controls.':
+    'គម្រោង Business ជាមួយការគ្រប់គ្រងអនុលោម ចំណាយ និងលទ្ធកម្មកម្រិតខ្ពស់។',
+  'All Business modules': 'ម៉ូឌុលទាំងអស់របស់ Business',
+  'Expense claim workflows': 'លំហូរការងារទាមទារចំណាយ',
+  'Purchase request governance': 'អភិបាលកិច្ចសំណើទិញ',
+  'Audit-ready approvals': 'ការអនុម័តត្រៀមសវនកម្ម',
+  'Policy & compliance controls': 'ការគ្រប់គ្រងគោលនយោបាយ និងអនុលោម',
+  'Choose Professional': 'ជ្រើសរើស Professional',
   'Core operations modules': 'ម៉ូឌុលប្រតិបត្តិការស្នូល',
   'Up to 100 users': 'រហូតដល់ 100 អ្នកប្រើ',
   'Multi-step approval workflows': 'លំហូរអនុម័តច្រើនជំហាន',
@@ -77,6 +87,10 @@ const khText = {
   'Projects Module': 'ម៉ូឌុលគម្រោង',
   'Users & Permissions': 'អ្នកប្រើ និងសិទ្ធិ',
   'User Limit': 'ដែនកំណត់អ្នកប្រើ',
+  'Commercial Terms': 'លក្ខខណ្ឌពាណិជ្ជកម្ម',
+  'Billing Preference': 'ជម្រើសវិក្កយបត្រ',
+  'On request': 'តាមការស្នើសុំ',
+  'Monthly or yearly': 'ប្រចាំខែ ឬ ប្រចាំឆ្នាំ',
   'Department Permissions': 'សិទ្ធិនាយកដ្ឋាន',
   'Custom Permission Sets': 'សំណុំសិទ្ធិតាមតម្រូវការ',
   'Role-Based Access': 'សិទ្ធិតាមតួនាទី',
@@ -123,20 +137,21 @@ const tx = (value) => {
 const plans = [
   {
     name: 'Starter',
-    tagline: 'Perfect for small teams',
-    price: { monthly: 'Contact', annual: 'Contact' },
-    description: 'Start with essential workflows and basic approvals.',
+    tagline: 'HR foundation for structured teams',
+    price: { monthly: 'Contact Sales', annual: 'Contact Sales' },
+    description: 'People, attendance, and leave essentials for SMEs and NGOs starting formal workflows.',
     features: [
-      { text: 'Start with selected modules', included: true },
+      { text: 'People, attendance, and leave foundation', included: true },
       { text: 'Up to 25 users', included: true },
-      { text: 'Standard approval workflows', included: true },
-      { text: 'Basic reporting & exports', included: true },
-      { text: 'Email support', included: true },
+      { text: 'Up to 3 branches', included: true },
+      { text: '14-day trial', included: true },
+      { text: 'Standard workflow approvals', included: true },
+      { text: 'Audit-ready activity logs', included: true },
+      { text: 'Monthly base + per employee pricing', included: true },
       { text: 'Web + mobile browser access', included: true },
-      { text: 'Advanced permissions', included: false },
-      { text: 'Custom approval rules', included: false },
+      { text: 'Payroll module', included: false },
       { text: 'API access', included: false },
-      { text: 'Priority support', included: false }
+      { text: 'Advanced workflow approvals', included: false }
     ],
     cta: 'Start with Starter',
     highlight: false,
@@ -145,40 +160,61 @@ const plans = [
   {
     name: 'Business',
     tagline: 'Most popular choice',
-    price: { monthly: 'Contact', annual: 'Contact' },
-    description: 'Complete platform with advanced controls and full support.',
+    price: { monthly: 'Contact Sales', annual: 'Contact Sales' },
+    description: 'Starter plus payroll operations, employee salary controls, and finance-ready reporting.',
     features: [
-      { text: 'Core operations modules', included: true },
-      { text: 'Up to 100 users', included: true },
-      { text: 'Multi-step approval workflows', included: true },
-      { text: 'Advanced reporting & analytics', included: true },
-      { text: 'Priority email & chat support', included: true },
-      { text: 'Web + mobile browser access', included: true },
-      { text: 'Role-based permissions', included: true },
-      { text: 'Audit-ready activity logs', included: true },
-      { text: 'Implementation guidance', included: true },
-      { text: 'Onboarding & training', included: true }
+      { text: 'Starter plus payroll operations', included: true },
+      { text: 'Up to 120 users', included: true },
+      { text: 'Up to 20 branches', included: true },
+      { text: '14-day trial', included: true },
+      { text: 'Payroll runs, payslips, and loans', included: true },
+      { text: 'Salary grades, templates, and employee salaries', included: true },
+      { text: 'Tax configuration and payroll reports', included: true },
+      { text: 'Advanced workflow approvals', included: true },
+      { text: 'API access', included: true },
+      { text: 'Asset management', included: false }
     ],
     cta: 'Choose Business',
     highlight: true,
     popular: true
   },
   {
+    name: 'Professional',
+    tagline: 'For NGO compliance operations',
+    price: { monthly: 'Contact Sales', annual: 'Contact Sales' },
+    description: 'Business plus expense claims and purchase requests for stronger compliance and operational governance.',
+    features: [
+      { text: 'Business plus expense claims', included: true },
+      { text: 'Business plus purchase requests', included: true },
+      { text: 'Up to 300 users', included: true },
+      { text: 'Up to 40 branches', included: true },
+      { text: '14-day trial', included: true },
+      { text: 'Compliance pack', included: true },
+      { text: 'Budget, vendor, PO, and GR controls', included: true },
+      { text: 'Cash advances, clearances, reimbursements', included: true },
+      { text: 'Advanced permissions', included: true },
+      { text: 'Asset management', included: false }
+    ],
+    cta: 'Choose Professional',
+    highlight: false,
+    popular: false
+  },
+  {
     name: 'Enterprise',
     tagline: 'For complex organizations',
     price: { monthly: 'Custom', annual: 'Custom' },
-    description: 'Custom solutions for multi-department teams.',
+    description: 'Full platform access with assets, projects, announcements, rollout customization, and SLA-backed support.',
     features: [
-      { text: 'All modules + rollout customization', included: true },
+      { text: 'All modules', included: true },
       { text: 'Unlimited users', included: true },
-      { text: 'Custom approval rules', included: true },
-      { text: 'Custom reports & dashboards', included: true },
-      { text: 'Dedicated account manager', included: true },
-      { text: 'Web + mobile browser access', included: true },
-      { text: 'Advanced security controls', included: true },
-      { text: 'SLA guarantees', included: true },
-      { text: 'API access & integrations', included: true },
-      { text: 'Tenant rollout support', included: true }
+      { text: 'Unlimited branches', included: true },
+      { text: 'No trial', included: true },
+      { text: 'Assets, projects, and announcements', included: true },
+      { text: 'Custom workflows', included: true },
+      { text: 'SLA support', included: true },
+      { text: 'API integrations', included: true },
+      { text: 'Multi-branch rollout', included: true },
+      { text: 'Custom onboarding and governance setup', included: true }
     ],
     cta: 'Contact Sales',
     highlight: false,
@@ -211,41 +247,39 @@ const implementationServices = [
 
 const comparison = [
   {
-    category: 'Core Features',
+    category: 'Module Access',
     features: [
-      { name: 'People, Attendance, Leave', starter: true, business: true, enterprise: true },
-      { name: 'Payroll Module', starter: true, business: true, enterprise: true },
-      { name: 'Asset Management', starter: true, business: true, enterprise: true },
-      { name: 'Purchase Requests', starter: true, business: true, enterprise: true },
-      { name: 'Expense Claim', starter: false, business: true, enterprise: true },
-      { name: 'Projects Module', starter: false, business: true, enterprise: true }
+      { name: 'People Module', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Attendance Module', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Leave Module', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Payroll Module', starter: false, business: true, professional: true, enterprise: true },
+      { name: 'Purchase Requests', starter: false, business: false, professional: true, enterprise: true },
+      { name: 'Expense Claim', starter: false, business: false, professional: true, enterprise: true },
+      { name: 'Asset Management', starter: false, business: false, professional: false, enterprise: true },
+      { name: 'Projects Module', starter: false, business: false, professional: false, enterprise: true },
+      { name: 'Announcements', starter: false, business: false, professional: false, enterprise: true }
     ]
   },
   {
-    category: 'Users & Permissions',
+    category: 'Operational Scope',
     features: [
-      { name: 'User Limit', starter: '25', business: '100', enterprise: 'Unlimited' },
-      { name: 'Role-Based Access', starter: false, business: true, enterprise: true },
-      { name: 'Department Permissions', starter: false, business: true, enterprise: true },
-      { name: 'Custom Permission Sets', starter: false, business: false, enterprise: true }
+      { name: 'User Limit', starter: '25', business: '120', professional: '300', enterprise: 'Unlimited' },
+      { name: 'Branch Limit', starter: '3', business: '20', professional: '40', enterprise: 'Unlimited' },
+      { name: 'Trial Period', starter: '14 days', business: '14 days', professional: '14 days', enterprise: 'No trial' },
+      { name: 'Commercial Terms', starter: 'On request', business: 'On request', professional: 'On request', enterprise: 'On request' },
+      { name: 'Billing Preference', starter: 'Monthly or yearly', business: 'Monthly or yearly', professional: 'Monthly or yearly', enterprise: 'Custom' }
     ]
   },
   {
-    category: 'Workflows & Approvals',
+    category: 'Governance & Integrations',
     features: [
-      { name: 'Basic Approvals', starter: true, business: true, enterprise: true },
-      { name: 'Multi-Step Workflows', starter: false, business: true, enterprise: true },
-      { name: 'Conditional Rules', starter: false, business: true, enterprise: true },
-      { name: 'Workflow Governance Controls', starter: false, business: false, enterprise: true }
-    ]
-  },
-  {
-    category: 'Support & Services',
-    features: [
-      { name: 'Email Support', starter: true, business: true, enterprise: true },
-      { name: 'Priority Support', starter: false, business: true, enterprise: true },
-      { name: 'Dedicated Account Manager', starter: false, business: false, enterprise: true },
-      { name: 'SLA Guarantee', starter: false, business: false, enterprise: true }
+      { name: 'Standard Workflow Controls', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Advanced Workflow Controls', starter: false, business: true, professional: true, enterprise: true },
+      { name: 'Audit-ready Activity Logs', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'API Access', starter: false, business: true, professional: true, enterprise: true },
+      { name: 'Compliance Pack', starter: false, business: false, professional: true, enterprise: true },
+      { name: 'Custom Workflow Design', starter: false, business: false, professional: false, enterprise: true },
+      { name: 'SLA Support', starter: false, business: false, professional: false, enterprise: true }
     ]
   }
 ]
@@ -306,6 +340,9 @@ const requestablePlans = computed(() => {
       monthly_price: plan.monthly_price,
       yearly_price: plan.yearly_price,
       modules: Array.isArray(plan.modules) ? plan.modules : [],
+      max_users: plan.max_users,
+      max_branches: plan.max_branches,
+      trial_days: plan.trial_days,
     }))
   }
 
@@ -316,6 +353,9 @@ const requestablePlans = computed(() => {
     monthly_price: null,
     yearly_price: null,
     modules: [],
+    max_users: null,
+    max_branches: null,
+    trial_days: null,
   }))
 })
 
@@ -326,13 +366,12 @@ const selectedPlan = computed(() =>
 const selectedPlanPrice = computed(() => {
   const plan = selectedPlan.value
   if (!plan) return '-'
+  return t({ en: 'Shared on request', kh: 'ផ្តល់ជូនតាមការស្នើសុំ' })
+})
 
-  const amount = subscriptionForm.value.billing_cycle === 'yearly' ? plan.yearly_price : plan.monthly_price
-  if (amount == null) {
-    return t({ en: 'Contact Sales', kh: 'ទាក់ទងផ្នែកលក់' })
-  }
-
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Number(amount))
+const selectedPlanModuleFamilies = computed(() => {
+  const modules = Array.isArray(selectedPlan.value?.modules) ? selectedPlan.value.modules : []
+  return Array.from(new Set(modules.map((item) => String(item).split('.')[0]).filter(Boolean))).length
 })
 
 const clearFieldError = (key) => {
@@ -488,14 +527,14 @@ const toggleFaq = (faqId) => {
       <UiSection
         :kicker="t({ en: 'TRANSPARENT PRICING', kh: 'តម្លៃច្បាស់លាស់' })"
         :title="t({ en: 'Simple plans that grow with you', kh: 'គម្រោងសាមញ្ញដែលពង្រីកទៅតាមអ្នក' })"
-        :subtitle="t({ en: 'Start with priority modules today and expand by workflow complexity, user scope, and governance needs.', kh: 'ចាប់ផ្តើមពីម៉ូឌុលអាទិភាពថ្ងៃនេះ ហើយពង្រីកតាមភាពស្មុគស្មាញលំហូរការងារ វិសាលភាពអ្នកប្រើ និងតម្រូវការអភិបាលកិច្ច។' })"
+        :subtitle="t({ en: 'Starter covers people, attendance, and leave. Business adds payroll. Professional adds expense claim and purchase request controls. Enterprise unlocks the full module catalog.', kh: 'Starter គ្រប់គ្រងបុគ្គលិក វត្តមាន និងការឈប់សម្រាក។ Business បន្ថែមបៀវត្សរ៍។ Professional បន្ថែមការគ្រប់គ្រងទាមទារចំណាយ និងសំណើទិញ។ Enterprise បើកប្រើកាតាឡុកម៉ូឌុលពេញលេញ។' })"
       />
 
     </section>
 
     <!-- Pricing Cards -->
     <section>
-      <div class="grid gap-8 lg:grid-cols-3">
+      <div class="grid gap-8 lg:grid-cols-4">
         <div 
           v-for="plan in plans" 
           :key="plan.name"
@@ -526,13 +565,11 @@ const toggleFaq = (faqId) => {
           </div>
 
           <div class="mt-6">
-            <div :class="['text-4xl font-bold', plan.highlight ? 'text-white' : 'text-slate-900']">
+            <div :class="['text-3xl font-bold', plan.highlight ? 'text-white' : 'text-slate-900']">
               {{ tx(plan.price[billingCycle]) }}
             </div>
             <p :class="['mt-1 text-sm', plan.highlight ? 'text-slate-300' : 'text-slate-500']">
-              {{ plan.price[billingCycle] === 'Contact' || plan.price[billingCycle] === 'Custom' 
-                  ? t({ en: 'Custom pricing based on needs', kh: 'តម្លៃតាមតម្រូវការ' }) 
-                  : t({ en: 'per month, billed annually', kh: 'ប្រចាំខែ គិតថ្លៃប្រចាំឆ្នាំ' }) }}
+              {{ t({ en: 'Commercial terms are shared after scope review and rollout sizing.', kh: 'លក្ខខណ្ឌពាណិជ្ជកម្មនឹងផ្តល់ជូនបន្ទាប់ពីពិនិត្យវិសាលភាព និងទំហំនៃការដាក់ឱ្យប្រើប្រាស់។' }) }}
             </p>
           </div>
 
@@ -584,7 +621,7 @@ const toggleFaq = (faqId) => {
 
       <p class="mt-8 text-center text-sm text-slate-600">
         {{ t({ en: 'All plans include secure access controls, regular updates, and operational support options.', kh: 'គ្រប់គម្រោងរួមមានការគ្រប់គ្រងសិទ្ធិចូលប្រើដោយសុវត្ថិភាព ការធ្វើបច្ចុប្បន្នភាពទៀងទាត់ និងជម្រើសគាំទ្រប្រតិបត្តិការ។' }) }}
-        <RouterLink to="/contact" class="font-medium text-indigo-600 hover:text-indigo-700">{{ t({ en: 'Contact us', kh: 'ទាក់ទងយើង' }) }}</RouterLink> {{ t({ en: 'for volume discounts.', kh: 'សម្រាប់ការបញ្ចុះតម្លៃតាមបរិមាណ។' }) }}
+        <RouterLink to="/contact" class="font-medium text-indigo-600 hover:text-indigo-700">{{ t({ en: 'Contact us', kh: 'ទាក់ទងយើង' }) }}</RouterLink> {{ t({ en: 'for pricing details and rollout scoping.', kh: 'សម្រាប់ព័ត៌មានតម្លៃ និងការកំណត់វិសាលភាពនៃការដាក់ឱ្យប្រើប្រាស់។' }) }}
       </p>
     </section>
 
@@ -730,11 +767,18 @@ const toggleFaq = (faqId) => {
 
           <div class="rounded-2xl border border-indigo-100 bg-indigo-50/60 p-4">
             <p class="text-sm font-medium text-indigo-900">
-              {{ t({ en: 'Selected Plan Price', kh: 'តម្លៃគម្រោងដែលបានជ្រើស' }) }}:
+              {{ t({ en: 'Commercial Terms', kh: 'លក្ខខណ្ឌពាណិជ្ជកម្ម' }) }}:
               <span class="font-semibold">{{ selectedPlanPrice }}</span>
             </p>
+            <p v-if="selectedPlan" class="mt-1 text-xs text-indigo-700">
+              {{ t({ en: 'Included module families', kh: 'គ្រួសារម៉ូឌុលដែលរួមមាន' }) }}:
+              <span class="font-medium">{{ selectedPlanModuleFamilies }}</span>
+              <span v-if="selectedPlan.max_users !== null"> • {{ t({ en: 'Users', kh: 'អ្នកប្រើ' }) }}: <span class="font-medium">{{ selectedPlan.max_users }}</span></span>
+              <span v-if="selectedPlan.max_branches !== null"> • {{ t({ en: 'Branches', kh: 'សាខា' }) }}: <span class="font-medium">{{ selectedPlan.max_branches }}</span></span>
+              <span v-if="selectedPlan.trial_days"> • {{ t({ en: 'Trial', kh: 'សាកល្បង' }) }}: <span class="font-medium">{{ selectedPlan.trial_days }} {{ t({ en: 'days', kh: 'ថ្ងៃ' }) }}</span></span>
+            </p>
             <p class="mt-1 text-xs text-indigo-700">
-              {{ plansLoading ? t({ en: 'Loading live plans from subscription service...', kh: 'កំពុងផ្ទុកគម្រោងពីសេវាកម្ម Subscription...' }) : t({ en: 'Pricing source is synchronized from Humaneti SaaS subscription plans.', kh: 'ប្រភពតម្លៃត្រូវបានសមកាលកម្មពីគម្រោង Subscription របស់ Humaneti SaaS។' }) }}
+              {{ plansLoading ? t({ en: 'Loading live plans from subscription service...', kh: 'កំពុងផ្ទុកគម្រោងពីសេវាកម្ម Subscription...' }) : t({ en: 'Plan availability is synchronized from Humaneti SaaS subscription plans. Commercial terms are shared separately by the Humaneti team.', kh: 'ភាពមានរបស់គម្រោងត្រូវបានសមកាលកម្មពីគម្រោង Subscription របស់ Humaneti SaaS។ លក្ខខណ្ឌពាណិជ្ជកម្មនឹងផ្តល់ជូនដោយឡែកដោយក្រុម Humaneti។' }) }}
             </p>
           </div>
 
@@ -807,13 +851,14 @@ const toggleFaq = (faqId) => {
                 <th class="px-6 py-4 text-left text-sm font-semibold text-slate-900">{{ t({ en: 'Features', kh: 'មុខងារ' }) }}</th>
                 <th class="px-6 py-4 text-center text-sm font-semibold text-slate-900">{{ tx('Starter') }}</th>
                 <th class="px-6 py-4 text-center text-sm font-semibold text-slate-900 bg-indigo-50">{{ tx('Business') }}</th>
+                <th class="px-6 py-4 text-center text-sm font-semibold text-slate-900">{{ tx('Professional') }}</th>
                 <th class="px-6 py-4 text-center text-sm font-semibold text-slate-900">{{ tx('Enterprise') }}</th>
               </tr>
             </thead>
             <tbody>
               <template v-for="(section, idx) in comparison" :key="idx">
                 <tr class="border-b border-slate-200 bg-slate-50">
-                  <td colspan="4" class="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-slate-700">
+                  <td colspan="5" class="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-slate-700">
                     {{ tx(section.category) }}
                   </td>
                 </tr>
@@ -844,6 +889,17 @@ const toggleFaq = (faqId) => {
                       </svg>
                     </template>
                     <span v-else class="text-sm font-medium text-slate-900">{{ tx(feature.business) }}</span>
+                  </td>
+                  <td class="px-6 py-4 text-center">
+                    <template v-if="typeof feature.professional === 'boolean'">
+                      <svg v-if="feature.professional" class="mx-auto h-5 w-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                      <svg v-else class="mx-auto h-5 w-5 text-slate-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </template>
+                    <span v-else class="text-sm text-slate-900">{{ tx(feature.professional) }}</span>
                   </td>
                   <td class="px-6 py-4 text-center">
                     <template v-if="typeof feature.enterprise === 'boolean'">

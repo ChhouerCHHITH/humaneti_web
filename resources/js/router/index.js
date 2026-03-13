@@ -15,7 +15,7 @@ import { LOCALE_CHANGED_EVENT, getPublicLocale, pickPublicText } from '@/composa
 const SITE_NAME = 'Humaneti'
 const SITE_URL = (import.meta.env.VITE_SITE_URL || window.location.origin || '').replace(/\/$/, '')
 const DEFAULT_DESCRIPTION =
-  'Humaneti is a workflow-first platform for People, Payroll, Assets, Purchase Requests, Expense Claims, and Projects.'
+  'Humaneti is a workflow-first platform for People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements.'
 const DEFAULT_OG_IMAGE = `${SITE_URL}/favicon/android-chrome-512x512.png`
 
 const router = createRouter({
@@ -31,12 +31,12 @@ const router = createRouter({
           component: HomeView,
           meta: {
             title: {
-              en: 'People, Payroll, Assets, Procurement, Claims & Projects',
-              kh: 'បុគ្គលិក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម ចំណាយ និងគម្រោង',
+              en: 'People, Attendance, Leave, Payroll & Operations',
+              kh: 'បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ និងប្រតិបត្តិការ',
             },
             description: {
-              en: 'Humaneti is a workflow-first platform for People, Payroll, Assets, Purchase Requests, Expense Claims, and Projects. Clean UX, clear controls, audit-ready history.',
-              kh: 'Humaneti ជាវេទិកាផ្អែកលើលំហូរការងារ សម្រាប់បុគ្គលិក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ និងគម្រោង។ រចនាប័ទ្មច្បាស់ ការគ្រប់គ្រងច្បាស់ និងប្រវត្តិត្រួតពិនិត្យបាន។',
+              en: 'Humaneti is a workflow-first platform for People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements. Clean UX, clear controls, audit-ready history.',
+              kh: 'Humaneti ជាវេទិកាផ្អែកលើលំហូរការងារ សម្រាប់បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។ រចនាប័ទ្មច្បាស់ ការគ្រប់គ្រងច្បាស់ និងប្រវត្តិត្រួតពិនិត្យបាន។',
             },
           },
         },
@@ -47,8 +47,8 @@ const router = createRouter({
           meta: {
             title: { en: 'Product', kh: 'ផលិតផល' },
             description: {
-              en: 'Explore Humaneti modules: People, Payroll, Assets, Purchase Requests, Expense Claims, and Projects. Standard approvals, roles, and traceable actions across teams.',
-              kh: 'ស្វែងយល់អំពីម៉ូឌុល Humaneti៖ បុគ្គលិក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ និងគម្រោង។ អនុម័តស្តង់ដារ តួនាទីច្បាស់ និងសកម្មភាពអាចតាមដានបាន។',
+              en: 'Explore Humaneti modules: People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements. Standard approvals, roles, and traceable actions across teams.',
+              kh: 'ស្វែងយល់អំពីម៉ូឌុល Humaneti៖ បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។ អនុម័តស្តង់ដារ តួនាទីច្បាស់ និងសកម្មភាពអាចតាមដានបាន។',
             },
           },
         },
@@ -71,8 +71,8 @@ const router = createRouter({
           meta: {
             title: { en: 'Pricing', kh: 'តម្លៃ' },
             description: {
-              en: 'Flexible plans to start small and scale. Choose the Humaneti modules you need and expand into a complete operations backbone as your team grows.',
-              kh: 'ផែនការតម្លៃបត់បែន សម្រាប់ចាប់ផ្ដើមតូច និងពង្រីកតាមតម្រូវការ។ ជ្រើសម៉ូឌុលដែលត្រូវការ ហើយពង្រីកជាវេទិកាប្រតិបត្តិការពេញលេញ។',
+              en: 'Flexible plans aligned to the live Humaneti SaaS catalog: Starter for people operations, Business for payroll, Professional for expense and procurement, and Enterprise for the full module set.',
+              kh: 'ផែនការតម្លៃបត់បែន ដែលស្របតាមកាតាឡុក SaaS របស់ Humaneti៖ Starter សម្រាប់ប្រតិបត្តិការបុគ្គលិក Business សម្រាប់បៀវត្សរ៍ Professional សម្រាប់ចំណាយ និងលទ្ធកម្ម និង Enterprise សម្រាប់ម៉ូឌុលពេញលេញ។',
             },
           },
         },
@@ -107,8 +107,8 @@ const router = createRouter({
           meta: {
             title: { en: 'Contact', kh: 'ទំនាក់ទំនង' },
             description: {
-              en: 'Request a demo or ask a question. Contact Humaneti to discuss People, Payroll, Asset, Procurement, Expense Claim, and Project workflow requirements.',
-              kh: 'ស្នើសុំដេមូ ឬសាកសួរ។ ទាក់ទង Humaneti ដើម្បីពិភាក្សាតម្រូវការលំហូរការងារផ្នែកបុគ្គលិក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម ចំណាយ និងគម្រោង។',
+              en: 'Request a demo or ask a question. Contact Humaneti to discuss People, Attendance, Leave, Payroll, Asset, Procurement, Expense Claim, Project, and announcement workflow requirements.',
+              kh: 'ស្នើសុំដេមូ ឬសាកសួរ។ ទាក់ទង Humaneti ដើម្បីពិភាក្សាតម្រូវការលំហូរការងារផ្នែកបុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម ចំណាយ គម្រោង និងសេចក្តីប្រកាស។',
             },
           },
         },

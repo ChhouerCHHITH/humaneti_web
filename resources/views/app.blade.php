@@ -7,19 +7,19 @@
   $metaMap = [
     '/' => [
       'title' => [
-        'en' => 'People, Payroll, Assets, Procurement, Claims & Projects',
-        'kh' => 'បុគ្គលិក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម ចំណាយ និងគម្រោង',
+        'en' => 'People, Attendance, Leave, Payroll & Operations',
+        'kh' => 'បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ និងប្រតិបត្តិការ',
       ],
       'description' => [
-        'en' => 'Humaneti is a workflow-first platform for People, Payroll, Assets, Purchase Requests, Expense Claims, and Projects.',
-        'kh' => 'Humaneti ជាវេទិកាផ្អែកលើលំហូរការងារ សម្រាប់បុគ្គលិក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ និងគម្រោង។',
+        'en' => 'Humaneti is a workflow-first platform for People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements.',
+        'kh' => 'Humaneti ជាវេទិកាផ្អែកលើលំហូរការងារ សម្រាប់បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។',
       ],
     ],
     '/product' => [
       'title' => ['en' => 'Product', 'kh' => 'ផលិតផល'],
       'description' => [
-        'en' => 'Explore Humaneti modules: People, Payroll, Assets, Purchase Requests, Expense Claims, and Projects.',
-        'kh' => 'ស្វែងយល់អំពីម៉ូឌុល Humaneti៖ បុគ្គលិក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ និងគម្រោង។',
+        'en' => 'Explore Humaneti modules: People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements.',
+        'kh' => 'ស្វែងយល់អំពីម៉ូឌុល Humaneti៖ បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។',
       ],
     ],
     '/solutions' => [
@@ -32,8 +32,8 @@
     '/pricing' => [
       'title' => ['en' => 'Pricing', 'kh' => 'តម្លៃ'],
       'description' => [
-        'en' => 'Flexible plans to start small and scale based on modules and governance needs.',
-        'kh' => 'ផែនការតម្លៃបត់បែន សម្រាប់ចាប់ផ្តើមតូច និងពង្រីកតាមម៉ូឌុល និងតម្រូវការអភិបាលកិច្ច។',
+        'en' => 'Flexible plans aligned to the live Humaneti SaaS catalog: Starter for people operations, Business for payroll, Professional for expense and procurement, and Enterprise for the full module set.',
+        'kh' => 'ផែនការតម្លៃបត់បែន ដែលស្របតាមកាតាឡុក SaaS របស់ Humaneti៖ Starter សម្រាប់ប្រតិបត្តិការបុគ្គលិក Business សម្រាប់បៀវត្សរ៍ Professional សម្រាប់ចំណាយ និងលទ្ធកម្ម និង Enterprise សម្រាប់ម៉ូឌុលពេញលេញ។',
       ],
     ],
     '/resources' => [
@@ -76,8 +76,8 @@
   $defaultMeta = [
     'title' => ['en' => $siteName, 'kh' => 'ក្រុមហ៊ុន ហ៊ូម៉ាណេទី'],
     'description' => [
-      'en' => 'Humaneti is a workflow-first platform for HRM, payroll, asset tracking, purchase requests, and projects.',
-      'kh' => 'Humaneti ជាវេទិកាផ្អែកលើលំហូរការងារ សម្រាប់ HRM បៀវត្សរ៍ ការតាមដានទ្រព្យសម្បត្តិ សំណើទិញ និងគម្រោង។',
+      'en' => 'Humaneti is a workflow-first platform for people operations, attendance, leave, payroll, assets, procurement, expense claims, projects, and announcements.',
+      'kh' => 'Humaneti ជាវេទិកាផ្អែកលើលំហូរការងារ សម្រាប់ប្រតិបត្តិការបុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។',
     ],
   ];
 

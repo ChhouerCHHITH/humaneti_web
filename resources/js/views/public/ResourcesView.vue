@@ -18,8 +18,8 @@ const khText = {
   'Best Practices': 'អនុវត្តល្អបំផុត',
   Technical: 'បច្ចេកទេស',
   'What is Humaneti and what does it do?': 'ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ជាអ្វី ហើយវាធ្វើអ្វីខ្លះ?',
-  'Humaneti is a multi-tenant operations platform covering People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, and Projects. It provides workflow approvals, role permissions, and complete activity traceability.':
-    'ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ជាវេទិកាប្រតិបត្តិការច្រើនតេណង់ ដែលគ្របដណ្តប់បុគ្គលិក វត្តមាន ច្បាប់ បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ និងគម្រោង។ វាផ្តល់ការអនុម័តតាមលំហូរការងារ សិទ្ធិតាមតួនាទី និងការតាមដានសកម្មភាពពេញលេញ។',
+  'Humaneti is a multi-tenant operations platform covering People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements. It provides workflow approvals, role permissions, and complete activity traceability.':
+    'ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ជាវេទិកាប្រតិបត្តិការច្រើនតេណង់ ដែលគ្របដណ្តប់បុគ្គលិក វត្តមាន ច្បាប់ បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។ វាផ្តល់ការអនុម័តតាមលំហូរការងារ សិទ្ធិតាមតួនាទី និងការតាមដានសកម្មភាពពេញលេញ។',
   'Can we start with just one module?': 'តើយើងអាចចាប់ផ្តើមតែម៉ូឌុលមួយបានទេ?',
   "Absolutely! Our modular approach allows you to start with the module that addresses your most pressing need-whether that's Purchase Requests, Asset Management, HRM, or Payroll. You can then add additional modules as your requirements evolve, all seamlessly integrated on the same platform.":
     'បាន។ វិធីសាស្ត្រម៉ូឌុលរបស់យើងអនុញ្ញាតឱ្យអ្នកចាប់ផ្តើមពីម៉ូឌុលដែលដោះស្រាយតម្រូវការបន្ទាន់បំផុតរបស់អ្នក មិនថា Purchase Requests, Asset Management, HRM ឬ Payroll ទេ។ បន្ទាប់មកអ្នកអាចបន្ថែមម៉ូឌុលផ្សេងៗតាមការផ្លាស់ប្តូរតម្រូវការ ដោយរួមបញ្ចូលបានរលូនលើវេទិកាតែមួយ។',
@@ -142,7 +142,7 @@ const faqs = [
   {
     category: 'getting-started',
     q: 'What is Humaneti and what does it do?',
-    a: 'Humaneti is a multi-tenant operations platform covering People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, and Projects. It provides workflow approvals, role permissions, and complete activity traceability.'
+    a: 'Humaneti is a multi-tenant operations platform covering People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements. It provides workflow approvals, role permissions, and complete activity traceability.'
   },
   {
     category: 'getting-started',
