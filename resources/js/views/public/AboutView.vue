@@ -85,23 +85,27 @@ const principles = [
   {
     title: 'Simple by Design',
     description: 'Complex doesn\'t mean better. We build intuitive workflows that teams actually want to use.',
-    icon: '🎯'
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />',
+    color: 'amber',
   },
   {
     title: 'Modular & Flexible',
     description: 'Start with what you need today. Add modules as you grow. No forced bundles or unnecessary features.',
-    icon: '🧩'
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />',
+    color: 'indigo',
   },
   {
     title: 'Built for Trust',
     description: 'Transparent approvals and complete audit trails create accountability and confidence.',
-    icon: '🤝'
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />',
+    color: 'emerald',
   },
   {
     title: 'Local First',
     description: 'Designed for Southeast Asian businesses with understanding of local regulations and practices.',
-    icon: '🌏'
-  }
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
+    color: 'violet',
+  },
 ]
 
 const timeline = [
@@ -426,8 +430,16 @@ const stats = [
           class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md"
         >
           <div class="flex items-start gap-4">
-            <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-slate-100 text-2xl">
-              {{ principle.icon }}
+            <div
+              class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl shadow-sm"
+              :class="{
+                'bg-amber-100 text-amber-700': principle.color === 'amber',
+                'bg-indigo-100 text-indigo-700': principle.color === 'indigo',
+                'bg-emerald-100 text-emerald-700': principle.color === 'emerald',
+                'bg-violet-100 text-violet-700': principle.color === 'violet',
+              }"
+            >
+              <span v-html="`<svg viewBox='0 0 24 24' class='h-6 w-6' fill='none' stroke='currentColor'>${principle.icon}</svg>`"></span>
             </div>
             <div>
               <h3 class="text-lg font-semibold text-slate-900">{{ tx(principle.title) }}</h3>

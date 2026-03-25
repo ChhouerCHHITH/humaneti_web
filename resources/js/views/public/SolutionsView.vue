@@ -141,7 +141,8 @@ const useCases = [
   {
     id: 'sme',
     type: 'SME',
-    icon: '🏢',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />',
+    color: 'emerald',
     title: 'Small & Medium Enterprises',
     subtitle: 'Professional workflows without enterprise complexity',
     description: 'Growing businesses need structured controls without unnecessary complexity. Humaneti provides practical workflows that teams can adopt quickly.',
@@ -167,7 +168,8 @@ const useCases = [
   {
     id: 'ngo',
     type: 'NGO',
-    icon: '🤝',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />',
+    color: 'indigo',
     title: 'Non-Profit Organizations',
     subtitle: 'Transparent workflows that meet donor requirements',
     description: 'NGOs face donor compliance, grant reporting, and control requirements. Humaneti provides traceable workflows and project-linked operational records.',
@@ -193,7 +195,8 @@ const useCases = [
   {
     id: 'enterprise',
     type: 'Enterprise',
-    icon: '🏭',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
+    color: 'violet',
     title: 'Multi-Department Organizations',
     subtitle: 'Unified platform for complex organizational structures',
     description: 'Multi-department organizations need consistent controls while preserving delegated authority. Humaneti combines centralized governance with flexible configuration.',
@@ -268,34 +271,40 @@ const implementationSteps = [
 const industries = [
   {
     name: 'Manufacturing',
-    icon: '⚙️',
-    needs: ['Asset tracking', 'Employee management', 'Purchase control']
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />',
+    color: 'slate',
+    needs: ['Asset tracking', 'Employee management', 'Purchase control'],
   },
   {
     name: 'Retail',
-    icon: '🛍️',
-    needs: ['Multi-location HR', 'Payroll processing', 'Inventory requests']
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />',
+    color: 'amber',
+    needs: ['Multi-location HR', 'Payroll processing', 'Inventory requests'],
   },
   {
     name: 'Healthcare',
-    icon: '🏥',
-    needs: ['Compliance tracking', 'Equipment management', 'Staff scheduling']
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />',
+    color: 'rose',
+    needs: ['Compliance tracking', 'Equipment management', 'Staff scheduling'],
   },
   {
     name: 'Education',
-    icon: '🎓',
-    needs: ['Faculty management', 'Asset allocation', 'Budget approvals']
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />',
+    color: 'indigo',
+    needs: ['Faculty management', 'Asset allocation', 'Budget approvals'],
   },
   {
     name: 'Construction',
-    icon: '🏗️',
-    needs: ['Equipment tracking', 'Project payroll', 'Material requests']
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />',
+    color: 'emerald',
+    needs: ['Equipment tracking', 'Project payroll', 'Material requests'],
   },
   {
     name: 'Technology',
-    icon: '💻',
-    needs: ['Remote HR', 'Device management', 'Rapid scaling']
-  }
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />',
+    color: 'violet',
+    needs: ['Remote HR', 'Device management', 'Rapid scaling'],
+  },
 ]
 
 const metrics = [
@@ -389,8 +398,19 @@ watch(() => route.hash, (hash) => {
               : 'border-slate-200 bg-white hover:border-slate-300 hover:shadow-md'
           ]"
         >
-          <div class="text-4xl mb-3">{{ useCase.icon }}</div>
-          <div 
+          <div
+            class="mb-3 inline-flex rounded-xl p-2.5 shadow-sm"
+            :class="selectedUseCase === idx
+              ? 'bg-indigo-200 text-indigo-800'
+              : {
+                  'bg-emerald-100 text-emerald-700': useCase.color === 'emerald',
+                  'bg-indigo-100 text-indigo-700': useCase.color === 'indigo',
+                  'bg-violet-100 text-violet-700': useCase.color === 'violet',
+                }"
+          >
+            <span v-html="`<svg viewBox='0 0 24 24' class='h-6 w-6' fill='none' stroke='currentColor'>${useCase.icon}</svg>`"></span>
+          </div>
+          <div
             :class="[
               'text-lg font-bold',
               selectedUseCase === idx ? 'text-indigo-900' : 'text-slate-900'
@@ -398,7 +418,7 @@ watch(() => route.hash, (hash) => {
           >
             {{ tx(useCase.title) }}
           </div>
-          <div 
+          <div
             :class="[
               'mt-1 text-sm',
               selectedUseCase === idx ? 'text-indigo-700' : 'text-slate-600'
@@ -483,8 +503,8 @@ watch(() => route.hash, (hash) => {
 
             <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <div class="text-center">
-                <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
-                  <span class="text-2xl">{{ useCase.icon }}</span>
+                <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-700">
+                  <span v-html="`<svg viewBox='0 0 24 24' class='h-6 w-6' fill='none' stroke='currentColor'>${useCase.icon}</svg>`"></span>
                 </div>
                 <h5 class="mt-4 font-semibold text-slate-900">{{ t({ en: 'Perfect for', kh: 'សមស្របសម្រាប់' }) }} {{ tx(useCase.type) }}</h5>
                 <p class="mt-2 text-sm text-slate-600">
@@ -535,9 +555,21 @@ watch(() => route.hash, (hash) => {
         <div 
           v-for="industry in industries" 
           :key="industry.name"
-          class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md"
+          class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
         >
-          <div class="text-4xl mb-3">{{ industry.icon }}</div>
+          <div
+            class="mb-4 inline-flex rounded-xl p-2.5 shadow-sm"
+            :class="{
+              'bg-slate-100 text-slate-700': industry.color === 'slate',
+              'bg-amber-100 text-amber-700': industry.color === 'amber',
+              'bg-rose-100 text-rose-700': industry.color === 'rose',
+              'bg-indigo-100 text-indigo-700': industry.color === 'indigo',
+              'bg-emerald-100 text-emerald-700': industry.color === 'emerald',
+              'bg-violet-100 text-violet-700': industry.color === 'violet',
+            }"
+          >
+            <span v-html="`<svg viewBox='0 0 24 24' class='h-5 w-5' fill='none' stroke='currentColor'>${industry.icon}</svg>`"></span>
+          </div>
           <h3 class="text-lg font-semibold text-slate-900">{{ tx(industry.name) }}</h3>
           <ul class="mt-3 space-y-2">
             <li 

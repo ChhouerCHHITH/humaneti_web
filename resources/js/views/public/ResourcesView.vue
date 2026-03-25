@@ -131,11 +131,11 @@ const tx = (value) => {
 }
 
 const categories = [
-  { id: 'all', name: 'All Resources', icon: '📚' },
-  { id: 'getting-started', name: 'Getting Started', icon: '🚀' },
-  { id: 'modules', name: 'Module Guides', icon: '📖' },
-  { id: 'best-practices', name: 'Best Practices', icon: '⭐' },
-  { id: 'technical', name: 'Technical', icon: '⚙️' }
+  { id: 'all', name: 'All Resources', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />' },
+  { id: 'getting-started', name: 'Getting Started', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />' },
+  { id: 'modules', name: 'Module Guides', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />' },
+  { id: 'best-practices', name: 'Best Practices', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />' },
+  { id: 'technical', name: 'Technical', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />' },
 ]
 
 const faqs = [
@@ -206,114 +206,128 @@ const guides = [
     category: 'getting-started',
     title: 'Quick Start Guide',
     description: 'Get up and running with Humaneti in 30 minutes',
-    icon: '🚀',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />',
+    color: 'indigo',
     type: 'PDF',
-    time: '10 min read'
+    time: '10 min read',
   },
   {
     category: 'getting-started',
     title: 'Admin Setup Checklist',
     description: 'Step-by-step checklist for initial system configuration',
-    icon: '✅',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />',
+    color: 'emerald',
     type: 'PDF',
-    time: '15 min read'
+    time: '15 min read',
   },
   {
     category: 'modules',
     title: 'HRM Module Guide',
     description: 'Complete guide to employee management and HR workflows',
-    icon: '👥',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />',
+    color: 'violet',
     type: 'PDF',
-    time: '25 min read'
+    time: '25 min read',
   },
   {
     category: 'modules',
     title: 'Payroll Processing Guide',
     description: 'Step-by-step payroll processing and salary management',
-    icon: '💰',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
+    color: 'emerald',
     type: 'PDF',
-    time: '20 min read'
+    time: '20 min read',
   },
   {
     category: 'modules',
     title: 'Asset Management Best Practices',
     description: 'How to track and manage company assets effectively',
-    icon: '📦',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />',
+    color: 'amber',
     type: 'PDF',
-    time: '15 min read'
+    time: '15 min read',
   },
   {
     category: 'modules',
     title: 'Purchase Request Workflows',
     description: 'Setting up effective procurement approval processes',
-    icon: '🛒',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />',
+    color: 'indigo',
     type: 'PDF',
-    time: '18 min read'
+    time: '18 min read',
   },
   {
     category: 'modules',
     title: 'Expense Claim Guide',
     description: 'Cash Advance, Advance Clearance, and Reimbursement workflow setup',
-    icon: '💳',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />',
+    color: 'rose',
     type: 'PDF',
-    time: '16 min read'
+    time: '16 min read',
   },
   {
     category: 'modules',
     title: 'Projects Module Guide',
     description: 'Project Master, Donor/Grant, Budget, Workplan, and Team management',
-    icon: '🧭',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />',
+    color: 'violet',
     type: 'PDF',
-    time: '22 min read'
+    time: '22 min read',
   },
   {
     category: 'best-practices',
     title: 'Building Approval Matrices',
     description: 'How to design effective multi-level approval hierarchies',
-    icon: '📊',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />',
+    color: 'indigo',
     type: 'Article',
-    time: '12 min read'
+    time: '12 min read',
   },
   {
     category: 'best-practices',
     title: 'Asset Custody Workflows',
     description: 'Managing assignment, transfer, and return processes',
-    icon: '🔄',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />',
+    color: 'amber',
     type: 'Article',
-    time: '10 min read'
+    time: '10 min read',
   },
   {
     category: 'best-practices',
     title: 'Payroll Approvals & Change Control',
     description: 'Best practices for finance teams managing payroll',
-    icon: '🔐',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />',
+    color: 'emerald',
     type: 'Article',
-    time: '14 min read'
+    time: '14 min read',
   },
   {
     category: 'best-practices',
     title: 'Clean Employee Data Structure',
     description: 'Organizing HR data for accuracy and compliance',
-    icon: '📋',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />',
+    color: 'slate',
     type: 'Article',
-    time: '11 min read'
+    time: '11 min read',
   },
   {
     category: 'technical',
     title: 'API Integration Guide',
     description: 'Connect Humaneti with your existing systems',
-    icon: '🔌',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />',
+    color: 'violet',
     type: 'Documentation',
-    time: '30 min read'
+    time: '30 min read',
   },
   {
     category: 'technical',
     title: 'Data Import Templates',
     description: 'Excel templates for bulk data import',
-    icon: '📥',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />',
+    color: 'emerald',
     type: 'Excel',
-    time: 'Download'
-  }
+    time: 'Download',
+  },
 ]
 
 const videos = [
@@ -345,28 +359,32 @@ const videos = [
 
 const support = [
   {
-    icon: '📧',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />',
+    color: 'indigo',
     title: 'Email Support',
     description: 'Get help via email within 24 hours',
     action: 'support@humaneti.com',
     link: 'mailto:support@humaneti.com'
   },
   {
-    icon: '💬',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />',
+    color: 'emerald',
     title: 'Live Chat',
     description: 'Chat with our team during business hours',
     action: 'Start Chat',
     link: '/contact'
   },
   {
-    icon: '📞',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />',
+    color: 'violet',
     title: 'Phone Support',
     description: 'Talk to a specialist (Enterprise plans)',
     action: '(+855) 096 59 62 864',
     link: 'tel:+8550965962864'
   },
   {
-    icon: '🎓',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />',
+    color: 'amber',
     title: 'Training Sessions',
     description: 'Schedule personalized training for your team',
     action: 'Book Training',
@@ -434,7 +452,7 @@ const openSupportLink = (link) => {
               : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-md'
           ]"
         >
-          <span class="text-lg">{{ category.icon }}</span>
+          <span v-html="`<svg viewBox='0 0 24 24' class='h-4 w-4' fill='none' stroke='currentColor'>${category.icon}</svg>`"></span>
           {{ tx(category.name) }}
         </button>
       </div>
@@ -454,20 +472,21 @@ const openSupportLink = (link) => {
           :key="video.title"
           class="group cursor-pointer rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-lg"
         >
-          <div class="mb-4 flex h-32 items-center justify-center rounded-xl bg-gradient-to-br from-slate-900 to-slate-700 text-5xl text-white">
-            {{ video.thumbnail }}
-          </div>
-          <div class="flex items-center justify-between">
-            <h3 class="font-semibold text-slate-900 group-hover:text-indigo-600">{{ tx(video.title) }}</h3>
-            <div class="flex-shrink-0">
-              <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600">
-                <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-                </svg>
-                {{ video.duration }}
-              </span>
+          <div class="relative mb-4 flex h-32 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 to-slate-700">
+            <div class="absolute inset-0 bg-indigo-900/30"></div>
+            <div class="relative flex h-12 w-12 items-center justify-center rounded-full bg-white/20 ring-2 ring-white/40 backdrop-blur-sm transition-transform group-hover:scale-110">
+              <svg class="ml-0.5 h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+            <div class="absolute bottom-2 right-2 flex items-center gap-1 rounded-md bg-black/50 px-2 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
+              <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+              </svg>
+              {{ video.duration }}
             </div>
           </div>
+          <h3 class="font-semibold text-slate-900 group-hover:text-indigo-600">{{ tx(video.title) }}</h3>
           <p class="mt-2 text-sm text-slate-600">{{ tx(video.description) }}</p>
         </div>
       </div>
@@ -488,8 +507,18 @@ const openSupportLink = (link) => {
           class="group cursor-pointer rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-indigo-200"
         >
           <div class="flex items-start gap-4">
-            <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 text-2xl text-white shadow-md">
-              {{ guide.icon }}
+            <div
+              class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl shadow-sm transition-transform group-hover:-translate-y-0.5"
+              :class="{
+                'bg-indigo-100 text-indigo-700': guide.color === 'indigo',
+                'bg-emerald-100 text-emerald-700': guide.color === 'emerald',
+                'bg-violet-100 text-violet-700': guide.color === 'violet',
+                'bg-amber-100 text-amber-700': guide.color === 'amber',
+                'bg-rose-100 text-rose-700': guide.color === 'rose',
+                'bg-slate-100 text-slate-700': guide.color === 'slate',
+              }"
+            >
+              <span v-html="`<svg viewBox='0 0 24 24' class='h-6 w-6' fill='none' stroke='currentColor'>${guide.icon}</svg>`"></span>
             </div>
             <div class="min-w-0 flex-1">
               <div class="flex items-start justify-between gap-2">
@@ -569,7 +598,11 @@ const openSupportLink = (link) => {
         </div>
 
         <div v-if="filteredFaqs.length === 0" class="text-center py-12">
-          <div class="text-4xl mb-4">🔍</div>
+          <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
           <p class="text-slate-600">{{ t({ en: 'No FAQs found in this category.', kh: 'មិនមានសំណួរញឹកញាប់ក្នុងប្រភេទនេះទេ។' }) }}</p>
           <UiButton @click="activeCategory = 'all'" variant="secondary" size="sm" class="mt-4">
             {{ t({ en: 'View All FAQs', kh: 'មើលសំណួរញឹកញាប់ទាំងអស់' }) }}
@@ -592,7 +625,17 @@ const openSupportLink = (link) => {
           :key="option.title"
           class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center"
         >
-          <div class="text-4xl mb-3">{{ option.icon }}</div>
+          <div
+            class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl shadow-sm"
+            :class="{
+              'bg-indigo-100 text-indigo-700': option.color === 'indigo',
+              'bg-emerald-100 text-emerald-700': option.color === 'emerald',
+              'bg-violet-100 text-violet-700': option.color === 'violet',
+              'bg-amber-100 text-amber-700': option.color === 'amber',
+            }"
+          >
+            <span v-html="`<svg viewBox='0 0 24 24' class='h-7 w-7' fill='none' stroke='currentColor'>${option.icon}</svg>`"></span>
+          </div>
           <h3 class="font-semibold text-slate-900">{{ tx(option.title) }}</h3>
           <p class="mt-2 text-sm text-slate-600">{{ tx(option.description) }}</p>
           <button

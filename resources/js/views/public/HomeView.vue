@@ -6,6 +6,7 @@ import UiBadge from '@/components/UiBadge.vue'
 import UiSection from '@/components/UiSection.vue'
 import { icons } from '@/components/icons'
 import { usePublicI18n } from '@/composables/usePublicI18n'
+import logoIcon from '@/assets/humaneti-icon-trimmed.png'
 
 const { t } = usePublicI18n()
 
@@ -337,49 +338,127 @@ const toggleFaq = (index) => {
         </div>
       </div>
 
-      <!-- Hero Visual -->
+      <!-- Hero Visual — Platform Dashboard Mockup -->
       <div class="relative">
         <div class="absolute -inset-4 rounded-3xl bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-emerald-500/20 blur-2xl"></div>
-        <div class="relative rounded-3xl border border-slate-200/80 bg-white/80 p-6 shadow-2xl backdrop-blur-sm sm:p-8">
-          <div class="mb-6 flex items-center justify-between">
-            <div class="space-y-1">
-              <div class="text-sm font-semibold text-slate-900">{{ t({ en: 'Humaneti Platform', kh: 'វេទិកា ក្រុមហ៊ុន ហ៊ូម៉ាណេទី' }) }}</div>
-              <div class="text-xs text-slate-500">{{ t({ en: 'Integrated workflow modules', kh: 'ម៉ូឌុលលំហូរការងាររួមបញ្ចូល' }) }}</div>
+        <div class="relative overflow-hidden rounded-3xl border border-slate-200/80 shadow-2xl">
+
+          <!-- Browser chrome bar -->
+          <div class="flex items-center gap-2.5 border-b border-slate-200 bg-slate-50 px-4 py-2.5">
+            <div class="flex gap-1.5">
+              <div class="h-2.5 w-2.5 rounded-full bg-rose-400"></div>
+              <div class="h-2.5 w-2.5 rounded-full bg-amber-400"></div>
+              <div class="h-2.5 w-2.5 rounded-full bg-emerald-400"></div>
             </div>
-            <div class="rounded-lg bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-              {{ t({ en: 'All-in-One', kh: 'គ្រប់យ៉ាងក្នុងតែមួយ' }) }}
+            <div class="flex flex-1 items-center gap-2 rounded-md border border-slate-200 bg-white px-2.5 py-1 text-[11px] text-slate-400">
+              <svg class="h-3 w-3 flex-shrink-0 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+              </svg>
+              app.humaneti.com/dashboard
+            </div>
+            <div class="flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-emerald-700">
+              <div class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500"></div>
+              {{ t({ en: 'Live', kh: 'រស់' }) }}
             </div>
           </div>
 
-          <div class="space-y-3">
-            <div 
-              v-for="(feature, idx) in features" 
-              :key="idx"
-              class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:border-slate-300"
-            >
-              <div class="flex items-start gap-3">
-                <div class="flex-shrink-0 rounded-lg bg-gradient-to-br from-slate-900 to-slate-700 p-2.5 text-white shadow-md group-hover:scale-105 transition-transform">
-                  <span v-html="`<svg viewBox='0 0 24 24' class='h-5 w-5'>${feature.icon}</svg>`"></span>
-                </div>
-                <div class="min-w-0 flex-1">
-                  <div class="font-semibold text-slate-900">{{ t(feature.title) }}</div>
-                  <div class="mt-1 text-xs leading-relaxed text-slate-600">
-                    {{ t(feature.preview || feature.description) }}
-                  </div>
-                </div>
+          <!-- App layout: dark sidebar + main content -->
+          <div class="flex bg-white" style="min-height:340px; max-height:400px;">
+
+            <!-- Sidebar -->
+            <div class="flex w-12 flex-shrink-0 flex-col items-center gap-1.5 border-r border-slate-800 bg-slate-900 py-3">
+              <div class="mb-2 flex h-7 w-7 items-center justify-center rounded-lg bg-white/10">
+                <img :src="logoIcon" class="h-5 w-5 object-contain" alt="H" />
+              </div>
+              <div
+                v-for="(feature, idx) in features.slice(0, 6)"
+                :key="idx"
+                class="flex h-8 w-8 items-center justify-center rounded-lg transition-colors"
+                :class="idx === 0 ? 'bg-indigo-500/30 text-indigo-300' : 'text-slate-500 hover:bg-white/10 hover:text-white'"
+              >
+                <span v-html="`<svg viewBox='0 0 24 24' class='h-4 w-4' fill='none' stroke='currentColor' stroke-width='2'>${feature.icon}</svg>`"></span>
               </div>
             </div>
-          </div>
 
-          <div class="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-4">
-            <div class="mb-2 flex items-center gap-2 text-xs font-semibold tracking-widest text-emerald-900">
-              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              {{ t({ en: 'KEY BENEFITS', kh: 'អត្ថប្រយោជន៍សំខាន់' }) }}
-            </div>
-            <div class="text-sm text-slate-700">
-              {{ t({ en: 'Consistent approvals • Role-based access • Complete audit trail • Seamless integration', kh: 'អនុម័តស្របស្តង់ដារ • សិទ្ធិតាមតួនាទី • ប្រវត្តិត្រួតពិនិត្យពេញលេញ • ការរួមបញ្ចូលរលូន' }) }}
+            <!-- Main content -->
+            <div class="flex flex-1 flex-col overflow-hidden">
+              <!-- Top bar -->
+              <div class="flex items-center justify-between border-b border-slate-100 px-4 py-2.5">
+                <div>
+                  <div class="text-xs font-semibold text-slate-800">{{ t({ en: 'Operations Dashboard', kh: 'ផ្ទាំងប្រតិបត្តិការ' }) }}</div>
+                  <div class="text-[10px] text-slate-400">{{ t({ en: "Today's workflow overview", kh: 'ទិដ្ឋភាពលំហូរការងារថ្ងៃនេះ' }) }}</div>
+                </div>
+                <div class="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-[9px] font-bold text-white">AD</div>
+              </div>
+
+              <!-- Stats row -->
+              <div class="grid grid-cols-3 gap-2 px-3 pt-3 pb-2">
+                <div class="rounded-xl bg-amber-50 p-2.5 text-center">
+                  <div class="text-lg font-bold text-amber-700">12</div>
+                  <div class="text-[9px] font-medium text-amber-600">{{ t({ en: 'Pending', kh: 'រង់ចាំ' }) }}</div>
+                </div>
+                <div class="rounded-xl bg-emerald-50 p-2.5 text-center">
+                  <div class="text-lg font-bold text-emerald-700">47</div>
+                  <div class="text-[9px] font-medium text-emerald-600">{{ t({ en: 'Approved', kh: 'អនុម័ត' }) }}</div>
+                </div>
+                <div class="rounded-xl bg-indigo-50 p-2.5 text-center">
+                  <div class="text-lg font-bold text-indigo-700">9</div>
+                  <div class="text-[9px] font-medium text-indigo-600">{{ t({ en: 'Modules', kh: 'ម៉ូឌុល' }) }}</div>
+                </div>
+              </div>
+
+              <!-- Workflow activity feed -->
+              <div class="flex-1 overflow-hidden px-3 pb-3 space-y-1.5">
+                <div class="mb-1.5 text-[9px] font-semibold uppercase tracking-widest text-slate-400">
+                  {{ t({ en: 'Recent Workflow Activity', kh: 'សកម្មភាពលំហូរការងារថ្មីៗ' }) }}
+                </div>
+
+                <div class="flex items-center gap-2 rounded-lg border border-amber-100 bg-amber-50/60 px-2.5 py-2">
+                  <div class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500"></div>
+                  <span class="text-[10px] font-semibold text-slate-800">PR-0042</span>
+                  <span class="flex-1 text-[9px] text-slate-400">{{ t({ en: 'Purchase Request', kh: 'សំណើទិញ' }) }}</span>
+                  <span class="rounded-full bg-amber-100 px-1.5 py-0.5 text-[9px] font-semibold text-amber-700">{{ t({ en: 'Pending', kh: 'រង់ចាំ' }) }}</span>
+                </div>
+
+                <div class="flex items-center gap-2 rounded-lg border border-emerald-100 bg-emerald-50/60 px-2.5 py-2">
+                  <div class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500"></div>
+                  <span class="text-[10px] font-semibold text-slate-800">EC-0089</span>
+                  <span class="flex-1 text-[9px] text-slate-400">{{ t({ en: 'Expense Claim', kh: 'ទាមទារចំណាយ' }) }}</span>
+                  <span class="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[9px] font-semibold text-emerald-700">{{ t({ en: 'Approved', kh: 'អនុម័ត' }) }}</span>
+                </div>
+
+                <div class="flex items-center gap-2 rounded-lg border border-amber-100 bg-amber-50/60 px-2.5 py-2">
+                  <div class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500"></div>
+                  <span class="text-[10px] font-semibold text-slate-800">LR-0031</span>
+                  <span class="flex-1 text-[9px] text-slate-400">{{ t({ en: 'Leave Request', kh: 'ការឈប់សម្រាក' }) }}</span>
+                  <span class="rounded-full bg-amber-100 px-1.5 py-0.5 text-[9px] font-semibold text-amber-700">{{ t({ en: 'Pending', kh: 'រង់ចាំ' }) }}</span>
+                </div>
+
+                <div class="flex items-center gap-2 rounded-lg border border-emerald-100 bg-emerald-50/60 px-2.5 py-2">
+                  <div class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500"></div>
+                  <span class="text-[10px] font-semibold text-slate-800">AT-0015</span>
+                  <span class="flex-1 text-[9px] text-slate-400">{{ t({ en: 'Asset Transfer', kh: 'ផ្ទេរទ្រព្យ' }) }}</span>
+                  <span class="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[9px] font-semibold text-emerald-700">{{ t({ en: 'Approved', kh: 'អនុម័ត' }) }}</span>
+                </div>
+
+                <div class="flex items-center gap-2 rounded-lg border border-violet-100 bg-violet-50/60 px-2.5 py-2">
+                  <div class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-violet-500"></div>
+                  <span class="text-[10px] font-semibold text-slate-800">PR-0091</span>
+                  <span class="flex-1 text-[9px] text-slate-400">{{ t({ en: 'Payroll Run', kh: 'ដំណើរការបៀវត្សរ៍' }) }}</span>
+                  <span class="rounded-full bg-violet-100 px-1.5 py-0.5 text-[9px] font-semibold text-violet-700">{{ t({ en: 'In Review', kh: 'កំពុងពិនិត្យ' }) }}</span>
+                </div>
+              </div>
+
+              <!-- Status footer -->
+              <div class="flex items-center justify-between border-t border-slate-100 bg-slate-50 px-4 py-2">
+                <div class="flex items-center gap-1.5 text-[9px] text-slate-500">
+                  <svg class="h-3 w-3 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  {{ t({ en: 'Secure · Role-based · Audit-ready', kh: 'សុវត្ថិភាព · ផ្អែកតួនាទី · ត្រៀមសវនកម្ម' }) }}
+                </div>
+                <span class="text-[9px] text-slate-400">Humaneti v2.0</span>
+              </div>
             </div>
           </div>
         </div>
@@ -533,27 +612,30 @@ const toggleFaq = (index) => {
       />
 
       <div class="mt-12 grid gap-8 lg:grid-cols-3">
-        <div 
-          v-for="testimonial in testimonials" 
+        <div
+          v-for="testimonial in testimonials"
           :key="testimonial.name"
-          class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:shadow-lg"
+          class="flex flex-col rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:shadow-lg"
         >
-          <div class="mb-6 flex items-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-slate-900 to-slate-700 text-2xl text-white shadow-lg">
+          <!-- Stars -->
+          <div class="mb-4 flex items-center gap-0.5">
+            <svg v-for="i in 5" :key="i" class="h-4 w-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          </div>
+
+          <blockquote class="flex-1 text-slate-700 leading-relaxed">
+            "{{ t(testimonial.quote) }}"
+          </blockquote>
+
+          <div class="mt-6 flex items-center gap-3 border-t border-slate-100 pt-5">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-slate-800 to-slate-600 text-lg text-white shadow-md">
               {{ testimonial.avatar }}
             </div>
             <div>
               <div class="font-semibold text-slate-900">{{ testimonial.name }}</div>
-              <div class="text-sm text-slate-600">{{ t(testimonial.role) }}</div>
+              <div class="text-xs text-slate-500">{{ t(testimonial.role) }} · {{ t(testimonial.company) }}</div>
             </div>
-          </div>
-          
-          <blockquote class="text-slate-700 leading-relaxed">
-            "{{ t(testimonial.quote) }}"
-          </blockquote>
-          
-          <div class="mt-4 text-sm font-medium text-slate-500">
-            — {{ t(testimonial.company) }}
           </div>
         </div>
       </div>

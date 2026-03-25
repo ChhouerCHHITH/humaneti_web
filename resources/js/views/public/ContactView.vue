@@ -41,6 +41,7 @@ const requestablePlans = computed(() =>
     code: plan.code,
     name: locale.value === 'kh' ? (plan.name_kh || plan.name) : plan.name,
     tenant_type: plan.tenant_type || 'all',
+    modules: Array.isArray(plan.modules) ? plan.modules : [],
   })),
 )
 
@@ -107,12 +108,34 @@ const onTenantTypeChange = async () => {
   chooseDefaultPlan()
 }
 
+const validateForm = (values) => {
+  const errors = {}
+  if (!values.company_name.trim()) {
+    errors.company_name = [t({ en: 'Company name is required.', kh: 'ឈ្មោះក្រុមហ៊ុន/អង្គការចាំបាច់ត្រូវបំពេញ។' })]
+  }
+  if (!values.contact_name.trim()) {
+    errors.contact_name = [t({ en: 'Contact name is required.', kh: 'ឈ្មោះអ្នកទំនាក់ទំនងចាំបាច់ត្រូវបំពេញ។' })]
+  }
+  if (!values.contact_email.trim()) {
+    errors.contact_email = [t({ en: 'Contact email is required.', kh: 'អ៊ីមែលទំនាក់ទំនងចាំបាច់ត្រូវបំពេញ។' })]
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.contact_email.trim())) {
+    errors.contact_email = [t({ en: 'Please enter a valid email address.', kh: 'សូមបញ្ចូលអ៊ីមែលត្រឹមត្រូវ។' })]
+  }
+  return errors
+}
+
 const submit = async () => {
   if (submitting.value) return
 
   formErrors.value = {}
   if (form.value.website) {
     push(t({ en: 'Failed to submit subscription request. Please try again.', kh: 'បរាជ័យក្នុងការដាក់ស្នើសំណើជាវ។ សូមព្យាយាមម្តងទៀត។' }), 'danger')
+    return
+  }
+
+  const clientErrors = validateForm(form.value)
+  if (Object.keys(clientErrors).length > 0) {
+    formErrors.value = clientErrors
     return
   }
 
@@ -127,7 +150,7 @@ const submit = async () => {
       requested_plan_code: form.value.requested_plan_code || null,
       preferred_users: form.value.preferred_users ? Number(form.value.preferred_users) : null,
       billing_cycle: form.value.billing_cycle || 'monthly',
-      requested_modules: [],
+      requested_modules: selectedPlan.value?.modules || [],
       message: form.value.message.trim() || null,
       metadata: {
         locale: locale.value,
@@ -360,24 +383,85 @@ onMounted(async () => {
     </UiCard>
 
     <div class="space-y-4">
-      <UiCard>
-        <div class="font-semibold">{{ t({ en: 'Business contact', kh: 'ទំនាក់ទំនងអាជីវកម្ម' }) }}</div>
-        <div class="mt-2 text-sm text-slate-600">
-          {{ t({ en: 'Email:', kh: 'អ៊ីមែល៖' }) }} <span class="text-slate-900">sales@humaneti.com</span><br>
-          {{ t({ en: 'Phone:', kh: 'ទូរស័ព្ទ៖' }) }} <span class="text-slate-900">(+855) 096 59 62 864</span><br>
-          {{ t({ en: 'Location:', kh: 'ទីតាំង៖' }) }} <span class="text-slate-900">{{ t({ en: 'Phnom Penh, Cambodia', kh: 'ភ្នំពេញ ប្រទេសកម្ពុជា' }) }}</span>
+      <!-- Contact details card -->
+      <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div class="border-b border-slate-100 bg-gradient-to-r from-slate-900 to-slate-700 px-5 py-4">
+          <div class="font-semibold text-white">{{ t({ en: 'Business Contact', kh: 'ទំនាក់ទំនងអាជីវកម្ម' }) }}</div>
+          <div class="mt-0.5 text-xs text-slate-300">{{ t({ en: 'Reach our sales team directly', kh: 'ទំនាក់ទំនងក្រុមលក់ដោយផ្ទាល់' }) }}</div>
         </div>
-      </UiCard>
+        <div class="divide-y divide-slate-100 px-5 py-1">
+          <div class="flex items-center gap-3 py-3">
+            <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <div class="text-[10px] font-semibold uppercase tracking-widest text-slate-400">{{ t({ en: 'Email', kh: 'អ៊ីមែល' }) }}</div>
+              <a href="mailto:sales@humaneti.com" class="text-sm font-medium text-slate-800 hover:text-indigo-600">sales@humaneti.com</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 py-3">
+            <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <div>
+              <div class="text-[10px] font-semibold uppercase tracking-widest text-slate-400">{{ t({ en: 'Phone', kh: 'ទូរស័ព្ទ' }) }}</div>
+              <a href="tel:+8550965962864" class="text-sm font-medium text-slate-800 hover:text-emerald-600">(+855) 096 59 62 864</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 py-3">
+            <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-violet-100 text-violet-600">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div>
+              <div class="text-[10px] font-semibold uppercase tracking-widest text-slate-400">{{ t({ en: 'Location', kh: 'ទីតាំង' }) }}</div>
+              <div class="text-sm font-medium text-slate-800">{{ t({ en: 'Phnom Penh, Cambodia', kh: 'ភ្នំពេញ ប្រទេសកម្ពុជា' }) }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <UiCard>
-        <div class="font-semibold">{{ t({ en: 'What to include', kh: 'ព័ត៌មានដែលគួរដាក់បញ្ចូល' }) }}</div>
-        <ul class="mt-2 space-y-2 text-sm text-slate-600 list-disc pl-5">
-          <li>{{ t({ en: 'Number of employees and departments', kh: 'ចំនួនបុគ្គលិក និងផ្នែក' }) }}</li>
-          <li>{{ t({ en: 'Priority modules (e.g., Payroll, Expense Claim, Projects)', kh: 'ម៉ូឌុលអាទិភាព (ឧ. បៀវត្សរ៍ ចំណាយ គម្រោង)' }) }}</li>
-          <li>{{ t({ en: 'Expected go-live timeline', kh: 'កាលវិភាគចង់ដាក់ឱ្យប្រើ' }) }}</li>
-          <li>{{ t({ en: 'Any compliance or reporting requirements', kh: 'តម្រូវការអនុលោម ឬរបាយការណ៍ពាក់ព័ន្ធ' }) }}</li>
+      <!-- What to include card -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div class="flex items-center gap-2 font-semibold text-slate-900">
+          <svg class="h-4 w-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+          </svg>
+          {{ t({ en: 'What to include', kh: 'ព័ត៌មានដែលគួរដាក់បញ្ចូល' }) }}
+        </div>
+        <ul class="mt-3 space-y-2.5">
+          <li v-for="(item, idx) in [
+            { en: 'Number of employees and departments', kh: 'ចំនួនបុគ្គលិក និងផ្នែក' },
+            { en: 'Priority modules (e.g., Payroll, Expense Claim, Projects)', kh: 'ម៉ូឌុលអាទិភាព (ឧ. បៀវត្សរ៍ ចំណាយ គម្រោង)' },
+            { en: 'Expected go-live timeline', kh: 'កាលវិភាគចង់ដាក់ឱ្យប្រើ' },
+            { en: 'Any compliance or reporting requirements', kh: 'តម្រូវការអនុលោម ឬរបាយការណ៍ពាក់ព័ន្ធ' },
+          ]" :key="idx" class="flex items-start gap-2 text-sm text-slate-600">
+            <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            {{ t(item) }}
+          </li>
         </ul>
-      </UiCard>
+      </div>
+
+      <!-- Response time card -->
+      <div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+        <div class="flex items-center gap-2 text-sm font-semibold text-emerald-800">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          {{ t({ en: 'Quick Response', kh: 'ការឆ្លើយតបរហ័ស' }) }}
+        </div>
+        <p class="mt-1.5 text-xs text-emerald-700">
+          {{ t({ en: 'Our team typically responds within 1 business day to confirm your request and schedule onboarding.', kh: 'ក្រុមការងាររបស់យើងជាធម្មតាឆ្លើយតបក្នុងរយៈពេល 1 ថ្ងៃអាជីវកម្ម ដើម្បីបញ្ជាក់សំណើ និងកំណត់ពេល onboarding របស់អ្នក។' }) }}
+        </p>
+      </div>
     </div>
   </div>
 </template>

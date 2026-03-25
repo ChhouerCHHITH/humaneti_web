@@ -123,6 +123,58 @@ const khText = {
   'We offer flexible terms with no long-term lock-in on most plans. Enterprise plans may have different terms based on customization level.':
     'យើងផ្តល់លក្ខខណ្ឌបត់បែន ដោយគ្មានការចងរយៈពេលវែងសម្រាប់ភាគច្រើននៃគម្រោង។ គម្រោង Enterprise អាចមានលក្ខខណ្ឌខុសគ្នាតាមកម្រិតកំណត់តាមតម្រូវការ។',
   Unlimited: 'គ្មានកំណត់',
+  // HR & Attendance
+  'HR & Attendance Modules': 'ម៉ូឌុល HR និងវត្តមាន',
+  'Employee Profiles & Records': 'ប្រវត្តិ និងកំណត់ត្រាបុគ្គលិក',
+  'Departments & Org Structure': 'នាយកដ្ឋាន និងរចនាសម្ព័ន្ធអង្គការ',
+  'Recruitment & Candidates': 'ការជ្រើសរើស និងបេក្ខជន',
+  'Contracts & Documents': 'កិច្ចសន្យា និងឯកសារ',
+  'Onboarding & Offboarding': 'Onboarding និង Offboarding',
+  'Attendance, Shifts & Holidays': 'វត្តមាន វេន និងថ្ងៃឈប់សម្រាក',
+  'Leave Requests & Balances': 'សំណើ និងសមតុល្យការឈប់សម្រាក',
+  // Payroll
+  'Payroll & Salary Management': 'ការគ្រប់គ្រងបៀវត្សរ៍ និងប្រាក់ខែ',
+  'Payroll Runs & Payslips': 'ដំណើរការ និងសន្លឹកបៀវត្សរ៍',
+  'Salary Structures & Templates': 'រចនាសម្ព័ន្ធ និង Template ប្រាក់ខែ',
+  'Tax Configuration': 'ការកំណត់ពន្ធ',
+  'Loan & Deduction Tracking': 'ការតាមដានកម្ចី និងការកាត់ប្រាក់',
+  'Payroll Approvals & Audit Trail': 'ការអនុម័ត និងប្រវត្តិបៀវត្សរ៍',
+  // Procurement & Expense
+  'Procurement & Expense Controls': 'ការគ្រប់គ្រងលទ្ធកម្ម និងចំណាយ',
+  'Purchase Request Workflows': 'លំហូរការងារសំណើទិញ',
+  'Budget & Vendor Management': 'ការគ្រប់គ្រងថវិកា និងអ្នកផ្គត់ផ្គង់',
+  'Purchase Orders & Goods Received': 'ពាក្យបញ្ជាទិញ និងការទទួលទំនិញ',
+  'Cash Advance & Clearance': 'បុរេប្រទាន និងបិទបញ្ចប់',
+  'Expense Reimbursements': 'ការសំណងចំណាយ',
+  // Asset & Project
+  'Asset & Project Management': 'ការគ្រប់គ្រងទ្រព្យ និងគម្រោង',
+  'Asset Registry & Assignment': 'បញ្ជី និងការចាត់តាំងទ្រព្យ',
+  'Custody History & Returns': 'ប្រវត្តិកាន់កាប់ និងការប្រគល់ត្រឡប់',
+  'Projects, Workplan & Budgets': 'គម្រោង ផែនការ និងថវិកា',
+  'Donor & Grant Management': 'ការគ្រប់គ្រង Donor និង Grant',
+  Announcements: 'សេចក្តីប្រកាស',
+  // Platform
+  'Platform & Access Controls': 'ការគ្រប់គ្រងវេទិកា និងសិទ្ធិ',
+  'Role-Based Access Control': 'ការគ្រប់គ្រងសិទ្ធិតាមតួនាទី',
+  'Standard Approval Workflows': 'លំហូរអនុម័តស្តង់ដារ',
+  'Multi-Step & Conditional Approvals': 'ការអនុម័តច្រើនជំហាន និងមានលក្ខខណ្ឌ',
+  'Audit-Ready Activity Logs': 'កំណត់ហេតុសកម្មភាពត្រៀមសវនកម្ម',
+  'Excel Import / Export': 'នាំចូល/នាំចេញ Excel',
+  'API Access': 'ការចូលប្រើ API',
+  'Custom Workflow Design': 'ការរចនា Workflow តាមតម្រូវការ',
+  // Plan card features
+  'Everything in Business, plus:': 'អ្វីៗដែលមានក្នុង Business បូក:',
+  'Purchase requests (PR → PO → GR workflow)': 'សំណើទិញ (លំហូរ PR → PO → GR)',
+  'Budget & vendor management': 'ការគ្រប់គ្រងថវិកា និងអ្នកផ្គត់ផ្គង់',
+  'Cash advance, clearance & reimbursements': 'បុរេប្រទាន បិទបញ្ចប់ និងសំណងចំណាយ',
+  'Compliance & governance controls': 'ការគ្រប់គ្រងអនុលោម និងអភិបាលកិច្ច',
+  'Up to 300 users, 40 branches': 'រហូតដល់ 300 អ្នកប្រើ 40 សាខា',
+  'Projects & donor management': 'ការគ្រប់គ្រងគម្រោង និង Donor',
+  // Scope
+  'Branch Limit': 'ដែនកំណត់សាខា',
+  'Trial Period': 'រយៈពេលសាកល្បង',
+  '14 days': '14 ថ្ងៃ',
+  'No trial': 'គ្មានការសាកល្បង',
 }
 
 const normalizeTxKey = (value) => String(value || '').replace(/[’]/g, "'").replace(/[–—]/g, '-')
@@ -140,6 +192,7 @@ const plans = [
     tagline: 'HR foundation for structured teams',
     price: { monthly: 'Contact Sales', annual: 'Contact Sales' },
     description: 'People, attendance, and leave essentials for SMEs and NGOs starting formal workflows.',
+    accent: 'emerald',
     features: [
       { text: 'People, attendance, and leave foundation', included: true },
       { text: 'Up to 25 users', included: true },
@@ -162,6 +215,7 @@ const plans = [
     tagline: 'Most popular choice',
     price: { monthly: 'Contact Sales', annual: 'Contact Sales' },
     description: 'Starter plus payroll operations, employee salary controls, and finance-ready reporting.',
+    accent: 'indigo',
     features: [
       { text: 'Starter plus payroll operations', included: true },
       { text: 'Up to 120 users', included: true },
@@ -183,17 +237,17 @@ const plans = [
     tagline: 'For NGO compliance operations',
     price: { monthly: 'Contact Sales', annual: 'Contact Sales' },
     description: 'Business plus expense claims and purchase requests for stronger compliance and operational governance.',
+    accent: 'violet',
     features: [
-      { text: 'Business plus expense claims', included: true },
-      { text: 'Business plus purchase requests', included: true },
-      { text: 'Up to 300 users', included: true },
-      { text: 'Up to 40 branches', included: true },
+      { text: 'Everything in Business, plus:', included: true },
+      { text: 'Purchase requests (PR → PO → GR workflow)', included: true },
+      { text: 'Budget & vendor management', included: true },
+      { text: 'Cash advance, clearance & reimbursements', included: true },
+      { text: 'Compliance & governance controls', included: true },
+      { text: 'Up to 300 users, 40 branches', included: true },
       { text: '14-day trial', included: true },
-      { text: 'Compliance pack', included: true },
-      { text: 'Budget, vendor, PO, and GR controls', included: true },
-      { text: 'Cash advances, clearances, reimbursements', included: true },
-      { text: 'Advanced permissions', included: true },
-      { text: 'Asset management', included: false }
+      { text: 'Asset management', included: false },
+      { text: 'Projects & donor management', included: false },
     ],
     cta: 'Choose Professional',
     highlight: false,
@@ -204,6 +258,7 @@ const plans = [
     tagline: 'For complex organizations',
     price: { monthly: 'Custom', annual: 'Custom' },
     description: 'Full platform access with assets, projects, announcements, rollout customization, and SLA-backed support.',
+    accent: 'amber',
     features: [
       { text: 'All modules', included: true },
       { text: 'Unlimited users', included: true },
@@ -224,40 +279,84 @@ const plans = [
 
 const implementationServices = [
   {
-    icon: '🎯',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />',
+    color: 'indigo',
     title: 'Workflow Mapping',
-    description: 'We work with your team to define roles, approval steps, and responsibilities for each module.'
+    description: 'We work with your team to define roles, approval steps, and responsibilities for each module.',
   },
   {
-    icon: '📊',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />',
+    color: 'emerald',
     title: 'Data Migration',
-    description: 'Support for importing existing data with templates and validation to ensure clean records.'
+    description: 'Support for importing existing data with templates and validation to ensure clean records.',
   },
   {
-    icon: '👥',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />',
+    color: 'violet',
     title: 'Team Training',
-    description: 'Comprehensive training for admins and end users with documentation and video guides.'
+    description: 'Comprehensive training for admins and end users with documentation and video guides.',
   },
   {
-    icon: '🚀',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />',
+    color: 'amber',
     title: 'Go-Live Support',
-    description: 'Pilot testing, refinement, and full rollout with dedicated support during transition.'
-  }
+    description: 'Pilot testing, refinement, and full rollout with dedicated support during transition.',
+  },
 ]
 
 const comparison = [
   {
-    category: 'Module Access',
+    category: 'HR & Attendance Modules',
     features: [
-      { name: 'People Module', starter: true, business: true, professional: true, enterprise: true },
-      { name: 'Attendance Module', starter: true, business: true, professional: true, enterprise: true },
-      { name: 'Leave Module', starter: true, business: true, professional: true, enterprise: true },
-      { name: 'Payroll Module', starter: false, business: true, professional: true, enterprise: true },
-      { name: 'Purchase Requests', starter: false, business: false, professional: true, enterprise: true },
-      { name: 'Expense Claim', starter: false, business: false, professional: true, enterprise: true },
-      { name: 'Asset Management', starter: false, business: false, professional: false, enterprise: true },
-      { name: 'Projects Module', starter: false, business: false, professional: false, enterprise: true },
-      { name: 'Announcements', starter: false, business: false, professional: false, enterprise: true }
+      { name: 'Employee Profiles & Records', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Departments & Org Structure', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Recruitment & Candidates', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Contracts & Documents', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Onboarding & Offboarding', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Attendance, Shifts & Holidays', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Leave Requests & Balances', starter: true, business: true, professional: true, enterprise: true },
+    ]
+  },
+  {
+    category: 'Payroll & Salary Management',
+    features: [
+      { name: 'Payroll Runs & Payslips', starter: false, business: true, professional: true, enterprise: true },
+      { name: 'Salary Structures & Templates', starter: false, business: true, professional: true, enterprise: true },
+      { name: 'Tax Configuration', starter: false, business: true, professional: true, enterprise: true },
+      { name: 'Loan & Deduction Tracking', starter: false, business: true, professional: true, enterprise: true },
+      { name: 'Payroll Approvals & Audit Trail', starter: false, business: true, professional: true, enterprise: true },
+    ]
+  },
+  {
+    category: 'Procurement & Expense Controls',
+    features: [
+      { name: 'Purchase Request Workflows', starter: false, business: false, professional: true, enterprise: true },
+      { name: 'Budget & Vendor Management', starter: false, business: false, professional: true, enterprise: true },
+      { name: 'Purchase Orders & Goods Received', starter: false, business: false, professional: true, enterprise: true },
+      { name: 'Cash Advance & Clearance', starter: false, business: false, professional: true, enterprise: true },
+      { name: 'Expense Reimbursements', starter: false, business: false, professional: true, enterprise: true },
+    ]
+  },
+  {
+    category: 'Asset & Project Management',
+    features: [
+      { name: 'Asset Registry & Assignment', starter: false, business: false, professional: false, enterprise: true },
+      { name: 'Custody History & Returns', starter: false, business: false, professional: false, enterprise: true },
+      { name: 'Projects, Workplan & Budgets', starter: false, business: false, professional: false, enterprise: true },
+      { name: 'Donor & Grant Management', starter: false, business: false, professional: false, enterprise: true },
+      { name: 'Announcements', starter: false, business: false, professional: false, enterprise: true },
+    ]
+  },
+  {
+    category: 'Platform & Access Controls',
+    features: [
+      { name: 'Role-Based Access Control', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Standard Approval Workflows', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Multi-Step & Conditional Approvals', starter: false, business: true, professional: true, enterprise: true },
+      { name: 'Audit-Ready Activity Logs', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Excel Import / Export', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'API Access', starter: false, business: true, professional: true, enterprise: true },
+      { name: 'Custom Workflow Design', starter: false, business: false, professional: false, enterprise: true },
     ]
   },
   {
@@ -266,22 +365,17 @@ const comparison = [
       { name: 'User Limit', starter: '25', business: '120', professional: '300', enterprise: 'Unlimited' },
       { name: 'Branch Limit', starter: '3', business: '20', professional: '40', enterprise: 'Unlimited' },
       { name: 'Trial Period', starter: '14 days', business: '14 days', professional: '14 days', enterprise: 'No trial' },
-      { name: 'Commercial Terms', starter: 'On request', business: 'On request', professional: 'On request', enterprise: 'On request' },
-      { name: 'Billing Preference', starter: 'Monthly or yearly', business: 'Monthly or yearly', professional: 'Monthly or yearly', enterprise: 'Custom' }
     ]
   },
   {
-    category: 'Governance & Integrations',
+    category: 'Support & Services',
     features: [
-      { name: 'Standard Workflow Controls', starter: true, business: true, professional: true, enterprise: true },
-      { name: 'Advanced Workflow Controls', starter: false, business: true, professional: true, enterprise: true },
-      { name: 'Audit-ready Activity Logs', starter: true, business: true, professional: true, enterprise: true },
-      { name: 'API Access', starter: false, business: true, professional: true, enterprise: true },
-      { name: 'Compliance Pack', starter: false, business: false, professional: true, enterprise: true },
-      { name: 'Custom Workflow Design', starter: false, business: false, professional: false, enterprise: true },
-      { name: 'SLA Support', starter: false, business: false, professional: false, enterprise: true }
+      { name: 'Email Support', starter: true, business: true, professional: true, enterprise: true },
+      { name: 'Priority Support', starter: false, business: false, professional: false, enterprise: true },
+      { name: 'Dedicated Account Manager', starter: false, business: false, professional: false, enterprise: true },
+      { name: 'SLA Guarantee', starter: false, business: false, professional: false, enterprise: true },
     ]
-  }
+  },
 ]
 
 const faqs = [
@@ -424,6 +518,22 @@ const onTenantTypeChange = async () => {
   setAutoPlan()
 }
 
+const validateForm = (values) => {
+  const errors = {}
+  if (!values.company_name.trim()) {
+    errors.company_name = [t({ en: 'Company name is required.', kh: 'ឈ្មោះក្រុមហ៊ុន/អង្គការចាំបាច់ត្រូវបំពេញ។' })]
+  }
+  if (!values.contact_name.trim()) {
+    errors.contact_name = [t({ en: 'Contact name is required.', kh: 'ឈ្មោះអ្នកទំនាក់ទំនងចាំបាច់ត្រូវបំពេញ។' })]
+  }
+  if (!values.contact_email.trim()) {
+    errors.contact_email = [t({ en: 'Contact email is required.', kh: 'អ៊ីមែលទំនាក់ទំនងចាំបាច់ត្រូវបំពេញ។' })]
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.contact_email.trim())) {
+    errors.contact_email = [t({ en: 'Please enter a valid email address.', kh: 'សូមបញ្ចូលអ៊ីមែលត្រឹមត្រូវ។' })]
+  }
+  return errors
+}
+
 const submitSubscription = async () => {
   if (submitLoading.value) return
 
@@ -433,6 +543,12 @@ const submitSubscription = async () => {
 
   if (subscriptionForm.value.website) {
     submitError.value = t({ en: 'Submission failed. Please try again.', kh: 'ការដាក់ស្នើបរាជ័យ។ សូមព្យាយាមម្តងទៀត។' })
+    return
+  }
+
+  const clientErrors = validateForm(subscriptionForm.value)
+  if (Object.keys(clientErrors).length > 0) {
+    formErrors.value = clientErrors
     return
   }
 
@@ -471,10 +587,12 @@ const submitSubscription = async () => {
         formErrors.value = data.errors
       }
 
-      submitError.value = data?.message || t({
-        en: 'Failed to submit subscription request. Please try again.',
-        kh: 'ការដាក់ស្នើសំណើជាវបរាជ័យ។ សូមព្យាយាមម្តងទៀត។',
-      })
+      submitError.value = response.status === 429
+        ? t({ en: 'Too many attempts. Please wait a minute and try again.', kh: 'បានព្យាយាមច្រើនដងពេក។ សូមរង់ចាំបន្តិច ហើយព្យាយាមម្តងទៀត។' })
+        : data?.message || t({
+            en: 'Failed to submit subscription request. Please try again.',
+            kh: 'ការដាក់ស្នើសំណើជាវបរាជ័យ។ សូមព្យាយាមម្តងទៀត។',
+          })
       push(submitError.value, 'danger')
       return
     }
@@ -535,16 +653,29 @@ const toggleFaq = (faqId) => {
     <!-- Pricing Cards -->
     <section>
       <div class="grid gap-8 lg:grid-cols-4">
-        <div 
-          v-for="plan in plans" 
+        <div
+          v-for="plan in plans"
           :key="plan.name"
           :class="[
-            'relative rounded-3xl border p-8 transition-all',
+            'relative overflow-hidden rounded-3xl border transition-all',
             plan.highlight
               ? 'border-slate-900 bg-slate-900 text-white shadow-2xl lg:-mt-4 lg:scale-105'
-              : 'border-slate-200 bg-white shadow-sm hover:shadow-lg'
+              : 'border-slate-200 bg-white shadow-sm hover:shadow-lg',
           ]"
         >
+          <!-- Accent stripe at top for non-highlighted plans -->
+          <div
+            v-if="!plan.highlight"
+            class="h-1.5 w-full"
+            :class="{
+              'bg-emerald-500': plan.accent === 'emerald',
+              'bg-violet-500': plan.accent === 'violet',
+              'bg-amber-500': plan.accent === 'amber',
+              'bg-indigo-500': plan.accent === 'indigo',
+            }"
+          ></div>
+
+          <div class="p-8">
           <!-- Popular Badge -->
           <div v-if="plan.popular" class="absolute -top-4 left-1/2 -translate-x-1/2">
             <div class="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-1 text-xs font-semibold text-white shadow-lg">
@@ -606,9 +737,9 @@ const toggleFaq = (faqId) => {
           </ul>
 
           <div class="mt-8">
-            <UiButton 
-              as="router-link" 
-              to="/contact" 
+            <UiButton
+              as="router-link"
+              to="/contact"
               :variant="plan.highlight ? 'secondary' : 'primary'"
               class="w-full"
               size="lg"
@@ -616,6 +747,7 @@ const toggleFaq = (faqId) => {
               {{ tx(plan.cta) }}
             </UiButton>
           </div>
+          </div><!-- end p-8 wrapper -->
         </div>
       </div>
 
@@ -822,12 +954,22 @@ const toggleFaq = (faqId) => {
       />
 
       <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <div 
-          v-for="service in implementationServices" 
+        <div
+          v-for="service in implementationServices"
           :key="service.title"
-          class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md"
+          class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
         >
-          <div class="mb-4 text-4xl">{{ service.icon }}</div>
+          <div
+            class="mb-4 inline-flex rounded-xl p-2.5 shadow-sm"
+            :class="{
+              'bg-indigo-100 text-indigo-700': service.color === 'indigo',
+              'bg-emerald-100 text-emerald-700': service.color === 'emerald',
+              'bg-violet-100 text-violet-700': service.color === 'violet',
+              'bg-amber-100 text-amber-700': service.color === 'amber',
+            }"
+          >
+            <span v-html="`<svg viewBox='0 0 24 24' class='h-5 w-5' fill='none' stroke='currentColor'>${service.icon}</svg>`"></span>
+          </div>
           <h3 class="text-lg font-semibold text-slate-900">{{ tx(service.title) }}</h3>
           <p class="mt-2 text-sm leading-relaxed text-slate-600">{{ tx(service.description) }}</p>
         </div>

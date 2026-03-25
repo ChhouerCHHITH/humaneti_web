@@ -402,35 +402,41 @@ const modules = [
 
 const platformFeatures = [
   {
-    icon: '🔄',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />',
+    color: 'indigo',
     title: 'Unified Workflows',
-    description: 'Same UX patterns across all modules for consistency and ease of use'
+    description: 'Same UX patterns across all modules for consistency and ease of use',
   },
   {
-    icon: '🔐',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />',
+    color: 'emerald',
     title: 'Role-Based Access',
-    description: 'Granular permissions ensuring users see only what they need'
+    description: 'Granular permissions ensuring users see only what they need',
   },
   {
-    icon: '📊',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />',
+    color: 'violet',
     title: 'Real-Time Reports',
-    description: 'Instant insights into operations with customizable dashboards'
+    description: 'Instant insights into operations with customizable dashboards',
   },
   {
-    icon: '📱',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />',
+    color: 'slate',
     title: 'Mobile Access',
-    description: 'Full functionality on any device, anywhere, anytime'
+    description: 'Full functionality on any device, anywhere, anytime',
   },
   {
-    icon: '🔔',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />',
+    color: 'amber',
     title: 'Operational Notifications',
-    description: 'In-app and email alerts for workflow actions and status updates'
+    description: 'In-app and email alerts for workflow actions and status updates',
   },
   {
-    icon: '🔍',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />',
+    color: 'rose',
     title: 'Scoped Data Access',
-    description: 'Company-scope and role-based controls across operational modules'
-  }
+    description: 'Company-scope and role-based controls across operational modules',
+  },
 ]
 
 const integrationPoints = [
@@ -681,12 +687,24 @@ watch(() => route.hash, (hash) => {
       />
 
       <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <div 
-          v-for="feature in platformFeatures" 
+        <div
+          v-for="feature in platformFeatures"
           :key="feature.title"
-          class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+          class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
         >
-          <div class="mb-3 text-3xl">{{ feature.icon }}</div>
+          <div
+            class="mb-4 inline-flex rounded-xl p-2.5 shadow-sm"
+            :class="{
+              'bg-indigo-100 text-indigo-700': feature.color === 'indigo',
+              'bg-emerald-100 text-emerald-700': feature.color === 'emerald',
+              'bg-violet-100 text-violet-700': feature.color === 'violet',
+              'bg-slate-100 text-slate-700': feature.color === 'slate',
+              'bg-amber-100 text-amber-700': feature.color === 'amber',
+              'bg-rose-100 text-rose-700': feature.color === 'rose',
+            }"
+          >
+            <span v-html="`<svg viewBox='0 0 24 24' class='h-5 w-5' fill='none' stroke='currentColor'>${feature.icon}</svg>`"></span>
+          </div>
           <h3 class="text-lg font-semibold text-slate-900">{{ tx(feature.title) }}</h3>
           <p class="mt-2 text-sm text-slate-600">{{ tx(feature.description) }}</p>
         </div>

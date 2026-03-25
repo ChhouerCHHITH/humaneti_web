@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\GatewayResponseException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
@@ -37,11 +38,18 @@ class PublicSubscriptionGateway
         try {
             $response = $this->request()->post($this->endpoint('/api/v1/public/subscription-requests'), $payload);
             if ($response->failed()) {
-                throw new RuntimeException($this->extractMessage($response->json()), $response->status());
+                $json = is_array($response->json()) ? $response->json() : [];
+                throw new GatewayResponseException(
+                    $this->extractMessage($json),
+                    $response->status(),
+                    $json,
+                );
             }
 
             $data = $response->json();
             return is_array($data) ? $data : ['success' => true];
+        } catch (GatewayResponseException $e) {
+            throw $e;
         } catch (ConnectionException $e) {
             throw new RuntimeException('Subscription service is temporarily unavailable.', 503, $e);
         } catch (RequestException $e) {

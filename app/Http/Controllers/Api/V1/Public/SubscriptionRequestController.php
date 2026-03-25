@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Public;
 
+use App\Exceptions\GatewayResponseException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Public\StoreSubscriptionRequest;
 use App\Services\PublicSubscriptionGateway;
@@ -29,6 +30,15 @@ class SubscriptionRequestController extends Controller
             $status = isset($response['data']) ? 201 : 200;
 
             return response()->json($response, $status);
+        } catch (GatewayResponseException $e) {
+            // Forward any field-level validation errors the SaaS returned
+            $body = ['success' => false, 'message' => $e->getMessage()];
+            $data = $e->getResponseData();
+            if (isset($data['errors']) && is_array($data['errors'])) {
+                $body['errors'] = $data['errors'];
+            }
+
+            return response()->json($body, $this->statusFromException($e));
         } catch (RuntimeException $e) {
             return response()->json([
                 'success' => false,
