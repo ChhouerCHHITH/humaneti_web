@@ -432,6 +432,7 @@ const openSupportLink = (link) => {
       <UiBadge tone="neutral" class="mb-6">{{ t({ en: 'RESOURCES & SUPPORT', kh: 'ធនធាន និងការគាំទ្រ' }) }}</UiBadge>
       
       <UiSection
+        as="h1"
         :kicker="t({ en: 'HELP CENTER', kh: 'មជ្ឈមណ្ឌលជំនួយ' })"
         :title="t({ en: 'Everything you need to succeed with Humaneti', kh: 'អ្វីៗដែលអ្នកត្រូវការដើម្បីជោគជ័យជាមួយ ក្រុមហ៊ុន ហ៊ូម៉ាណេទី' })"
         :subtitle="t({ en: 'Guides, FAQs, and support for the exact modules running in your Humaneti environment.', kh: 'មគ្គុទេសក៍ សំណួរញឹកញាប់ និងការគាំទ្រ សម្រាប់ម៉ូឌុលដែលអ្នកកំពុងប្រើក្នុង ក្រុមហ៊ុន ហ៊ូម៉ាណេទី។' })"

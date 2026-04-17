@@ -11,6 +11,7 @@ const { t } = usePublicI18n()
 
   <div class="mt-4">
     <UiSection
+      as="h1"
       :kicker="t({ en: 'PRIVACY POLICY', kh: 'គោលការណ៍ភាពឯកជន' })"
       :title="t({ en: 'Privacy Policy', kh: 'គោលការណ៍ភាពឯកជន' })"
       :subtitle="t({ en: 'How Humaneti collects, uses, and protects information submitted through this website.', kh: 'របៀបដែល ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ប្រមូល ប្រើប្រាស់ និងការពារព័ត៌មានដែលបានដាក់ស្នើតាមគេហទំព័រនេះ។' })"

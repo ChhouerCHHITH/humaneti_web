@@ -198,7 +198,7 @@ const applyRouteMeta = (to) => {
   const canonical = SITE_URL ? `${SITE_URL}${to.path}` : null
   upsertLinkTag('canonical', canonical)
   upsertAlternateLinkTag('en', canonical ? `${canonical}?lang=en` : null)
-  upsertAlternateLinkTag('kh', canonical ? `${canonical}?lang=kh` : null)
+  upsertAlternateLinkTag('km', canonical ? `${canonical}?lang=kh` : null)
   upsertAlternateLinkTag('x-default', canonical)
 
   upsertMetaTag('og:title', titlePart, 'property')
@@ -207,12 +207,18 @@ const applyRouteMeta = (to) => {
   upsertMetaTag('og:site_name', SITE_NAME, 'property')
   upsertMetaTag('og:url', canonical || window.location.href, 'property')
   upsertMetaTag('og:image', to.meta?.ogImage || DEFAULT_OG_IMAGE, 'property')
+  upsertMetaTag('og:image:type', 'image/png', 'property')
+  upsertMetaTag('og:image:width', '512', 'property')
+  upsertMetaTag('og:image:height', '512', 'property')
+  upsertMetaTag('og:image:alt', `${SITE_NAME} logo`, 'property')
   upsertMetaTag('og:locale', activeLocale === 'kh' ? 'km_KH' : 'en_US', 'property')
+  upsertMetaTag('og:locale:alternate', activeLocale === 'kh' ? 'en_US' : 'km_KH', 'property')
 
   upsertMetaTag('twitter:card', 'summary_large_image')
   upsertMetaTag('twitter:title', titlePart)
   upsertMetaTag('twitter:description', desc)
   upsertMetaTag('twitter:image', to.meta?.ogImage || DEFAULT_OG_IMAGE)
+  upsertMetaTag('twitter:image:alt', `${SITE_NAME} logo`)
 }
 
 router.afterEach((to) => {

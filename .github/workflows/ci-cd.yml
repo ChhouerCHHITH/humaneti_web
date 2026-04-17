@@ -166,3 +166,97 @@ jobs:
             --exclude="node_modules/" \
             -e "ssh -i ~/.ssh/id_ed25519 -p ${{ secrets.SSH_PORT }} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
             ./ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/"
+
+  prerender:
+    name: Prerender (post-deploy)
+    needs: deploy
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # Failures here must NOT mark the overall workflow as failed — the site is
+    # already deployed. Bots simply see the SPA shell until the next successful
+    # prerender run.
+    continue-on-error: true
+
+    env:
+      PRERENDER_BASE: https://humaneti.com
+      HEALTH_URL: https://humaneti.com/up
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Cache Puppeteer Chromium
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/puppeteer
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Node deps
+        run: npm ci
+
+      - name: Wait for deploy to be reachable
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$HEALTH_URL" || echo "000")
+            echo "attempt ${attempt}: ${HEALTH_URL} -> ${code}"
+            if [ "$code" = "200" ]; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Health check did not return 200 within the retry window"
+          exit 1
+
+      - name: Run prerender
+        run: npm run prerender
+
+      - name: Verify snapshots were produced
+        run: |
+          set -euo pipefail
+          count=$(find storage/app/prerender -type f -name '*.html' | wc -l | tr -d ' ')
+          echo "prerendered files: ${count}"
+          if [ "${count}" -lt 1 ]; then
+            echo "No prerender output; refusing to sync"
+            exit 1
+          fi
+
+      - name: Prepare SSH
+        run: |
+          set -euo pipefail
+
+          test -n "${{ secrets.SSH_HOST }}" || (echo "Missing secret: SSH_HOST" && exit 1)
+          test -n "${{ secrets.SSH_USER }}" || (echo "Missing secret: SSH_USER" && exit 1)
+          test -n "${{ secrets.SSH_PORT }}" || (echo "Missing secret: SSH_PORT" && exit 1)
+          test -n "${{ secrets.DEPLOY_PATH }}" || (echo "Missing secret: DEPLOY_PATH" && exit 1)
+          test -n "${{ secrets.SSH_PRIVATE_KEY }}" || (echo "Missing secret: SSH_PRIVATE_KEY" && exit 1)
+
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          if [ -n "${{ secrets.SSH_KNOWN_HOSTS }}" ]; then
+            printf "%s\n" "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          else
+            ssh-keyscan -T 10 -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          fi
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Sync snapshots to remote
+        # --delete is scoped to a single owned directory (storage/app/prerender)
+        # so stale routes are removed without touching anything else on prod.
+        run: |
+          set -euo pipefail
+
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/id_ed25519 -p ${{ secrets.SSH_PORT }} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+            ./storage/app/prerender/ \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/storage/app/prerender/"

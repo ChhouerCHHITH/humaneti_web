@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ServePrerendered;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', function () {
@@ -32,7 +33,7 @@ Route::get('/sitemap.xml', function () {
         $xml[] = '  <url>';
         $xml[] = '    <loc>' . $escape($loc) . '</loc>';
         $xml[] = '    <xhtml:link rel="alternate" hreflang="en" href="' . $escape($locEn) . '"/>';
-        $xml[] = '    <xhtml:link rel="alternate" hreflang="kh" href="' . $escape($locKh) . '"/>';
+        $xml[] = '    <xhtml:link rel="alternate" hreflang="km" href="' . $escape($locKh) . '"/>';
         $xml[] = '    <xhtml:link rel="alternate" hreflang="x-default" href="' . $escape($loc) . '"/>';
         $xml[] = '    <lastmod>' . $today . '</lastmod>';
         $xml[] = '    <changefreq>' . $item['changefreq'] . '</changefreq>';
@@ -45,4 +46,6 @@ Route::get('/sitemap.xml', function () {
     return response(implode("\n", $xml), 200, ['Content-Type' => 'application/xml; charset=UTF-8']);
 });
 
-Route::view('/{any?}', 'app')->where('any', '.*');
+Route::view('/{any?}', 'app')
+    ->where('any', '.*')
+    ->middleware(ServePrerendered::class);

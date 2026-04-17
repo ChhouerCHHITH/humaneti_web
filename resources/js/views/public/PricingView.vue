@@ -643,6 +643,7 @@ const toggleFaq = (faqId) => {
       <UiBadge tone="neutral" class="mb-6">{{ t({ en: 'PRICING', kh: 'តម្លៃ' }) }}</UiBadge>
       
       <UiSection
+        as="h1"
         :kicker="t({ en: 'TRANSPARENT PRICING', kh: 'តម្លៃច្បាស់លាស់' })"
         :title="t({ en: 'Simple plans that grow with you', kh: 'គម្រោងសាមញ្ញដែលពង្រីកទៅតាមអ្នក' })"
         :subtitle="t({ en: 'Starter covers people, attendance, and leave. Business adds payroll. Professional adds expense claim and purchase request controls. Enterprise unlocks the full module catalog.', kh: 'Starter គ្រប់គ្រងបុគ្គលិក វត្តមាន និងការឈប់សម្រាក។ Business បន្ថែមបៀវត្សរ៍។ Professional បន្ថែមការគ្រប់គ្រងទាមទារចំណាយ និងសំណើទិញ។ Enterprise បើកប្រើកាតាឡុកម៉ូឌុលពេញលេញ។' })"

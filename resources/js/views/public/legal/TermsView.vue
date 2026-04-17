@@ -11,6 +11,7 @@ const { t } = usePublicI18n()
 
   <div class="mt-4">
     <UiSection
+      as="h1"
       :kicker="t({ en: 'TERMS OF SERVICE', kh: 'លក្ខខណ្ឌសេវាកម្ម' })"
       :title="t({ en: 'Terms of Service', kh: 'លក្ខខណ្ឌសេវាកម្ម' })"
       :subtitle="t({ en: 'Terms for use of the Humaneti public website and related communications.', kh: 'លក្ខខណ្ឌសម្រាប់ការប្រើប្រាស់គេហទំព័រសាធារណៈ ក្រុមហ៊ុន ហ៊ូម៉ាណេទី និងការទំនាក់ទំនងដែលពាក់ព័ន្ធ។' })"

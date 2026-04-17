@@ -370,6 +370,7 @@ watch(() => route.hash, (hash) => {
       <UiBadge tone="neutral" class="mb-6">{{ t({ en: 'SOLUTIONS', kh: 'ដំណោះស្រាយ' }) }}</UiBadge>
       
       <UiSection
+        as="h1"
         :kicker="t({ en: 'REAL-WORLD APPLICATIONS', kh: 'ការអនុវត្តជាក់ស្តែង' })"
         :title="t({ en: 'Built for real operations: approvals, accountability, and records', kh: 'បង្កើតសម្រាប់ប្រតិបត្តិការពិត៖ អនុម័ត ទទួលខុសត្រូវ និងកំណត់ត្រា' })"
         :subtitle="t({ en: 'Whether you are an SME, NGO, or multi-department team, Humaneti adapts to your workflow and governance needs.', kh: 'មិនថាអ្នកជា SME NGO ឬក្រុមការងារច្រើនផ្នែក ក្រុមហ៊ុន ហ៊ូម៉ាណេទី អាចបត់បែនតាមលំហូរការងារ និងតម្រូវការអភិបាលកិច្ចរបស់អ្នក។' })"
