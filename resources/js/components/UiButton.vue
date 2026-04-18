@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const props = defineProps({
   as: { type: String, default: 'button' }, // button | a | router-link
@@ -24,16 +25,21 @@ const sizes = {
 }
 
 const klass = computed(() => [base, variants[props.variant], sizes[props.size]].join(' '))
+
+const tag = computed(() => {
+  if (props.as === 'router-link') return RouterLink
+  return props.as
+})
 </script>
 
 <template>
   <component
-    :is="as === 'router-link' ? 'RouterLink' : as"
-    :to="as === 'router-link' ? to : null"
-    :href="as === 'a' ? href : null"
-    :type="as === 'button' ? type : null"
+    :is="tag"
+    :to="as === 'router-link' ? to : undefined"
+    :href="as === 'a' ? href : undefined"
+    :type="as === 'button' ? type : undefined"
     :class="klass"
-    :disabled="disabled"
+    :disabled="as === 'button' ? disabled : undefined"
   >
     <slot />
   </component>
