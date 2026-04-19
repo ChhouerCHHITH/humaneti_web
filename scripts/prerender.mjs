@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import puppeteer from 'puppeteer'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -10,17 +10,37 @@ const projectRoot = path.resolve(__dirname, '..')
 const BASE = (process.env.PRERENDER_BASE || 'http://127.0.0.1:8000').replace(/\/$/, '')
 const OUTPUT_DIR = path.join(projectRoot, 'storage', 'app', 'prerender')
 
-const ROUTES = [
+// Dynamic slugs are loaded from the same JS data files the SPA uses,
+// so the sitemap, Blade catalog, and prerender list stay aligned through
+// a single source of truth for content and a PHP mirror for SSR meta.
+const modulesUrl = pathToFileURL(path.join(projectRoot, 'resources/js/data/modules.js')).href
+const audiencesUrl = pathToFileURL(path.join(projectRoot, 'resources/js/data/audiences.js')).href
+const guidesUrl = pathToFileURL(path.join(projectRoot, 'resources/js/data/guides.js')).href
+
+const { modules } = await import(modulesUrl)
+const { audiences } = await import(audiencesUrl)
+const { guides } = await import(guidesUrl)
+
+const STATIC_ROUTES = [
   '/',
   '/product',
   '/solutions',
   '/pricing',
+  '/guides',
   '/resources',
   '/about',
   '/contact',
   '/legal/privacy',
   '/legal/terms',
 ]
+
+const DYNAMIC_ROUTES = [
+  ...modules.map((m) => `/product/${m.slug}`),
+  ...audiences.map((a) => `/solutions/${a.slug}`),
+  ...guides.map((g) => `/guides/${g.slug}`),
+]
+
+const ROUTES = [...STATIC_ROUTES, ...DYNAMIC_ROUTES]
 
 const LOCALES = ['en', 'kh']
 
@@ -30,12 +50,12 @@ const pathToFile = (route, locale) => {
 }
 
 const stripRuntimeArtifacts = (html) =>
-  // Remove data-v-app/scoped-id attrs and trim obvious SPA-only noise.
   html.replace(/\s(data-v-[0-9a-f-]+)(="[^"]*")?/g, '')
 
 async function main() {
   console.log(`[prerender] base=${BASE}`)
   console.log(`[prerender] out=${OUTPUT_DIR}`)
+  console.log(`[prerender] routes=${ROUTES.length} locales=${LOCALES.length}`)
 
   const browser = await puppeteer.launch({
     headless: true,
@@ -54,7 +74,6 @@ async function main() {
 
         try {
           await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 })
-          // Wait for Vue to mount — app root must contain children.
           await page.waitForFunction(
             () => !!document.querySelector('#app')?.firstElementChild,
             { timeout: 15000 },

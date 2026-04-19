@@ -5,17 +5,35 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', function () {
     $baseUrl = rtrim((string) (config('app.url') ?: request()->getSchemeAndHttpHost()), '/');
+    $catalog = config('seo_catalog');
+
     $routes = [
         ['path' => '/', 'changefreq' => 'weekly', 'priority' => '1.0'],
         ['path' => '/product', 'changefreq' => 'weekly', 'priority' => '0.9'],
         ['path' => '/solutions', 'changefreq' => 'weekly', 'priority' => '0.9'],
         ['path' => '/pricing', 'changefreq' => 'daily', 'priority' => '0.9'],
-        ['path' => '/resources', 'changefreq' => 'weekly', 'priority' => '0.8'],
+        ['path' => '/guides', 'changefreq' => 'weekly', 'priority' => '0.8'],
+        ['path' => '/resources', 'changefreq' => 'weekly', 'priority' => '0.7'],
         ['path' => '/about', 'changefreq' => 'monthly', 'priority' => '0.6'],
         ['path' => '/contact', 'changefreq' => 'monthly', 'priority' => '0.8'],
-        ['path' => '/legal/privacy', 'changefreq' => 'monthly', 'priority' => '0.5'],
-        ['path' => '/legal/terms', 'changefreq' => 'monthly', 'priority' => '0.5'],
+        ['path' => '/legal/privacy', 'changefreq' => 'monthly', 'priority' => '0.4'],
+        ['path' => '/legal/terms', 'changefreq' => 'monthly', 'priority' => '0.4'],
     ];
+
+    foreach (array_keys($catalog['modules'] ?? []) as $slug) {
+        $routes[] = ['path' => "/product/{$slug}", 'changefreq' => 'weekly', 'priority' => '0.8'];
+    }
+    foreach (array_keys($catalog['audiences'] ?? []) as $slug) {
+        $routes[] = ['path' => "/solutions/{$slug}", 'changefreq' => 'weekly', 'priority' => '0.8'];
+    }
+    foreach ($catalog['guides'] ?? [] as $slug => $guide) {
+        $routes[] = [
+            'path' => "/guides/{$slug}",
+            'changefreq' => 'monthly',
+            'priority' => '0.7',
+            'lastmod' => $guide['updatedAt'] ?? null,
+        ];
+    }
 
     $today = now()->toDateString();
     $escape = static fn (string $value): string => htmlspecialchars($value, ENT_XML1 | ENT_QUOTES, 'UTF-8');
@@ -35,7 +53,7 @@ Route::get('/sitemap.xml', function () {
         $xml[] = '    <xhtml:link rel="alternate" hreflang="en" href="' . $escape($locEn) . '"/>';
         $xml[] = '    <xhtml:link rel="alternate" hreflang="km" href="' . $escape($locKh) . '"/>';
         $xml[] = '    <xhtml:link rel="alternate" hreflang="x-default" href="' . $escape($loc) . '"/>';
-        $xml[] = '    <lastmod>' . $today . '</lastmod>';
+        $xml[] = '    <lastmod>' . ($item['lastmod'] ?? $today) . '</lastmod>';
         $xml[] = '    <changefreq>' . $item['changefreq'] . '</changefreq>';
         $xml[] = '    <priority>' . $item['priority'] . '</priority>';
         $xml[] = '  </url>';

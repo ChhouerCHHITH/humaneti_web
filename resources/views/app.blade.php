@@ -3,30 +3,51 @@
   $currentPath = '/' . ltrim(request()->path(), '/');
   $activeLocale = request()->query('lang') === 'kh' ? 'kh' : 'en';
   $htmlLang = $activeLocale === 'kh' ? 'km' : 'en';
+  $seoCatalog = config('seo_catalog');
+
+  $pickLocale = static function (array $map) use ($activeLocale) {
+    return $map[$activeLocale] ?? $map['en'] ?? reset($map) ?? '';
+  };
 
   $metaMap = [
     '/' => [
       'title' => [
-        'en' => 'People, Attendance, Leave, Payroll & Operations',
-        'kh' => 'បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ និងប្រតិបត្តិការ',
+        'en' => 'HRMS, Payroll & Operations Software for Cambodia',
+        'kh' => 'កម្មវិធី HRMS បៀវត្សរ៍ និងប្រតិបត្តិការសម្រាប់កម្ពុជា',
       ],
       'description' => [
-        'en' => 'Humaneti is a workflow-first platform for People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements.',
-        'kh' => 'Humaneti ជាវេទិកាផ្អែកលើលំហូរការងារ សម្រាប់បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។',
+        'en' => 'Humaneti is the HRMS, payroll, and operations platform built for Cambodia SMEs and NGOs — bilingual, mobile-first, and audit-ready.',
+        'kh' => 'Humaneti ជាវេទិកា HRMS បៀវត្សរ៍ និងប្រតិបត្តិការបង្កើតសម្រាប់ SME និង NGO កម្ពុជា — ពីរភាសា ផ្តើមពីទូរស័ព្ទ និងត្រៀមសវនកម្ម។',
       ],
     ],
     '/product' => [
-      'title' => ['en' => 'Product', 'kh' => 'ផលិតផល'],
+      'title' => [
+        'en' => 'Product Modules: HR, Payroll, Assets, Procurement',
+        'kh' => 'ម៉ូឌុលផលិតផល៖ HR បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម',
+      ],
       'description' => [
-        'en' => 'Explore Humaneti modules: People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements.',
-        'kh' => 'ស្វែងយល់អំពីម៉ូឌុល Humaneti៖ បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។',
+        'en' => 'Humaneti product modules: People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements — one platform for Cambodia operations.',
+        'kh' => 'ម៉ូឌុលផលិតផល Humaneti៖ បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការស្នើសុំសងថ្លៃចំណាយ គម្រោង និងសេចក្តីប្រកាស — វេទិកាមួយសម្រាប់ប្រតិបត្តិការកម្ពុជា។',
       ],
     ],
     '/solutions' => [
-      'title' => ['en' => 'Solutions', 'kh' => 'ដំណោះស្រាយ'],
+      'title' => [
+        'en' => 'Solutions for Cambodia NGOs, SMEs & Schools',
+        'kh' => 'ដំណោះស្រាយសម្រាប់ NGO SME និងសាលារៀននៅកម្ពុជា',
+      ],
       'description' => [
-        'en' => 'Solutions for SMEs and NGOs with clear approvals, accountability, and traceable decisions.',
-        'kh' => 'ដំណោះស្រាយសម្រាប់ SME និង NGO ជាមួយការអនុម័តច្បាស់ ការទទួលខុសត្រូវ និងការសម្រេចចិត្តអាចតាមដានបាន។',
+        'en' => 'Humaneti solutions tailored for Cambodia: NGO compliance, SME growth, and school HR — with bilingual Khmer/English across every module.',
+        'kh' => 'ដំណោះស្រាយ Humaneti សមស្របសម្រាប់កម្ពុជា៖ អនុលោម NGO ការរីកលូតលាស់ SME និង HR សាលារៀន — ជាមួយភាសាខ្មែរ/អង់គ្លេសលើគ្រប់ម៉ូឌុល។',
+      ],
+    ],
+    '/guides' => [
+      'title' => [
+        'en' => 'Guides: HR, Payroll & Operations in Cambodia',
+        'kh' => 'មគ្គុទេសក៍៖ HR បៀវត្សរ៍ និងប្រតិបត្តិការនៅកម្ពុជា',
+      ],
+      'description' => [
+        'en' => 'Practical guides for Cambodia teams running HR, payroll, procurement, and expense workflows — written for SMEs and NGOs.',
+        'kh' => 'មគ្គុទេសក៍ជាក់ស្តែងសម្រាប់ក្រុមកម្ពុជាគ្រប់គ្រង HR បៀវត្សរ៍ លទ្ធកម្ម និងលំហូរចំណាយ — សរសេរសម្រាប់ SME និង NGO។',
       ],
     ],
     '/pricing' => [
@@ -76,20 +97,43 @@
   $defaultMeta = [
     'title' => ['en' => $siteName, 'kh' => 'ក្រុមហ៊ុន ហ៊ូម៉ាណេទី'],
     'description' => [
-      'en' => 'Humaneti is a workflow-first platform for people operations, attendance, leave, payroll, assets, procurement, expense claims, projects, and announcements.',
-      'kh' => 'Humaneti ជាវេទិកាផ្អែកលើលំហូរការងារ សម្រាប់ប្រតិបត្តិការបុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។',
+      'en' => 'Humaneti is a workflow-first HRMS, payroll, and operations platform for Cambodia SMEs and NGOs.',
+      'kh' => 'Humaneti ជាវេទិកា HRMS បៀវត្សរ៍ និងប្រតិបត្តិការផ្អែកលើលំហូរការងារ សម្រាប់ SME និង NGO កម្ពុជា។',
     ],
   ];
 
-  $meta = $metaMap[$currentPath] ?? $defaultMeta;
-  $title = $meta['title'][$activeLocale] ?? $meta['title']['en'] ?? $siteName;
-  $description = $meta['description'][$activeLocale] ?? $meta['description']['en'] ?? '';
+  // Resolve dynamic routes: /product/:slug, /solutions/:slug, /guides/:slug.
+  $dynamicKind = null;
+  $dynamicEntry = null;
+  if (preg_match('#^/product/([a-z0-9\-]+)$#', $currentPath, $m)) {
+    $dynamicEntry = $seoCatalog['modules'][$m[1]] ?? null;
+    $dynamicKind = $dynamicEntry ? 'module' : null;
+  } elseif (preg_match('#^/solutions/([a-z0-9\-]+)$#', $currentPath, $m)) {
+    $dynamicEntry = $seoCatalog['audiences'][$m[1]] ?? null;
+    $dynamicKind = $dynamicEntry ? 'audience' : null;
+  } elseif (preg_match('#^/guides/([a-z0-9\-]+)$#', $currentPath, $m)) {
+    $dynamicEntry = $seoCatalog['guides'][$m[1]] ?? null;
+    $dynamicKind = $dynamicEntry ? 'guide' : null;
+  }
+
+  if ($dynamicEntry) {
+    $meta = [
+      'title' => $dynamicEntry['seoTitle'] ?? ($dynamicEntry['name'] ?? $dynamicEntry['title'] ?? $defaultMeta['title']),
+      'description' => $dynamicEntry['description'] ?? $defaultMeta['description'],
+    ];
+  } else {
+    $meta = $metaMap[$currentPath] ?? $defaultMeta;
+  }
+
+  $title = $pickLocale($meta['title']);
+  $description = $pickLocale($meta['description']);
   $pageTitle = $title ? $title . ' | ' . $siteName : $siteName;
 
   $baseUrl = rtrim((string) (config('app.url') ?: request()->getSchemeAndHttpHost()), '/');
   $pathPart = $currentPath === '/' ? '' : $currentPath;
   $canonicalUrl = $baseUrl . $pathPart;
   $ogImage = $baseUrl . '/favicon/android-chrome-512x512.png';
+  $ogType = $dynamicKind === 'guide' ? 'article' : 'website';
 
   $organizationSchema = [
     '@context' => 'https://schema.org',
@@ -125,7 +169,7 @@
     'inLanguage' => $htmlLang,
   ];
 
-  // Breadcrumb trail derived from current path
+  // Breadcrumb trail derived from current path; dynamic segments use catalog names.
   $breadcrumbLabels = [
     '' => ['en' => 'Home', 'kh' => 'ទំព័រដើម'],
     'product' => ['en' => 'Product', 'kh' => 'ផលិតផល'],
@@ -134,6 +178,7 @@
     'resources' => ['en' => 'Resources', 'kh' => 'ធនធាន'],
     'about' => ['en' => 'About', 'kh' => 'អំពី'],
     'contact' => ['en' => 'Contact', 'kh' => 'ទំនាក់ទំនង'],
+    'guides' => ['en' => 'Guides', 'kh' => 'មគ្គុទេសក៍'],
     'legal' => ['en' => 'Legal', 'kh' => 'ច្បាប់'],
     'privacy' => ['en' => 'Privacy Policy', 'kh' => 'គោលការណ៍ភាពឯកជន'],
     'terms' => ['en' => 'Terms of Service', 'kh' => 'លក្ខខណ្ឌសេវាកម្ម'],
@@ -148,9 +193,20 @@
   $accum = '';
   foreach ($segments as $i => $segment) {
     $accum .= '/' . $segment;
-    $label = $breadcrumbLabels[$segment][$activeLocale]
-      ?? $breadcrumbLabels[$segment]['en']
-      ?? ucfirst($segment);
+    $label = null;
+    // Dynamic segment at position 2 (e.g., /product/payroll, /solutions/ngos, /guides/foo)
+    if ($i === 1 && $dynamicEntry) {
+      if ($dynamicKind === 'module' || $dynamicKind === 'audience') {
+        $label = $pickLocale($dynamicEntry['name'] ?? []);
+      } elseif ($dynamicKind === 'guide') {
+        $label = $pickLocale($dynamicEntry['title'] ?? []);
+      }
+    }
+    if (!$label) {
+      $label = $breadcrumbLabels[$segment][$activeLocale]
+        ?? $breadcrumbLabels[$segment]['en']
+        ?? ucfirst(str_replace('-', ' ', $segment));
+    }
     $breadcrumbItems[] = [
       '@type' => 'ListItem',
       'position' => $i + 2,
@@ -174,7 +230,7 @@
     $plans = [
       ['name' => 'Starter',      'desc' => ['en' => 'People, attendance, and leave essentials for SMEs and NGOs starting formal workflows.', 'kh' => 'ម៉ូឌុលមូលដ្ឋានបុគ្គលិក វត្តមាន និងការឈប់សម្រាក សម្រាប់ SME និង NGO ដែលចាប់ផ្តើមលំហូរការងារ។']],
       ['name' => 'Business',     'desc' => ['en' => 'Starter plus payroll operations, salary controls, and finance-ready reporting.', 'kh' => 'Starter បូកនឹងបៀវត្សរ៍ ការគ្រប់គ្រងប្រាក់ខែ និងរបាយការណ៍សម្រាប់ហិរញ្ញវត្ថុ។']],
-      ['name' => 'Professional', 'desc' => ['en' => 'Business plus expense claims and purchase requests with compliance controls.', 'kh' => 'Business បូកនឹងការទាមទារចំណាយ និងសំណើទិញ ជាមួយការគ្រប់គ្រងអនុលោម។']],
+      ['name' => 'Professional', 'desc' => ['en' => 'Business plus expense claims and purchase requests with compliance controls.', 'kh' => 'Business បូកនឹងការស្នើសុំសងថ្លៃចំណាយ និងសំណើទិញ ជាមួយការគ្រប់គ្រងអនុលោម។']],
       ['name' => 'Enterprise',   'desc' => ['en' => 'Full platform with assets, projects, announcements, and SLA-backed support.', 'kh' => 'វេទិកាពេញលេញជាមួយទ្រព្យសម្បត្តិ គម្រោង សេចក្តីប្រកាស និងការគាំទ្រ SLA។']],
     ];
     $offers = [];
@@ -236,11 +292,11 @@
     $faq = [
       [
         'q' => ['en' => 'What modules does Humaneti include?', 'kh' => 'Humaneti រួមបញ្ចូលម៉ូឌុលអ្វីខ្លះ?'],
-        'a' => ['en' => 'People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements.', 'kh' => 'បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។'],
+        'a' => ['en' => 'People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements.', 'kh' => 'បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការស្នើសុំសងថ្លៃចំណាយ គម្រោង និងសេចក្តីប្រកាស។'],
       ],
       [
-        'q' => ['en' => 'Is Humaneti suitable for NGOs?', 'kh' => 'តើ Humaneti សមស្របសម្រាប់ NGO ទេ?'],
-        'a' => ['en' => 'Yes. Humaneti supports NGO compliance with expense claims, purchase requests, donor/project tracking, and audit-ready approvals.', 'kh' => 'មែន។ Humaneti គាំទ្រការអនុលោមរបស់ NGO តាមរយៈការទាមទារចំណាយ សំណើទិញ ការតាមដានអ្នកឧបត្ថម្ភ និងការអនុម័តត្រៀមសវនកម្ម។'],
+        'q' => ['en' => 'Is Humaneti suitable for NGOs?', 'kh' => 'តើ Humaneti សមស្របសម្រាប់អង្គការទេ?'],
+        'a' => ['en' => 'Yes. Humaneti supports NGO compliance with expense claims, purchase requests, donor/project tracking, and audit-ready approvals.', 'kh' => 'មែន។ Humaneti គាំទ្រការអនុលោមរបស់អង្គការ តាមរយៈការស្នើសុំសងថ្លៃចំណាយ សំណើទិញ ការតាមដានអ្នកឧបត្ថម្ភ និងការអនុម័តត្រៀមសវនកម្ម។'],
       ],
       [
         'q' => ['en' => 'Which languages does Humaneti support?', 'kh' => 'Humaneti គាំទ្រភាសាអ្វីខ្លះ?'],
@@ -258,6 +314,28 @@
           'text' => $item['a'][$activeLocale] ?? $item['a']['en'],
         ],
       ], $faq),
+    ];
+  }
+
+  // Article schema for /guides/:slug
+  if ($dynamicKind === 'guide') {
+    $extraSchemas[] = [
+      '@context' => 'https://schema.org',
+      '@type' => 'Article',
+      'headline' => $title,
+      'description' => $description,
+      'url' => $canonicalUrl,
+      'inLanguage' => $htmlLang,
+      'datePublished' => $dynamicEntry['publishedAt'] ?? null,
+      'dateModified' => $dynamicEntry['updatedAt'] ?? ($dynamicEntry['publishedAt'] ?? null),
+      'author' => ['@type' => 'Organization', 'name' => 'Humaneti'],
+      'publisher' => [
+        '@type' => 'Organization',
+        'name' => 'Humaneti',
+        'logo' => ['@type' => 'ImageObject', 'url' => $ogImage],
+      ],
+      'image' => $ogImage,
+      'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $canonicalUrl],
     ];
   }
 @endphp
@@ -288,7 +366,7 @@
   <link rel="alternate" hreflang="x-default" href="{{ $canonicalUrl }}">
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="{{ $ogType }}">
   <meta property="og:site_name" content="Humaneti">
   <meta property="og:title" content="{{ $pageTitle }}">
   <meta property="og:description" content="{{ $description }}">

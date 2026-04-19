@@ -64,7 +64,7 @@ const khText = {
   'Advanced security controls': 'ការគ្រប់គ្រងសុវត្ថិភាពកម្រិតខ្ពស់',
   'SLA guarantees': 'ការធានា SLA',
   'API access & integrations': 'ការចូលប្រើ API និងការរួមបញ្ចូល',
-  'Tenant rollout support': 'ការគាំទ្រដាក់ឱ្យប្រើតាមតេណង់',
+  'Tenant rollout support': 'ការគាំទ្រដាក់ឱ្យប្រើតាម Tenant',
   'Contact Sales': 'ទាក់ទងក្រុមលក់',
   'Workflow Mapping': 'ផែនទីលំហូរការងារ',
   'We work with your team to define roles, approval steps, and responsibilities for each module.':
@@ -83,7 +83,7 @@ const khText = {
   'Payroll Module': 'ម៉ូឌុលបៀវត្សរ៍',
   'Asset Management': 'ការគ្រប់គ្រងទ្រព្យសម្បត្តិ',
   'Purchase Requests': 'សំណើទិញ',
-  'Expense Claim': 'ការទាមទារចំណាយ',
+  'Expense Claim': 'ការស្នើសុំសងថ្លៃចំណាយ',
   'Projects Module': 'ម៉ូឌុលគម្រោង',
   'Users & Permissions': 'អ្នកប្រើ និងសិទ្ធិ',
   'User Limit': 'ដែនកំណត់អ្នកប្រើ',
@@ -837,7 +837,7 @@ const toggleFaq = (faqId) => {
             </div>
 
             <div>
-              <label class="text-sm font-medium text-slate-700">{{ t({ en: 'Tenant Type', kh: 'ប្រភេទតេណង់' }) }}</label>
+              <label class="text-sm font-medium text-slate-700">{{ t({ en: 'Tenant Type', kh: 'ប្រភេទ Tenant' }) }}</label>
               <select
                 v-model="subscriptionForm.tenant_type"
                 class="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"

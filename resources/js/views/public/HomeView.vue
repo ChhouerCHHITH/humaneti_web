@@ -23,7 +23,7 @@ const stats = [
   },
   {
     label: { en: 'Company Scope', kh: 'វិសាលភាពក្រុមហ៊ុន' },
-    value: { en: 'Multi-tenant', kh: 'ច្រើនតេណង់' },
+    value: { en: 'Multi-tenant', kh: 'Multi-Tenant' },
     icon: icons.shield,
   },
   {
@@ -43,7 +43,7 @@ const features = [
     },
     description: {
       en: 'Manage employees, departments, designations, reporting lines, contracts, recruitment, and core HR records in one place.',
-      kh: 'គ្រប់គ្រងបុគ្គលិក នាយកដ្ឋាន តួនាទី ខ្សែរបាយការណ៍ កិច្ចសន្យា ការជ្រើសរើស និងកំណត់ត្រា HR សំខាន់ៗក្នុងកន្លែងតែមួយ។',
+      kh: 'គ្រប់គ្រងបុគ្គលិក នាយកដ្ឋាន តួនាទី ខ្សែរបាយការណ៍ កិច្ចសន្យា ការជ្រើសរើស និងកំណត់ត្រាធនធានមនុស្សសំខាន់ៗក្នុងកន្លែងតែមួយ។',
     },
     benefits: [
       { en: 'Employee records', kh: 'កំណត់ត្រាបុគ្គលិក' },
@@ -108,7 +108,7 @@ const features = [
   },
   {
     icon: icons.money,
-    title: { en: 'Expense Claim', kh: 'ការទាមទារចំណាយ' },
+    title: { en: 'Expense Claim', kh: 'ការស្នើសុំសងថ្លៃចំណាយ' },
     preview: {
       en: 'Cash advance, clearance, and reimbursement with settlement control.',
       kh: 'បុរេប្រទានសាច់ប្រាក់ បិទបញ្ចប់ និងសំណងចំណាយ ជាមួយការគ្រប់គ្រងទូទាត់។',
@@ -133,7 +133,7 @@ const features = [
     },
     description: {
       en: 'Support NGO and donor operations with project master data, grants, budgets, workplans, and project teams.',
-      kh: 'គាំទ្រប្រតិបត្តិការ NGO និងម្ចាស់ជំនួយ ជាមួយទិន្នន័យស្នូលគម្រោង មូលនិធិ ថវិកា ផែនការការងារ និងក្រុមគម្រោង។',
+      kh: 'គាំទ្រប្រតិបត្តិការអង្គការ និងម្ចាស់ជំនួយ ជាមួយទិន្នន័យស្នូលគម្រោង មូលនិធិ ថវិកា ផែនការការងារ និងក្រុមគម្រោង។',
     },
     benefits: [
       { en: 'Project master', kh: 'ទិន្នន័យស្នូលគម្រោង' },
@@ -151,7 +151,7 @@ const useCases = [
     title: { en: 'Small & Medium Enterprises', kh: 'សហគ្រាសខ្នាតតូច និងមធ្យម' },
     description: {
       en: 'Scale your operations with professional HR and payroll processes without enterprise complexity.',
-      kh: 'ពង្រីកប្រតិបត្តិការរបស់អ្នកជាមួយដំណើរការ HR និងបៀវត្សរ៍មានវិជ្ជាជីវៈ ដោយមិនមានភាពស្មុគស្មាញដូចសហគ្រាសធំ។',
+      kh: 'ពង្រីកប្រតិបត្តិការរបស់អ្នកជាមួយដំណើរការធនធានមនុស្ស និងបៀវត្សរ៍មានវិជ្ជាជីវៈ ដោយមិនមានភាពស្មុគស្មាញដូចសហគ្រាសធំ។',
     },
     highlights: [
       { en: 'Quick setup', kh: 'ដំឡើងរហ័ស' },
@@ -161,11 +161,11 @@ const useCases = [
   },
   {
     type: 'NGO',
-    typeLabel: { en: 'NGO', kh: 'NGO' },
+    typeLabel: { en: 'NGO', kh: 'អង្គការ' },
     title: { en: 'Non-Profit Organizations', kh: 'អង្គការមិនរកប្រាក់ចំណេញ' },
     description: {
       en: 'Transparent workflows and audit trails that meet donor requirements and compliance standards.',
-      kh: 'លំហូរការងារថ្លៃថ្នូរ និងប្រវត្តិត្រួតពិនិត្យ ដែលបំពេញតាមតម្រូវការម្ចាស់ជំនួយ និងស្តង់ដារអនុលោម។',
+      kh: 'លំហូរការងារតម្លាភាព និងប្រវត្តិត្រួតពិនិត្យ ដែលបំពេញតាមតម្រូវការម្ចាស់ជំនួយ និងស្តង់ដារអនុលោម។',
     },
     highlights: [
       { en: 'Grant structures', kh: 'រចនាសម្ព័ន្ធមូលនិធិ' },
@@ -183,7 +183,7 @@ const useCases = [
     },
     highlights: [
       { en: 'Departmental control', kh: 'ការគ្រប់គ្រងតាមផ្នែក' },
-      { en: 'Tenant scope', kh: 'វិសាលភាពតេណង់' },
+      { en: 'Tenant scope', kh: 'វិសាលភាព Tenant' },
       { en: 'Advanced permissions', kh: 'សិទ្ធិកម្រិតខ្ពស់' },
     ],
   },
@@ -200,8 +200,8 @@ const testimonials = [
   {
     quote: 'Payroll used to take us days of back-and-forth. Now approvals are clean, errors dropped, and month-end closes on time without last-minute stress.',
     name: 'Dara Sok',
-    role: { en: 'HR & Admin Lead', kh: 'មេដឹកនាំ HR និងរដ្ឋបាល' },
-    company: { en: 'International NGO', kh: 'NGO អន្តរជាតិ' },
+    role: { en: 'HR & Admin Lead', kh: 'ប្រធានធនធានមនុស្ស និងរដ្ឋបាល' },
+    company: { en: 'International NGO', kh: 'អង្គការអន្តរជាតិ' },
     avatar: '👨‍💼',
   },
   {
@@ -300,7 +300,7 @@ const toggleFaq = (index) => {
         <p class="text-lg leading-relaxed text-slate-600 sm:text-xl">
           {{ t({
             en: 'Humaneti streamlines people, attendance, leave, payroll, procurement, expense claims, assets, projects, and announcements with clear approvals and complete traceability. Start with your current priority and expand without changing platforms.',
-            kh: 'ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ធ្វើឱ្យការងារបុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ លទ្ធកម្ម ការទាមទារចំណាយ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស មានភាពរលូនជាមួយការអនុម័តច្បាស់ និងការតាមដានពេញលេញ។ ចាប់ផ្តើមពីអាទិភាពរបស់អ្នក ហើយពង្រីកដោយមិនចាំបាច់ប្តូរវេទិកា។',
+            kh: 'ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ធ្វើឱ្យការងារបុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ លទ្ធកម្ម ការស្នើសុំសងថ្លៃចំណាយ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស មានភាពរលូនជាមួយការអនុម័តច្បាស់ និងការតាមដានពេញលេញ។ ចាប់ផ្តើមពីអាទិភាពរបស់អ្នក ហើយពង្រីកដោយមិនចាំបាច់ប្តូរវេទិកា។',
           }) }}
         </p>
 
@@ -330,7 +330,7 @@ const toggleFaq = (index) => {
               {{ t({ en: 'SMEs', kh: 'សហគ្រាស SME' }) }}
             </span>
             <span class="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
-              {{ t({ en: 'NGOs', kh: 'អង្គការ NGO' }) }}
+              {{ t({ en: 'NGOs', kh: 'អង្គការ' }) }}
             </span>
             <span class="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">{{ t({ en: 'Multi-Company Teams', kh: 'ក្រុមការងារច្រើនក្រុមហ៊ុន' }) }}</span>
             <span class="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">{{ t({ en: 'Operations & Finance Units', kh: 'អង្គភាពប្រតិបត្តិការ និងហិរញ្ញវត្ថុ' }) }}</span>
@@ -490,7 +490,7 @@ const toggleFaq = (index) => {
       <UiSection
         :kicker="t({ en: 'COMPLETE SOLUTION', kh: 'ដំណោះស្រាយពេញលេញ' })"
         :title="t({ en: 'Everything you need to manage your operations', kh: 'អ្វីៗគ្រប់យ៉ាងដែលអ្នកត្រូវការសម្រាប់គ្រប់គ្រងប្រតិបត្តិការ' })"
-        :subtitle="t({ en: 'Integrated modules for people, attendance, leave, payroll, procurement, expense claims, assets, projects, and announcements with consistent approvals across your organization.', kh: 'ម៉ូឌុលរួមបញ្ចូលសម្រាប់បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ លទ្ធកម្ម ការទាមទារចំណាយ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស ជាមួយការអនុម័តស្របគ្នាទូទាំងអង្គការ។' })"
+        :subtitle="t({ en: 'Integrated modules for people, attendance, leave, payroll, procurement, expense claims, assets, projects, and announcements with consistent approvals across your organization.', kh: 'ម៉ូឌុលរួមបញ្ចូលសម្រាប់បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ លទ្ធកម្ម ការស្នើសុំសងថ្លៃចំណាយ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស ជាមួយការអនុម័តស្របគ្នាទូទាំងអង្គការ។' })"
       />
 
       <div class="mt-12 grid gap-8 lg:grid-cols-2">
@@ -551,7 +551,7 @@ const toggleFaq = (index) => {
           </div>
           <h3 class="text-lg font-semibold text-slate-900">{{ t({ en: 'Complete Traceability', kh: 'ការតាមដានពេញលេញ' }) }}</h3>
           <p class="mt-2 text-sm leading-relaxed text-slate-600">
-            {{ t({ en: 'Every change tracked and timestamped for compliance, audits, and organizational transparency.', kh: 'រាល់ការកែប្រែត្រូវបានតាមដាន និងកត់ពេលវេលា សម្រាប់អនុលោម សវនកម្ម និងភាពថ្លៃថ្នូរអង្គការ។' }) }}
+            {{ t({ en: 'Every change tracked and timestamped for compliance, audits, and organizational transparency.', kh: 'រាល់ការកែប្រែត្រូវបានតាមដាន និងកត់ពេលវេលា សម្រាប់អនុលោម សវនកម្ម និងតម្លាភាពអង្គការ។' }) }}
           </p>
         </UiCard>
 
@@ -572,7 +572,7 @@ const toggleFaq = (index) => {
       <UiSection
         :kicker="t({ en: 'PERFECT FOR', kh: 'សមស្របសម្រាប់' })"
         :title="t({ en: 'Solutions tailored to your organization type', kh: 'ដំណោះស្រាយសមស្របតាមប្រភេទអង្គការរបស់អ្នក' })"
-        :subtitle="t({ en: 'Whether you are a startup, NGO, or enterprise, Humaneti adapts to your needs.', kh: 'មិនថាអ្នកជាអាជីវកម្មចាប់ផ្តើម NGO ឬសហគ្រាស ក្រុមហ៊ុន ហ៊ូម៉ាណេទី អាចបត់បែនតាមតម្រូវការរបស់អ្នក។' })"
+        :subtitle="t({ en: 'Whether you are a startup, NGO, or enterprise, Humaneti adapts to your needs.', kh: 'មិនថាអ្នកជាអាជីវកម្មចាប់ផ្តើម អង្គការ ឬសហគ្រាស ក្រុមហ៊ុន ហ៊ូម៉ាណេទី អាចបត់បែនតាមតម្រូវការរបស់អ្នក។' })"
       />
 
       <div class="mt-12 grid gap-6 lg:grid-cols-3">
@@ -709,7 +709,7 @@ const toggleFaq = (index) => {
             {{ t({ en: 'Ready to transform your operations?', kh: 'ត្រៀមខ្លួនផ្លាស់ប្តូរប្រតិបត្តិការរបស់អ្នកហើយឬនៅ?' }) }}
           </h2>
           <p class="mt-4 text-lg leading-relaxed text-slate-300">
-            {{ t({ en: 'Use Humaneti to run HR, payroll, assets, procurement, expense claims, and projects with one consistent workflow model. Start with one area and expand based on your rollout plan.', kh: 'ប្រើ ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ដើម្បីដំណើរការ HR បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម ការទាមទារចំណាយ និងគម្រោង ជាមួយគំរូលំហូរការងារស្របគ្នា។ ចាប់ផ្តើមពីផ្នែកមួយ ហើយពង្រីកតាមផែនការអនុវត្តរបស់អ្នក។' }) }}
+            {{ t({ en: 'Use Humaneti to run HR, payroll, assets, procurement, expense claims, and projects with one consistent workflow model. Start with one area and expand based on your rollout plan.', kh: 'ប្រើ ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ដើម្បីដំណើរការធនធានមនុស្ស បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម ការស្នើសុំសងថ្លៃចំណាយ និងគម្រោង ជាមួយគំរូលំហូរការងារស្របគ្នា។ ចាប់ផ្តើមពីផ្នែកមួយ ហើយពង្រីកតាមផែនការអនុវត្តរបស់អ្នក។' }) }}
           </p>
           
           <div class="mt-8 flex flex-wrap justify-center gap-4">
@@ -741,7 +741,7 @@ const toggleFaq = (index) => {
               <svg class="h-5 w-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
               </svg>
-              {{ t({ en: 'Tenant-based controls', kh: 'ការគ្រប់គ្រងតាមតេណង់' }) }}
+              {{ t({ en: 'Tenant-based controls', kh: 'ការគ្រប់គ្រងតាម Tenant' }) }}
             </div>
             <div class="flex items-center gap-2">
               <svg class="h-5 w-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">

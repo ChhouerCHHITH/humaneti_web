@@ -36,7 +36,7 @@ const khText = {
   'Better document control': 'ការគ្រប់គ្រងឯកសារល្អប្រសើរ',
   'Clear pending-request visibility': 'ភាពមើលឃើញសំណើកំពុងរង់ចាំច្បាស់',
   'Scalable process design as teams grow': 'រចនាដំណើរការដែលអាចពង្រីកបាន ពេលក្រុមរីកចម្រើន',
-  'Transparent workflows that meet donor requirements': 'លំហូរការងារថ្លៃថ្នូរ បំពេញតម្រូវការម្ចាស់ជំនួយ',
+  'Transparent workflows that meet donor requirements': 'លំហូរការងារតម្លាភាព បំពេញតម្រូវការម្ចាស់ជំនួយ',
   'NGOs face donor compliance, grant reporting, and control requirements. Humaneti provides traceable workflows and project-linked operational records.':
     'NGO ប្រឈមនឹងតម្រូវការអនុលោមម្ចាស់ជំនួយ របាយការណ៍មូលនិធិ និងការគ្រប់គ្រង។ ក្រុមហ៊ុន ហ៊ូម៉ាណេទី ផ្តល់លំហូរការងារអាចតាមដានបាន និងកំណត់ត្រាប្រតិបត្តិការភ្ជាប់គម្រោង។',
   'Donor audit and compliance requirements': 'តម្រូវការសវនកម្ម និងអនុលោមរបស់ម្ចាស់ជំនួយ',
@@ -123,7 +123,7 @@ const khText = {
   Audit: 'សវនកម្ម',
   Traceability: 'ភាពអាចតាមដាន',
   'Timestamped activities and approval records': 'សកម្មភាពមានពេលវេលា និងកំណត់ត្រាអនុម័ត',
-  Tenant: 'តេណង់',
+  Tenant: 'Tenant',
   'Data Isolation': 'ការបែងចែកទិន្នន័យ',
   'Company-scope operations by design': 'ប្រតិបត្តិការតាមវិសាលភាពក្រុមហ៊ុន តាមការរចនា',
 }
@@ -372,8 +372,8 @@ watch(() => route.hash, (hash) => {
       <UiSection
         as="h1"
         :kicker="t({ en: 'REAL-WORLD APPLICATIONS', kh: 'ការអនុវត្តជាក់ស្តែង' })"
-        :title="t({ en: 'Built for real operations: approvals, accountability, and records', kh: 'បង្កើតសម្រាប់ប្រតិបត្តិការពិត៖ អនុម័ត ទទួលខុសត្រូវ និងកំណត់ត្រា' })"
-        :subtitle="t({ en: 'Whether you are an SME, NGO, or multi-department team, Humaneti adapts to your workflow and governance needs.', kh: 'មិនថាអ្នកជា SME NGO ឬក្រុមការងារច្រើនផ្នែក ក្រុមហ៊ុន ហ៊ូម៉ាណេទី អាចបត់បែនតាមលំហូរការងារ និងតម្រូវការអភិបាលកិច្ចរបស់អ្នក។' })"
+        :title="t({ en: 'HR and operations solutions for Cambodia NGOs, SMEs, and schools', kh: 'ដំណោះស្រាយធនធានមនុស្ស និងប្រតិបត្តិការសម្រាប់អង្គការ SME និងសាលារៀននៅកម្ពុជា' })"
+        :subtitle="t({ en: 'Whether you run a Cambodian NGO with donor compliance needs, a growing SME, or a multi-campus school, Humaneti adapts to your workflow and governance.', kh: 'មិនថាអ្នកដំណើរការអង្គការនៅកម្ពុជាដែលត្រូវការអនុលោមអ្នកឧបត្ថម្ភ SME ដែលរីកលូតលាស់ ឬសាលារៀនច្រើនបរិវេណ Humaneti បត់បែនតាមលំហូរការងារ និងអភិបាលកិច្ចរបស់អ្នក។' })"
       />
     </section>
 

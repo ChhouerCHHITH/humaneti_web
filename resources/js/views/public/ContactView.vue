@@ -297,7 +297,7 @@ onMounted(async () => {
 
         <div class="grid gap-4 md:grid-cols-2">
           <div>
-            <label class="text-sm font-medium">{{ t({ en: 'Tenant Type', kh: 'ប្រភេទតេណង់' }) }}</label>
+            <label class="text-sm font-medium">{{ t({ en: 'Tenant Type', kh: 'ប្រភេទ Tenant' }) }}</label>
             <select
               v-model="form.tenant_type"
               class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300"

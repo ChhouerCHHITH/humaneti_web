@@ -178,13 +178,13 @@ const modules = [
     features: [
       { title: { en: 'Employee Profiles', kh: 'ប្រវត្តិបុគ្គលិក' }, description: { en: 'One source of truth for employee data, documents, and lifecycle history.', kh: 'ប្រភពទិន្នន័យតែមួយសម្រាប់ព័ត៌មាន ឯកសារ និងប្រវត្តិបុគ្គលិក។' } },
       { title: { en: 'Departments & Designations', kh: 'នាយកដ្ឋាន និងតួនាទី' }, description: { en: 'Maintain department structure and position mapping for approvals and reporting.', kh: 'គ្រប់គ្រងរចនាសម្ព័ន្ធនាយកដ្ឋាន និងការភ្ជាប់តួនាទី សម្រាប់អនុម័ត និងរបាយការណ៍។' } },
-      { title: { en: 'Recruitment', kh: 'ការជ្រើសរើសបុគ្គលិក' }, description: { en: 'Track openings, candidates, and recruitment progression in the same HR workspace.', kh: 'តាមដានតំណែងទំនេរ បេក្ខជន និងវឌ្ឍនភាពជ្រើសរើស ក្នុងកន្លែងធ្វើការ HR ដូចគ្នា។' } },
+      { title: { en: 'Recruitment', kh: 'ការជ្រើសរើសបុគ្គលិក' }, description: { en: 'Track openings, candidates, and recruitment progression in the same HR workspace.', kh: 'តាមដានតំណែងទំនេរ បេក្ខជន និងវឌ្ឍនភាពជ្រើសរើស ក្នុងកន្លែងធ្វើការធនធានមនុស្ស ដូចគ្នា។' } },
       { title: { en: 'Contracts & Documents', kh: 'កិច្ចសន្យា និងឯកសារ' }, description: { en: 'Store contracts and supporting files with cleaner employee context.', kh: 'រក្សាទុកកិច្ចសន្យា និងឯកសារគាំទ្រ ជាមួយបរិបទបុគ្គលិកច្បាស់លាស់។' } },
       { title: { en: 'Onboarding & Offboarding', kh: 'Onboarding និង Offboarding' }, description: { en: 'Use checklist-based controls when employees join or leave the organization.', kh: 'ប្រើការគ្រប់គ្រងតាម checklist នៅពេលបុគ្គលិកចូល ឬចាកចេញពីអង្គការ។' } },
       { title: { en: 'Company Structure', kh: 'រចនាសម្ព័ន្ធក្រុមហ៊ុន' }, description: { en: 'Keep reporting lines and organization context aligned across modules.', kh: 'រក្សាខ្សែរបាយការណ៍ និងបរិបទរចនាសម្ព័ន្ធអង្គការ ឱ្យស្របគ្នាទូទាំងម៉ូឌុល។' } },
     ],
     benefits: [
-      { en: 'Reduce duplicate HR records', kh: 'កាត់បន្ថយកំណត់ត្រា HR ស្ទួន' },
+      { en: 'Reduce duplicate HR records', kh: 'កាត់បន្ថយកំណត់ត្រាធនធានមនុស្សស្ទួន' },
       { en: 'Improve role and reporting clarity', kh: 'បង្កើនភាពច្បាស់នៃតួនាទី និងខ្សែរបាយការណ៍' },
       { en: 'Keep employee history auditable', kh: 'រក្សាប្រវត្តិបុគ្គលិកឱ្យអាចត្រួតពិនិត្យបាន' },
       { en: 'Support cleaner onboarding handoffs', kh: 'គាំទ្រការផ្ទេរការងារ onboarding ឱ្យស្អាតជាងមុន' },
@@ -203,7 +203,7 @@ const modules = [
     availableIn: { en: 'Starter and above', kh: 'Starter និងខ្ពស់ជាង' },
     features: [
       { title: { en: 'My Attendance', kh: 'វត្តមានរបស់ខ្ញុំ' }, description: { en: 'Employees can review their own attendance and workday history.', kh: 'បុគ្គលិកអាចពិនិត្យវត្តមាន និងប្រវត្តិថ្ងៃធ្វើការរបស់ខ្លួនបាន។' } },
-      { title: { en: 'Attendance Management', kh: 'ការគ្រប់គ្រងវត្តមាន' }, description: { en: 'Managers and HR teams can review attendance with company controls.', kh: 'អ្នកគ្រប់គ្រង និងក្រុម HR អាចពិនិត្យវត្តមានបាន ជាមួយការគ្រប់គ្រងតាមក្រុមហ៊ុន។' } },
+      { title: { en: 'Attendance Management', kh: 'ការគ្រប់គ្រងវត្តមាន' }, description: { en: 'Managers and HR teams can review attendance with company controls.', kh: 'អ្នកគ្រប់គ្រង និងក្រុមធនធានមនុស្ស អាចពិនិត្យវត្តមានបាន ជាមួយការគ្រប់គ្រងតាមក្រុមហ៊ុន។' } },
       { title: { en: 'Shift Setup', kh: 'ការកំណត់វេន' }, description: { en: 'Define shift patterns that align with payroll and workforce operations.', kh: 'កំណត់លំនាំវេនឱ្យស្របតាមបៀវត្សរ៍ និងប្រតិបត្តិការកម្លាំងការងារ។' } },
       { title: { en: 'Holiday Calendar', kh: 'ប្រតិទិនថ្ងៃឈប់សម្រាក' }, description: { en: 'Maintain holiday rules centrally for more consistent attendance handling.', kh: 'រក្សាគោលការណ៍ថ្ងៃឈប់សម្រាកនៅកណ្ដាល ដើម្បីគ្រប់គ្រងវត្តមានឱ្យស្របគ្នា។' } },
       { title: { en: 'Attendance Reporting', kh: 'របាយការណ៍វត្តមាន' }, description: { en: 'Use reporting to review punctuality, presence, and operational coverage.', kh: 'ប្រើរបាយការណ៍ដើម្បីពិនិត្យពេលវេលា វត្តមាន និងការគ្របដណ្ដប់ប្រតិបត្តិការ។' } },
@@ -237,7 +237,7 @@ const modules = [
     ],
     benefits: [
       { en: 'Standardize leave request handling', kh: 'ធ្វើស្តង់ដារការដោះស្រាយសំណើច្បាប់' },
-      { en: 'Improve entitlement transparency', kh: 'បង្កើនភាពថ្លៃថ្នូរនៃសិទ្ធិច្បាប់' },
+      { en: 'Improve entitlement transparency', kh: 'បង្កើនតម្លាភាពនៃសិទ្ធិច្បាប់' },
       { en: 'Reduce approval ambiguity', kh: 'កាត់បន្ថយភាពមិនច្បាស់នៃការអនុម័ត' },
       { en: 'Keep leave history accessible', kh: 'រក្សាប្រវត្តិច្បាប់ឱ្យអាចចូលប្រើបាន' },
     ],
@@ -270,8 +270,8 @@ const modules = [
   },
   {
     id: 'expense-claim',
-    name: { en: 'Expense Claim', kh: 'ការទាមទារចំណាយ' },
-    fullName: { en: 'Expense Claims & Cash Advances', kh: 'ការទាមទារចំណាយ និងបុរេប្រទានសាច់ប្រាក់' },
+    name: { en: 'Expense Claim', kh: 'ការស្នើសុំសងថ្លៃចំណាយ' },
+    fullName: { en: 'Expense Claims & Cash Advances', kh: 'ការស្នើសុំសងថ្លៃចំណាយ និងបុរេប្រទានសាច់ប្រាក់' },
     icon: icons.audit,
     tagline: { en: 'Controlled employee spending workflows', kh: 'លំហូរការងារចំណាយបុគ្គលិកមានការគ្រប់គ្រង' },
     description: {
@@ -351,7 +351,7 @@ const modules = [
     name: { en: 'Projects', kh: 'គម្រោង' },
     fullName: { en: 'Projects & Grant Operations', kh: 'គម្រោង និងប្រតិបត្តិការមូលនិធិ' },
     icon: icons.workflow,
-    tagline: { en: 'NGO and donor project structure', kh: 'រចនាសម្ព័ន្ធគម្រោង NGO និងម្ចាស់ជំនួយ' },
+    tagline: { en: 'NGO and donor project structure', kh: 'រចនាសម្ព័ន្ធគម្រោងអង្គការ និងម្ចាស់ជំនួយ' },
     description: {
       en: 'Support donor-driven operations with project master data, grants, budgets, workplans, activities, partners, beneficiaries, and compliance views.',
       kh: 'គាំទ្រប្រតិបត្តិការដែលដឹកនាំដោយម្ចាស់ជំនួយ ជាមួយទិន្នន័យស្នូលគម្រោង មូលនិធិ ថវិកា ផែនការការងារ សកម្មភាព ដៃគូ អ្នកទទួលផល និងទិដ្ឋភាពអនុលោម។',
@@ -359,7 +359,7 @@ const modules = [
     availableIn: { en: 'Enterprise', kh: 'Enterprise' },
     features: [
       { title: { en: 'Project Master Data', kh: 'ទិន្នន័យស្នូលគម្រោង' }, description: { en: 'Keep project identities and structures organized in one place.', kh: 'រក្សាអត្តសញ្ញាណ និងរចនាសម្ព័ន្ធគម្រោងឱ្យមានរបៀបរៀបរយ ក្នុងកន្លែងតែមួយ។' } },
-      { title: { en: 'Donor & Grant Management', kh: 'ម្ចាស់ជំនួយ និងការគ្រប់គ្រងមូលនិធិ' }, description: { en: 'Track funding structures that support NGO reporting.', kh: 'តាមដានរចនាសម្ព័ន្ធមូលនិធិ ដែលគាំទ្ររបាយការណ៍ NGO។' } },
+      { title: { en: 'Donor & Grant Management', kh: 'ម្ចាស់ជំនួយ និងការគ្រប់គ្រងមូលនិធិ' }, description: { en: 'Track funding structures that support NGO reporting.', kh: 'តាមដានរចនាសម្ព័ន្ធមូលនិធិ ដែលគាំទ្ររបាយការណ៍អង្គការ។' } },
       { title: { en: 'Budget & Workplans', kh: 'ថវិកា និងផែនការការងារ' }, description: { en: 'Link budgets and workplans to project execution controls.', kh: 'ភ្ជាប់ថវិកា និងផែនការការងារ ទៅការគ្រប់គ្រងការអនុវត្តគម្រោង។' } },
       { title: { en: 'Activities & M&E', kh: 'សកម្មភាព និង M&E' }, description: { en: 'Manage activity planning and monitoring views for programs.', kh: 'គ្រប់គ្រងការរៀបចំសកម្មភាព និងទិដ្ឋភាពតាមដាន សម្រាប់កម្មវិធី។' } },
       { title: { en: 'Partners & Beneficiaries', kh: 'ដៃគូ និងអ្នកទទួលផល' }, description: { en: 'Keep relationship and beneficiary context connected to projects.', kh: 'រក្សាបរិបទដៃគូ និងអ្នកទទួលផល ឱ្យភ្ជាប់ជាមួយគម្រោង។' } },
@@ -368,7 +368,7 @@ const modules = [
     benefits: [
       { en: 'Support structured grant operations', kh: 'គាំទ្រប្រតិបត្តិការមូលនិធិដែលមានរចនាសម្ព័ន្ធ' },
       { en: 'Connect projects to budgets and teams', kh: 'ភ្ជាប់គម្រោងទៅថវិកា និងក្រុមការងារ' },
-      { en: 'Improve NGO reporting readiness', kh: 'បង្កើនភាពត្រៀមសម្រាប់របាយការណ៍ NGO' },
+      { en: 'Improve NGO reporting readiness', kh: 'បង្កើនភាពត្រៀមសម្រាប់របាយការណ៍អង្គការ' },
       { en: 'Keep donor context visible', kh: 'រក្សាភាពមើលឃើញលើបរិបទម្ចាស់ជំនួយ' },
     ],
   },
@@ -504,12 +504,12 @@ watch(() => route.hash, (hash) => {
       <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
         <div>
           <h1 class="text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl">
-            {{ t({ en: 'Build your operations backbone', kh: 'បង្កើតគ្រឹះប្រតិបត្តិការរបស់អ្នក' }) }}
-            <span class="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent"> {{ t({ en: 'without rebuilding later', kh: 'ដោយមិនចាំបាច់សាងសង់ឡើងវិញក្រោយមក' }) }}</span>
+            {{ t({ en: '9 modules for HR, payroll, and operations', kh: 'ម៉ូឌុល 9 សម្រាប់ធនធានមនុស្ស បៀវត្សរ៍ និងប្រតិបត្តិការ' }) }}
+            <span class="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent"> {{ t({ en: 'built for Cambodia', kh: 'បង្កើតសម្រាប់កម្ពុជា' }) }}</span>
           </h1>
           
           <p class="mt-6 text-lg leading-relaxed text-slate-600">
-            {{ t({ en: 'Humaneti is modular by design. The live SaaS catalog currently spans People, Attendance, Leave, Payroll, Expense Claims, Purchase Requests, Assets, Projects, and Announcements, with plan availability expanding from Starter to Enterprise.', kh: 'Humaneti ត្រូវបានរចនាជាម៉ូឌុល។ កាតាឡុក SaaS បច្ចុប្បន្នរួមមាន បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ការទាមទារចំណាយ សំណើទិញ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស ដោយការប្រើប្រាស់ពង្រីកពី Starter ទៅ Enterprise។' }) }}
+            {{ t({ en: 'Humaneti is modular by design. The live SaaS catalog currently spans People, Attendance, Leave, Payroll, Expense Claims, Purchase Requests, Assets, Projects, and Announcements, with plan availability expanding from Starter to Enterprise.', kh: 'Humaneti ត្រូវបានរចនាជាម៉ូឌុល។ កាតាឡុក SaaS បច្ចុប្បន្នរួមមាន បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ការស្នើសុំសងថ្លៃចំណាយ សំណើទិញ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស ដោយការប្រើប្រាស់ពង្រីកពី Starter ទៅ Enterprise។' }) }}
           </p>
 
           <div class="mt-8 flex flex-wrap gap-4">

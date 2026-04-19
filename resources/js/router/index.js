@@ -10,12 +10,19 @@ import ResourcesView from '@/views/public/ResourcesView.vue'
 import ContactView from '@/views/public/ContactView.vue'
 import PrivacyView from '@/views/public/legal/PrivacyView.vue'
 import TermsView from '@/views/public/legal/TermsView.vue'
+import ModuleView from '@/views/public/product/ModuleView.vue'
+import AudienceView from '@/views/public/solutions/AudienceView.vue'
+import GuideIndexView from '@/views/public/guides/GuideIndexView.vue'
+import GuideView from '@/views/public/guides/GuideView.vue'
 import { LOCALE_CHANGED_EVENT, getPublicLocale, pickPublicText } from '@/composables/usePublicI18n'
+import { getModule } from '@/data/modules'
+import { getAudience } from '@/data/audiences'
+import { getGuide } from '@/data/guides'
 
 const SITE_NAME = 'Humaneti'
 const SITE_URL = (import.meta.env.VITE_SITE_URL || window.location.origin || '').replace(/\/$/, '')
 const DEFAULT_DESCRIPTION =
-  'Humaneti is a workflow-first platform for People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements.'
+  'Humaneti is a workflow-first HRMS, payroll, and operations platform for Cambodia SMEs and NGOs.'
 const DEFAULT_OG_IMAGE = `${SITE_URL}/favicon/android-chrome-512x512.png`
 
 const router = createRouter({
@@ -31,12 +38,12 @@ const router = createRouter({
           component: HomeView,
           meta: {
             title: {
-              en: 'People, Attendance, Leave, Payroll & Operations',
-              kh: 'បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ និងប្រតិបត្តិការ',
+              en: 'HRMS, Payroll & Operations Software for Cambodia',
+              kh: 'កម្មវិធី HRMS បៀវត្សរ៍ និងប្រតិបត្តិការសម្រាប់កម្ពុជា',
             },
             description: {
-              en: 'Humaneti is a workflow-first platform for People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements. Clean UX, clear controls, audit-ready history.',
-              kh: 'Humaneti ជាវេទិកាផ្អែកលើលំហូរការងារ សម្រាប់បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។ រចនាប័ទ្មច្បាស់ ការគ្រប់គ្រងច្បាស់ និងប្រវត្តិត្រួតពិនិត្យបាន។',
+              en: 'Humaneti is the HRMS, payroll, and operations platform built for Cambodia SMEs and NGOs — bilingual, mobile-first, and audit-ready.',
+              kh: 'Humaneti ជាវេទិកា HRMS បៀវត្សរ៍ និងប្រតិបត្តិការបង្កើតសម្រាប់ SME និងអង្គការនៅកម្ពុជា — ពីរភាសា ផ្តើមពីទូរស័ព្ទ និងត្រៀមសវនកម្ម។',
             },
           },
         },
@@ -45,24 +52,63 @@ const router = createRouter({
           name: 'public.product',
           component: ProductView,
           meta: {
-            title: { en: 'Product', kh: 'ផលិតផល' },
+            title: {
+              en: 'Product Modules: HR, Payroll, Assets, Procurement',
+              kh: 'ម៉ូឌុលផលិតផល៖ ធនធានមនុស្ស បៀវត្សរ៍ ទ្រព្យសម្បត្តិ លទ្ធកម្ម',
+            },
             description: {
-              en: 'Explore Humaneti modules: People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements. Standard approvals, roles, and traceable actions across teams.',
-              kh: 'ស្វែងយល់អំពីម៉ូឌុល Humaneti៖ បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស។ អនុម័តស្តង់ដារ តួនាទីច្បាស់ និងសកម្មភាពអាចតាមដានបាន។',
+              en: 'Humaneti product modules: People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements — one platform for Cambodia operations.',
+              kh: 'ម៉ូឌុលផលិតផល Humaneti៖ បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការស្នើសុំសងថ្លៃចំណាយ គម្រោង និងសេចក្តីប្រកាស — វេទិកាមួយសម្រាប់ប្រតិបត្តិការកម្ពុជា។',
             },
           },
+        },
+        {
+          path: 'product/:slug',
+          name: 'public.product.module',
+          component: ModuleView,
+          meta: { dynamic: 'module' },
         },
         {
           path: 'solutions',
           name: 'public.solutions',
           component: SolutionsView,
           meta: {
-            title: { en: 'Solutions', kh: 'ដំណោះស្រាយ' },
+            title: {
+              en: 'Solutions for Cambodia NGOs, SMEs & Schools',
+              kh: 'ដំណោះស្រាយសម្រាប់អង្គការ SME និងសាលារៀននៅកម្ពុជា',
+            },
             description: {
-              en: 'Solutions for SMEs and NGOs: streamline approvals, reduce manual follow-ups, improve accountability, and keep decisions traceable across operations.',
-              kh: 'ដំណោះស្រាយសម្រាប់ SME និង NGO៖ បង្កើនល្បឿនអនុម័ត កាត់បន្ថយការតាមដានដៃ បង្កើនការទទួលខុសត្រូវ និងធានាថាការសម្រេចចិត្តអាចតាមដានបាន។',
+              en: 'Humaneti solutions tailored for Cambodia: NGO compliance, SME growth, and school HR — with bilingual Khmer/English across every module.',
+              kh: 'ដំណោះស្រាយ Humaneti សមស្របសម្រាប់កម្ពុជា៖ អនុលោមអង្គការ ការរីកលូតលាស់ SME និងធនធានមនុស្សសាលារៀន — ជាមួយភាសាខ្មែរ/អង់គ្លេសលើគ្រប់ម៉ូឌុល។',
             },
           },
+        },
+        {
+          path: 'solutions/:slug',
+          name: 'public.solutions.audience',
+          component: AudienceView,
+          meta: { dynamic: 'audience' },
+        },
+        {
+          path: 'guides',
+          name: 'public.guides',
+          component: GuideIndexView,
+          meta: {
+            title: {
+              en: 'Guides: HR, Payroll & Operations in Cambodia',
+              kh: 'មគ្គុទេសក៍៖ ធនធានមនុស្ស បៀវត្សរ៍ និងប្រតិបត្តិការនៅកម្ពុជា',
+            },
+            description: {
+              en: 'Practical guides for Cambodia teams running HR, payroll, procurement, and expense workflows — written for SMEs and NGOs.',
+              kh: 'មគ្គុទេសក៍ជាក់ស្តែងសម្រាប់ក្រុមកម្ពុជាគ្រប់គ្រងធនធានមនុស្ស បៀវត្សរ៍ លទ្ធកម្ម និងលំហូរចំណាយ — សរសេរសម្រាប់ SME និងអង្គការ។',
+            },
+          },
+        },
+        {
+          path: 'guides/:slug',
+          name: 'public.guides.detail',
+          component: GuideView,
+          meta: { dynamic: 'guide' },
         },
         {
           path: 'pricing',
@@ -84,7 +130,7 @@ const router = createRouter({
             title: { en: 'Resources', kh: 'ធនធាន' },
             description: {
               en: 'Guides and updates on HR workflows, payroll operations, asset tracking, and purchase request approvals—built for practical day-to-day use.',
-              kh: 'មគ្គុទេសក៍ និងព័ត៌មានថ្មីៗអំពីលំហូរការងារ HR បៀវត្សរ៍ ការតាមដានទ្រព្យសម្បត្តិ និងការអនុម័តសំណើទិញ សម្រាប់ការប្រើប្រាស់ប្រចាំថ្ងៃ។',
+              kh: 'មគ្គុទេសក៍ និងព័ត៌មានថ្មីៗអំពីលំហូរការងារធនធានមនុស្ស បៀវត្សរ៍ ការតាមដានទ្រព្យសម្បត្តិ និងការអនុម័តសំណើទិញ សម្រាប់ការប្រើប្រាស់ប្រចាំថ្ងៃ។',
             },
           },
         },
@@ -96,7 +142,7 @@ const router = createRouter({
             title: { en: 'About', kh: 'អំពី' },
             description: {
               en: 'Humaneti is built to help teams run HR and operations with clear workflows, strong control, and audit-ready records—without heavy complexity.',
-              kh: 'Humaneti ត្រូវបានបង្កើតឡើងដើម្បីជួយក្រុមការងារគ្រប់គ្រង HR និងប្រតិបត្តិការ ដោយមានលំហូរការងារច្បាស់ ការគ្រប់គ្រងរឹងមាំ និងកំណត់ត្រាអាចត្រួតពិនិត្យបាន។',
+              kh: 'Humaneti ត្រូវបានបង្កើតឡើងដើម្បីជួយក្រុមការងារគ្រប់គ្រងធនធានមនុស្ស និងប្រតិបត្តិការ ដោយមានលំហូរការងារច្បាស់ ការគ្រប់គ្រងរឹងមាំ និងកំណត់ត្រាអាចត្រួតពិនិត្យបាន។',
             },
           },
         },
@@ -185,13 +231,41 @@ function upsertAlternateLinkTag(hreflang, href) {
   el.setAttribute('href', href)
 }
 
+// Resolve dynamic meta from data files for /product/:slug, /solutions/:slug, /guides/:slug
+function resolveDynamicMeta(to) {
+  const kind = to.meta?.dynamic
+  if (!kind) return null
+  const slug = to.params?.slug
+  if (!slug) return null
+  if (kind === 'module') {
+    const mod = getModule(slug)
+    if (!mod) return null
+    return { title: mod.seoTitle || mod.name, description: mod.description }
+  }
+  if (kind === 'audience') {
+    const a = getAudience(slug)
+    if (!a) return null
+    return { title: a.seoTitle || a.name, description: a.description }
+  }
+  if (kind === 'guide') {
+    const g = getGuide(slug)
+    if (!g) return null
+    return { title: g.seoTitle || g.title, description: g.description }
+  }
+  return null
+}
+
 const applyRouteMeta = (to) => {
   const activeLocale = getPublicLocale()
-  const pageTitle = pickPublicText(to.meta?.title, activeLocale)
+  const dyn = resolveDynamicMeta(to)
+  const titleSrc = dyn?.title || to.meta?.title
+  const descSrc = dyn?.description || to.meta?.description
+
+  const pageTitle = pickPublicText(titleSrc, activeLocale)
   const titlePart = pageTitle ? `${pageTitle} | ${SITE_NAME}` : SITE_NAME
   document.title = titlePart
 
-  const desc = pickPublicText(to.meta?.description, activeLocale) || DEFAULT_DESCRIPTION
+  const desc = pickPublicText(descSrc, activeLocale) || DEFAULT_DESCRIPTION
   upsertMetaTag('description', desc)
   upsertMetaTag('robots', 'index,follow')
 
@@ -201,9 +275,10 @@ const applyRouteMeta = (to) => {
   upsertAlternateLinkTag('km', canonical ? `${canonical}?lang=kh` : null)
   upsertAlternateLinkTag('x-default', canonical)
 
+  const ogType = to.meta?.dynamic === 'guide' ? 'article' : 'website'
   upsertMetaTag('og:title', titlePart, 'property')
   upsertMetaTag('og:description', desc, 'property')
-  upsertMetaTag('og:type', 'website', 'property')
+  upsertMetaTag('og:type', ogType, 'property')
   upsertMetaTag('og:site_name', SITE_NAME, 'property')
   upsertMetaTag('og:url', canonical || window.location.href, 'property')
   upsertMetaTag('og:image', to.meta?.ogImage || DEFAULT_OG_IMAGE, 'property')

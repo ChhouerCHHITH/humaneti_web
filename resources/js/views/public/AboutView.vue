@@ -25,7 +25,7 @@ const khText = {
     'ចាប់ផ្តើមពីអ្វីដែលអ្នកត្រូវការថ្ងៃនេះ។ បន្ថែមម៉ូឌុលពេលអង្គការរីកចម្រើន។ គ្មានការបង្ខំបញ្ចូលកញ្ចប់ ឬមុខងារមិនចាំបាច់។',
   'Built for Trust': 'បង្កើតឡើងសម្រាប់ការជឿទុកចិត្ត',
   'Transparent approvals and complete audit trails create accountability and confidence.':
-    'ការអនុម័តថ្លៃថ្នូរ និងប្រវត្តិសវនកម្មពេញលេញ បង្កើតការទទួលខុសត្រូវ និងទំនុកចិត្ត។',
+    'ការអនុម័តតម្លាភាព និងប្រវត្តិសវនកម្មពេញលេញ បង្កើតការទទួលខុសត្រូវ និងទំនុកចិត្ត។',
   'Local First': 'ផ្តោតទីផ្សារក្នុងតំបន់មុនគេ',
   'Designed for Southeast Asian businesses with understanding of local regulations and practices.':
     'រចនាឡើងសម្រាប់អាជីវកម្មអាស៊ីអាគ្នេយ៍ ដោយយល់ដឹងពីបទប្បញ្ញត្តិ និងអនុវត្តក្នុងតំបន់។',
@@ -139,7 +139,7 @@ const identityCards = [
     },
     description: {
       en: 'Humaneti brings people operations, payroll, procurement, expense claims, assets, projects, and announcements into one operating model instead of disconnected tools.',
-      kh: 'Humaneti រួមបញ្ចូលប្រតិបត្តិការបុគ្គលិក បៀវត្សរ៍ លទ្ធកម្ម ការទាមទារចំណាយ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស ទៅក្នុងគំរូប្រតិបត្តិការតែមួយ ជំនួសឱ្យឧបករណ៍ដែលបែកចេញពីគ្នា។',
+      kh: 'Humaneti រួមបញ្ចូលប្រតិបត្តិការបុគ្គលិក បៀវត្សរ៍ លទ្ធកម្ម ការស្នើសុំសងថ្លៃចំណាយ ទ្រព្យសម្បត្តិ គម្រោង និងសេចក្តីប្រកាស ទៅក្នុងគំរូប្រតិបត្តិការតែមួយ ជំនួសឱ្យឧបករណ៍ដែលបែកចេញពីគ្នា។',
     },
     accent: 'indigo',
   },
@@ -197,7 +197,7 @@ const fitCards = [
   {
     title: {
       en: 'NGOs with compliance and donor visibility needs',
-      kh: 'NGO ដែលត្រូវការអនុលោម និងភាពអាចមើលឃើញសម្រាប់ម្ចាស់ជំនួយ',
+      kh: 'អង្គការដែលត្រូវការអនុលោម និងភាពអាចមើលឃើញសម្រាប់ម្ចាស់ជំនួយ',
     },
     description: {
       en: 'For organizations that need traceable approvals, project-linked operations, and stronger audit readiness across teams.',
@@ -241,7 +241,7 @@ const stats = [
   },
   {
     label: { en: 'Best Fit', kh: 'សមស្របសម្រាប់' },
-    value: { en: 'SMEs, NGOs, multi-branch teams', kh: 'SME, NGO និងក្រុមច្រើនសាខា' },
+    value: { en: 'SMEs, NGOs, multi-branch teams', kh: 'SME, អង្គការ និងក្រុមច្រើនសាខា' },
   },
 ]
 </script>
@@ -264,7 +264,7 @@ const stats = [
           </p>
 
           <p class="mt-4 text-base leading-relaxed text-slate-600">
-            {{ t({ en: 'Teams use Humaneti to run People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements with clear ownership, role-based access, and traceable approval history.', kh: 'ក្រុមការងារប្រើ Humaneti ដើម្បីដំណើរការ បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ គម្រោង និងសេចក្តីប្រកាស ជាមួយភាពជាម្ចាស់ការងារច្បាស់ សិទ្ធិតាមតួនាទី និងប្រវត្តិអនុម័តអាចតាមដានបាន។' }) }}
+            {{ t({ en: 'Teams use Humaneti to run People, Attendance, Leave, Payroll, Assets, Purchase Requests, Expense Claims, Projects, and Announcements with clear ownership, role-based access, and traceable approval history.', kh: 'ក្រុមការងារប្រើ Humaneti ដើម្បីដំណើរការ បុគ្គលិក វត្តមាន ការឈប់សម្រាក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការស្នើសុំសងថ្លៃចំណាយ គម្រោង និងសេចក្តីប្រកាស ជាមួយភាពជាម្ចាស់ការងារច្បាស់ សិទ្ធិតាមតួនាទី និងប្រវត្តិអនុម័តអាចតាមដានបាន។' }) }}
           </p>
 
           <div class="mt-8 flex flex-wrap gap-4">

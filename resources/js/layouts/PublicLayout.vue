@@ -234,7 +234,7 @@ watch(() => route.fullPath, closeMobileMenu)
             <p class="mt-4 max-w-md text-sm leading-relaxed text-slate-600">
               {{ t({
                 en: 'Streamline People operations, Payroll, Assets, Purchase Requests, Expense Claims, and Projects with workflow-driven controls, role-based permissions, and audit-ready history.',
-                kh: 'ធ្វើឱ្យប្រតិបត្តិការបុគ្គលិក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការទាមទារចំណាយ និងគម្រោង មានភាពរលូន ដោយប្រើការគ្រប់គ្រងតាមលំហូរការងារ សិទ្ធិតាមតួនាទី និងប្រវត្តិត្រួតពិនិត្យបាន។',
+                kh: 'ធ្វើឱ្យប្រតិបត្តិការបុគ្គលិក បៀវត្សរ៍ ទ្រព្យសម្បត្តិ សំណើទិញ ការស្នើសុំសងថ្លៃចំណាយ និងគម្រោង មានភាពរលូន ដោយប្រើការគ្រប់គ្រងតាមលំហូរការងារ សិទ្ធិតាមតួនាទី និងប្រវត្តិត្រួតពិនិត្យបាន។',
               }) }}
             </p>
             <div class="mt-6 space-y-2 text-sm">
